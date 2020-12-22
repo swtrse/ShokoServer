@@ -15,7 +15,7 @@ namespace Shoko.Server.API
     {
         // Override Controller.User to be the SVR_JMMUser, since we'll almost never need HttpContext.User
         protected new SVR_JMMUser User => HttpContext.GetUser();
-        
+
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             context.HttpContext.Items.Add("Random", new Random());

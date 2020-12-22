@@ -28,7 +28,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.UpdateMyListInfo,
-            extraParams = new[] {FullFileName}
+            extraParams = new[] { FullFileName }
         };
 
         public CommandRequest_UpdateMyListFileStatus()
@@ -40,7 +40,7 @@ namespace Shoko.Server.Commands
         {
             Hash = hash;
             Watched = watched;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
             UpdateSeriesStats = updateSeriesStats;
             WatchedDateAsSecs = watchedDateSecs;
 

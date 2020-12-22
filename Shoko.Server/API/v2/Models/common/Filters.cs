@@ -40,16 +40,16 @@ namespace Shoko.Server.API.v2.Models.common
                 .Where(a => a.InvisibleInClients == 0 &&
                             // and Has groups or is a directory
                             ((a.GroupsIds.ContainsKey(uid) && a.GroupsIds[uid].Count > 0) ||
-                             (a.FilterType & (int) GroupFilterType.Directory) == (int) GroupFilterType.Directory) &&
+                             (a.FilterType & (int)GroupFilterType.Directory) == (int)GroupFilterType.Directory) &&
                             // and is not a blacklisted tag
-                            !((a.FilterType & (int) GroupFilterType.Tag) != 0 &&
+                            !((a.FilterType & (int)GroupFilterType.Tag) != 0 &&
                             TagFilter.IsTagBlackListed(a.GroupFilterName, tagfilter, ref _)));
 
             if (_.Count > 0)
             {
                 gfs = gfs.Concat(_.Select(tag => RepoFactory.GroupFilter.GetAll().FirstOrDefault(a =>
                 {
-                    if (a.FilterType != (int) GroupFilterType.Tag) return false;
+                    if (a.FilterType != (int)GroupFilterType.Tag) return false;
                     if (tag.Equals("Original Work"))
                         return a.GroupFilterName.Equals("new");
 

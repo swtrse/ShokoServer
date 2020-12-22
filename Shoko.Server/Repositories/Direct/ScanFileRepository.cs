@@ -15,7 +15,7 @@ namespace Shoko.Server.Repositories.Direct
             {
                 return session.CreateCriteria(typeof(ScanFile))
                     .Add(Restrictions.Eq("ScanID", scanid))
-                    .Add(Restrictions.Eq("Status", (int) ScanFileStatus.Waiting))
+                    .Add(Restrictions.Eq("Status", (int)ScanFileStatus.Waiting))
                     .AddOrder(Order.Asc("CheckDate"))
                     .List<ScanFile>()
                     .ToList();
@@ -39,7 +39,7 @@ namespace Shoko.Server.Repositories.Direct
             {
                 return session.CreateCriteria(typeof(ScanFile))
                     .Add(Restrictions.Eq("ScanID", scanid))
-                    .Add(Restrictions.Eq("Status", (int) ScanFileStatus.ProcessedOK))
+                    .Add(Restrictions.Eq("Status", (int)ScanFileStatus.ProcessedOK))
                     .AddOrder(Order.Asc("CheckDate"))
                     .List<ScanFile>()
                     .ToList();
@@ -52,7 +52,7 @@ namespace Shoko.Server.Repositories.Direct
             {
                 return session.CreateCriteria(typeof(ScanFile))
                     .Add(Restrictions.Eq("ScanID", scanid))
-                    .Add(Restrictions.Gt("Status", (int) ScanFileStatus.ProcessedOK))
+                    .Add(Restrictions.Gt("Status", (int)ScanFileStatus.ProcessedOK))
                     .AddOrder(Order.Asc("CheckDate"))
                     .List<ScanFile>()
                     .ToList();
@@ -63,9 +63,9 @@ namespace Shoko.Server.Repositories.Direct
         {
             using (var session = DatabaseFactory.SessionFactory.OpenSession())
             {
-                return (int) session.CreateCriteria(typeof(ScanFile))
+                return (int)session.CreateCriteria(typeof(ScanFile))
                     .Add(Restrictions.Eq("ScanID", scanid))
-                    .Add(Restrictions.Eq("Status", (int) ScanFileStatus.Waiting))
+                    .Add(Restrictions.Eq("Status", (int)ScanFileStatus.Waiting))
                     .SetProjection(Projections.Count("ScanFileID"))
                     .UniqueResult();
             }

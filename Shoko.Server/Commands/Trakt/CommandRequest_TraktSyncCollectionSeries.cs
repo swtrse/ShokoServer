@@ -23,7 +23,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.SyncTraktSeries,
-            extraParams = new[] {SeriesName}
+            extraParams = new[] { SeriesName }
         };
 
         public CommandRequest_TraktSyncCollectionSeries()
@@ -34,7 +34,7 @@ namespace Shoko.Server.Commands
         {
             AnimeSeriesID = animeSeriesID;
             SeriesName = seriesName;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

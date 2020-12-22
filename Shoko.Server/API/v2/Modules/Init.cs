@@ -152,7 +152,7 @@ namespace Shoko.Server.API.v2.Modules
             TimeSpan? uptime = ShokoServer.UpTime;
             string uptimemsg = uptime == null
                 ? null
-                : $"{(int) uptime.Value.TotalHours:00}:{uptime.Value.Minutes:00}:{uptime.Value.Seconds:00}";
+                : $"{(int)uptime.Value.TotalHours:00}:{uptime.Value.Minutes:00}:{uptime.Value.Seconds:00}";
             ServerStatus status = new ServerStatus
             {
                 server_started = ServerState.Instance.ServerOnline,
@@ -174,7 +174,7 @@ namespace Shoko.Server.API.v2.Modules
         {
             return ServerState.Instance.ApiInUse;
         }
-        
+
         /// <summary>
         /// Gets the Default user's credentials. Will only return on first run
         /// </summary>
@@ -354,11 +354,11 @@ namespace Shoko.Server.API.v2.Modules
                 var details = new List<(string, string)>();
                 if (string.IsNullOrEmpty(settings.mysql_hostname))
                     details.Add(("mysql_hostname", "Must not be empty"));
-                if(string.IsNullOrEmpty(settings.mysql_schemaname))
+                if (string.IsNullOrEmpty(settings.mysql_schemaname))
                     details.Add(("mysql_schemaname", "Must not be empty"));
-                if(string.IsNullOrEmpty(settings.mysql_username))
+                if (string.IsNullOrEmpty(settings.mysql_username))
                     details.Add(("mysql_username", "Must not be empty"));
-                if(string.IsNullOrEmpty(settings.mysql_password))
+                if (string.IsNullOrEmpty(settings.mysql_password))
                     details.Add(("mysql_password", "Must not be empty"));
                 if (details.Count > 0)
                     return new APIMessage(HttpStatusCode.BadRequest, "An invalid setting was passed", details);
@@ -374,11 +374,11 @@ namespace Shoko.Server.API.v2.Modules
                 var details = new List<(string, string)>();
                 if (string.IsNullOrEmpty(settings.sqlserver_databaseserver))
                     details.Add(("sqlserver_databaseserver", "Must not be empty"));
-                if(string.IsNullOrEmpty(settings.sqlserver_databasename))
+                if (string.IsNullOrEmpty(settings.sqlserver_databasename))
                     details.Add(("sqlserver_databaseserver", "Must not be empty"));
-                if(string.IsNullOrEmpty(settings.sqlserver_username))
+                if (string.IsNullOrEmpty(settings.sqlserver_username))
                     details.Add(("sqlserver_username", "Must not be empty"));
-                if(string.IsNullOrEmpty(settings.sqlserver_password))
+                if (string.IsNullOrEmpty(settings.sqlserver_password))
                     details.Add(("sqlserver_password", "Must not be empty"));
                 if (details.Count > 0)
                     return new APIMessage(HttpStatusCode.BadRequest, "An invalid setting was passed", details);
@@ -410,7 +410,7 @@ namespace Shoko.Server.API.v2.Modules
             if (ServerSettings.Instance.Database.Type == Constants.DatabaseType.MySQL && new MySQL().TestConnection())
                 return APIStatus.OK();
 
-            if (ServerSettings.Instance.Database.Type == Constants.DatabaseType.SqlServer  && new SQLServer().TestConnection())
+            if (ServerSettings.Instance.Database.Type == Constants.DatabaseType.SqlServer && new SQLServer().TestConnection())
                 return APIStatus.OK();
 
             if (ServerSettings.Instance.Database.Type == Constants.DatabaseType.Sqlite)

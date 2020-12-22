@@ -24,13 +24,13 @@ namespace AniDBAPI
             {
                 AniDBRateLimiter.Instance.EnsureRate();
 
-                HttpWebRequest webReq = (HttpWebRequest) WebRequest.Create(url);
+                HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(url);
                 webReq.Timeout = 20000; // 20 seconds
                 webReq.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
                 webReq.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1";
 
                 webReq.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-                using (HttpWebResponse webResponse = (HttpWebResponse) webReq.GetResponse())
+                using (HttpWebResponse webResponse = (HttpWebResponse)webReq.GetResponse())
                 {
                     if (webResponse.StatusCode == HttpStatusCode.OK && webResponse.ContentLength == 0)
                         throw new Exception("Response Body was expected, but none returned");
@@ -65,15 +65,15 @@ namespace AniDBAPI
                 AniDBRateLimiter.Instance.EnsureRate();
 
                 HttpWebResponse response = null;
-                HttpWebRequest webReq = (HttpWebRequest) WebRequest.Create(url);
+                HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(url);
                 // Note: some network proxies require the useragent string to be set or they will deny the http request
                 // this is true for instance for EVERY thailand internet connection (also needs to be set for banners/episodethumbs and any other http request we send)
                 webReq.UserAgent = "Anime2MP";
                 webReq.Timeout = 20000; // 20 seconds
-                response = (HttpWebResponse) webReq.GetResponse();
+                response = (HttpWebResponse)webReq.GetResponse();
 
-                return response != null 
-                    ? response.GetResponseStream() 
+                return response != null
+                    ? response.GetResponseStream()
                     : null;
             }
             catch (Exception ex)

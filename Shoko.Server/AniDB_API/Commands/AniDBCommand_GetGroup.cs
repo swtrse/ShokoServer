@@ -40,12 +40,12 @@ namespace Shoko.Server.Commands
             switch (sMsgType)
             {
                 case "250":
-                {
-                    // 250 GROUP
-                    //3938|704|1900|53|1126|Ayako-Fansubs|Ayako|#Ayako|irc.rizon.net|http://ayakofansubs.info/|1669.png
-                    Group = new Raw_AniDB_Group(socketResponse);
-                    return AniDBUDPResponseCode.GotGroup;
-                }
+                    {
+                        // 250 GROUP
+                        //3938|704|1900|53|1126|Ayako-Fansubs|Ayako|#Ayako|irc.rizon.net|http://ayakofansubs.info/|1669.png
+                        Group = new Raw_AniDB_Group(socketResponse);
+                        return AniDBUDPResponseCode.GotGroup;
+                    }
                 case "350": return AniDBUDPResponseCode.NoSuchGroup;
                 case "501": return AniDBUDPResponseCode.LoginRequired;
             }

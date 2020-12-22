@@ -112,7 +112,7 @@ namespace Shoko.Server.Extensions
             r.MediaInfo[2] = (byte)((outsize >> 8) & 0xFF);
             r.MediaInfo[3] = (byte)(outsize & 0xFF);
             Array.Copy(data, 0, r.MediaInfo, 4, data.Length);
-            
+
 
             return r;
         }
@@ -133,7 +133,7 @@ namespace Shoko.Server.Extensions
             r.MediaInfo[2] = (byte)((outsize >> 8) & 0xFF);
             r.MediaInfo[3] = (byte)(outsize & 0xFF);
             Array.Copy(data, 0, r.MediaInfo, 4, data.Length);
-            
+
             return r;
         }
 
@@ -217,7 +217,7 @@ namespace Shoko.Server.Extensions
             m.MovieName = result.MovieName;
             m.OriginalName = result.OriginalName;
             m.Overview = result.Overview;
-            m.Rating = (int) Math.Round(result.Rating * 10D);
+            m.Rating = (int)Math.Round(result.Rating * 10D);
         }
 
         public static void Populate(this MovieDB_Poster m, MovieDB_Image_Result result, int movieID)
@@ -262,7 +262,7 @@ namespace Shoko.Server.Extensions
         public static void Populate(this TvDB_Episode episode, EpisodeRecord apiEpisode)
         {
             episode.Id = apiEpisode.Id;
-            episode.SeriesID =apiEpisode.SeriesId;
+            episode.SeriesID = apiEpisode.SeriesId;
             episode.SeasonID = 0;
             episode.SeasonNumber = apiEpisode.AiredSeason ?? 0;
             episode.EpisodeNumber = apiEpisode.AiredEpisodeNumber ?? 0;
@@ -279,7 +279,7 @@ namespace Shoko.Server.Extensions
             episode.AirsAfterSeason = apiEpisode.AirsAfterSeason;
             episode.AirsBeforeEpisode = apiEpisode.AirsBeforeEpisode;
             episode.AirsBeforeSeason = apiEpisode.AirsBeforeSeason;
-            if (apiEpisode.SiteRating != null) episode.Rating = (int) Math.Round(apiEpisode.SiteRating.Value);
+            if (apiEpisode.SiteRating != null) episode.Rating = (int)Math.Round(apiEpisode.SiteRating.Value);
             if (!string.IsNullOrEmpty(apiEpisode.FirstAired))
             {
                 episode.AirDate = DateTime.ParseExact(apiEpisode.FirstAired, "yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
@@ -473,7 +473,7 @@ namespace Shoko.Server.Extensions
             series.Banner = apiSeries.Banner;
             series.Status = apiSeries.Status;
             series.Lastupdated = apiSeries.LastUpdated.ToString();
-            if (apiSeries.SiteRating != null) series.Rating = (int) Math.Round(apiSeries.SiteRating.Value * 10);
+            if (apiSeries.SiteRating != null) series.Rating = (int)Math.Round(apiSeries.SiteRating.Value * 10);
         }
 
         [Obsolete("Populate XmlNode is deprecated, please use Populate TvDbSharper.SeriesSearchResult instead.")]
@@ -591,7 +591,7 @@ namespace Shoko.Server.Extensions
 
                 return true;
             }
-            
+
             //a new object
             return character.Populate(rawChar);
         }
@@ -609,7 +609,7 @@ namespace Shoko.Server.Extensions
 
                 return true;
             }
-            
+
             //a new object
             return character.Populate(rawChar);
         }
@@ -635,7 +635,7 @@ namespace Shoko.Server.Extensions
             {
                 contract.SeiyuuID = seiyuu.AniDB_SeiyuuID;
                 contract.SeiyuuName = seiyuu.SeiyuuName;
-                contract.SeiyuuImageType = (int) ImageEntityType.AniDB_Creator;
+                contract.SeiyuuImageType = (int)ImageEntityType.AniDB_Creator;
                 contract.SeiyuuImageID = seiyuu.AniDB_SeiyuuID;
             }
 
@@ -718,16 +718,16 @@ namespace Shoko.Server.Extensions
             recommendation.UserID = rawRec.UserID;
             recommendation.RecommendationText = rawRec.RecommendationText;
 
-            recommendation.RecommendationType = (int) AniDBRecommendationType.Recommended;
+            recommendation.RecommendationType = (int)AniDBRecommendationType.Recommended;
 
             if (rawRec.RecommendationTypeText.Equals("recommended", StringComparison.InvariantCultureIgnoreCase))
-                recommendation.RecommendationType = (int) AniDBRecommendationType.Recommended;
+                recommendation.RecommendationType = (int)AniDBRecommendationType.Recommended;
 
             if (rawRec.RecommendationTypeText.Equals("for fans", StringComparison.InvariantCultureIgnoreCase))
-                recommendation.RecommendationType = (int) AniDBRecommendationType.ForFans;
+                recommendation.RecommendationType = (int)AniDBRecommendationType.ForFans;
 
             if (rawRec.RecommendationTypeText.Equals("must see", StringComparison.InvariantCultureIgnoreCase))
-                recommendation.RecommendationType = (int) AniDBRecommendationType.MustSee;
+                recommendation.RecommendationType = (int)AniDBRecommendationType.MustSee;
         }
 
         public static void Populate(this AniDB_ReleaseGroup releasegroup, Raw_AniDB_Group raw)
@@ -778,7 +778,7 @@ namespace Shoko.Server.Extensions
             cross.Hash = vid.ED2KHash;
             cross.FileName = vid.FileName;
             cross.FileSize = vid.FileSize;
-            cross.CrossRefSource = (int) CrossRefSource.User;
+            cross.CrossRefSource = (int)CrossRefSource.User;
             cross.AnimeID = ep.GetAnimeSeries().AniDB_ID;
             cross.EpisodeID = ep.AniDB_EpisodeID;
             cross.Percentage = 100;
@@ -824,7 +824,7 @@ namespace Shoko.Server.Extensions
             return new CrossRef_AniDB_TvDBV2
             {
                 AnimeID = xref.AniDBID,
-                CrossRefSource = (int) xref.CrossRefSource,
+                CrossRefSource = (int)xref.CrossRefSource,
                 TvDBID = xref.TvDBID
             };
         }

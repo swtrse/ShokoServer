@@ -25,17 +25,17 @@ namespace Shoko.Server.API.Authentication
             if (!ServerState.Instance.ServerOnline)
             {
 
-                var initPrincipal = new ClaimsPrincipal(new ClaimsIdentity(new [] {
+                var initPrincipal = new ClaimsPrincipal(new ClaimsIdentity(new[] {
                     new Claim(ClaimTypes.Role, "init"),
                     new Claim(ClaimTypes.NameIdentifier, InitUser.Instance.JMMUserID.ToString()),
                     new Claim(ClaimTypes.AuthenticationMethod, "init"),}, CustomAuthOptions.DefaultScheme));
                 initPrincipal.AddIdentity(new ClaimsIdentity(InitUser.Instance));
 
-                return Task.FromResult( AuthenticateResult.Success(
+                return Task.FromResult(AuthenticateResult.Success(
                         new AuthenticationTicket(initPrincipal, Options.Scheme)));
             }
-            
-            
+
+
             // Get Authorization header value and join with the query
             var authkeys = Request.Headers["apikey"].Union(Request.Query["apikey"]).ToList();
 

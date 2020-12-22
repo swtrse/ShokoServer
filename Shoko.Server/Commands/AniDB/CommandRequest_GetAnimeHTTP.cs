@@ -23,7 +23,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.AnimeInfo,
-            extraParams = new[] {AnimeID.ToString()}
+            extraParams = new[] { AnimeID.ToString() }
         };
 
         public int RelDepth { get; set; }
@@ -41,8 +41,8 @@ namespace Shoko.Server.Commands
             AnimeID = animeid;
             DownloadRelations = downloadRelations;
             ForceRefresh = forced;
-            Priority = (int) DefaultPriority;
-            if (RepoFactory.AniDB_Anime.GetByAnimeID(animeid) == null) Priority = (int) CommandRequestPriority.Priority1;
+            Priority = (int)DefaultPriority;
+            if (RepoFactory.AniDB_Anime.GetByAnimeID(animeid) == null) Priority = (int)CommandRequestPriority.Priority1;
             RelDepth = relDepth;
 
             GenerateCommandID();
@@ -99,7 +99,7 @@ namespace Shoko.Server.Commands
 
                 // populate the fields
                 AnimeID = int.Parse(TryGetProperty(docCreator, "CommandRequest_GetAnimeHTTP", "AnimeID"));
-                if (RepoFactory.AniDB_Anime.GetByAnimeID(AnimeID) == null) Priority = (int) CommandRequestPriority.Priority1;
+                if (RepoFactory.AniDB_Anime.GetByAnimeID(AnimeID) == null) Priority = (int)CommandRequestPriority.Priority1;
                 DownloadRelations =
                     bool.Parse(TryGetProperty(docCreator, "CommandRequest_GetAnimeHTTP", "DownloadRelations"));
                 ForceRefresh = bool.Parse(

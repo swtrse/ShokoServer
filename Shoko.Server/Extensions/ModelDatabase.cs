@@ -71,10 +71,10 @@ namespace Shoko.Server.Extensions
             // We might have removed our AnimeEpisode_User records when wiping out AnimeEpisodes, recreate them if there's watched files
             var vlUsers = existingEp?.GetVideoLocals()
                 .SelectMany(a => RepoFactory.VideoLocalUser.GetByVideoLocalID(a.VideoLocalID)).ToList();
-            
+
             // get the list of unique users
             var users = vlUsers.Select(a => a.JMMUserID).Distinct();
-            
+
             if (vlUsers.Count > 0)
             {
                 // per user. An episode is watched if any file is
@@ -121,7 +121,7 @@ namespace Shoko.Server.Extensions
 
         public static MovieDB_Movie GetMovieDB_Movie(this CrossRef_AniDB_Other cross, ISessionWrapper session)
         {
-            if (cross.CrossRefType != (int) CrossRefType.MovieDB)
+            if (cross.CrossRefType != (int)CrossRefType.MovieDB)
                 return null;
             return RepoFactory.MovieDb_Movie.GetByOnlineID(session, int.Parse(cross.CrossRefID));
         }

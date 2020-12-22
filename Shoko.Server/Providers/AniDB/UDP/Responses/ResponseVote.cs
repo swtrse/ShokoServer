@@ -26,7 +26,7 @@ namespace Shoko.Server.Providers.AniDB.UDP.Responses
         public double Value
         {
             get => Math.Round(AniDBValue / 100D, 1, MidpointRounding.AwayFromZero);
-            set => AniDBValue = (int) (Math.Round(value, 1, MidpointRounding.AwayFromZero) * 100D);
+            set => AniDBValue = (int)(Math.Round(value, 1, MidpointRounding.AwayFromZero) * 100D);
         }
 
         /// <summary>

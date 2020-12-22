@@ -110,7 +110,7 @@ namespace Shoko.Server.API.v2.Models.common
                         ep.art.thumb.Add(new Art
                         {
                             index = 0,
-                            url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) ImageEntityType.TvDB_Episode,
+                            url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)ImageEntityType.TvDB_Episode,
                                 tvep.Id)
                         });
                     var fanarts = aep.GetAnimeSeries()?.GetAnime()?.Contract?.AniDBAnime?.Fanarts;
@@ -130,7 +130,7 @@ namespace Shoko.Server.API.v2.Models.common
                         ep.art.fanart.Add(new Art
                         {
                             index = 0,
-                            url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) ImageEntityType.TvDB_Episode,
+                            url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)ImageEntityType.TvDB_Episode,
                                 tvep.Id)
                         });
                     }
@@ -155,7 +155,7 @@ namespace Shoko.Server.API.v2.Models.common
             if (pic > 0 && ep.art.thumb.Count == 0)
             {
                 ep.art.thumb.Add(
-                    new Art {index = 0, url = APIV2Helper.ConstructSupportImageLink(ctx, "plex_404.png")});
+                    new Art { index = 0, url = APIV2Helper.ConstructSupportImageLink(ctx, "plex_404.png") });
                 ep.art.fanart.Add(new Art
                 {
                     index = 0,

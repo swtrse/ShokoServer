@@ -24,7 +24,7 @@ namespace Shoko.Server.FileHelper.Subtitles
                 a.Filename = file.Name;
                 if (language == null) return;
                 a.Language = language;
-                Tuple<string,string> mapping = MediaInfoUtils.GetLanguageMapping(language);
+                Tuple<string, string> mapping = MediaInfoUtils.GetLanguageMapping(language);
                 if (mapping == null) return;
                 a.LanguageCode = mapping.Item1;
                 a.LanguageName = mapping.Item2;
@@ -32,7 +32,7 @@ namespace Shoko.Server.FileHelper.Subtitles
             streams.AddRange(tStreams);
             return streams;
         }
-        
+
         public static readonly List<string> Extensions = new List<string>
         {
             "utf",

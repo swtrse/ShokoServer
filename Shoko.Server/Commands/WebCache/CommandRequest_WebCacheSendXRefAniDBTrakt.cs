@@ -20,7 +20,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.WebCacheSendXRefAniDBTrakt,
-            extraParams = new[] {CrossRef_AniDB_TraktID.ToString()}
+            extraParams = new[] { CrossRef_AniDB_TraktID.ToString() }
         };
 
         public CommandRequest_WebCacheSendXRefAniDBTrakt()
@@ -30,7 +30,7 @@ namespace Shoko.Server.Commands
         public CommandRequest_WebCacheSendXRefAniDBTrakt(int xrefID)
         {
             CrossRef_AniDB_TraktID = xrefID;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

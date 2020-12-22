@@ -106,7 +106,9 @@ namespace AniDBAPI
 
                 AniDB_Episode_Title episodeTitle = new AniDB_Episode_Title
                 {
-                    AniDB_EpisodeID = id, Language = language, Title = title
+                    AniDB_EpisodeID = id,
+                    Language = language,
+                    Title = title
                 };
                 Titles.Add(episodeTitle);
             }

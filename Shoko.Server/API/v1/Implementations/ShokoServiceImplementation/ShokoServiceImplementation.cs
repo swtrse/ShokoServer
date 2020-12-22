@@ -255,19 +255,19 @@ namespace Shoko.Server
                 contract.HashQueueCount = ShokoService.CmdProcessorHasher.QueueCount;
                 contract.HashQueueState =
                     ShokoService.CmdProcessorHasher.QueueState.formatMessage(); //Deprecated since 3.6.0.0
-                contract.HashQueueStateId = (int) ShokoService.CmdProcessorHasher.QueueState.queueState;
+                contract.HashQueueStateId = (int)ShokoService.CmdProcessorHasher.QueueState.queueState;
                 contract.HashQueueStateParams = ShokoService.CmdProcessorHasher.QueueState.extraParams;
 
                 contract.GeneralQueueCount = ShokoService.CmdProcessorGeneral.QueueCount;
                 contract.GeneralQueueState =
                     ShokoService.CmdProcessorGeneral.QueueState.formatMessage(); //Deprecated since 3.6.0.0
-                contract.GeneralQueueStateId = (int) ShokoService.CmdProcessorGeneral.QueueState.queueState;
+                contract.GeneralQueueStateId = (int)ShokoService.CmdProcessorGeneral.QueueState.queueState;
                 contract.GeneralQueueStateParams = ShokoService.CmdProcessorGeneral.QueueState.extraParams;
 
                 contract.ImagesQueueCount = ShokoService.CmdProcessorImages.QueueCount;
                 contract.ImagesQueueState =
                     ShokoService.CmdProcessorImages.QueueState.formatMessage(); //Deprecated since 3.6.0.0
-                contract.ImagesQueueStateId = (int) ShokoService.CmdProcessorImages.QueueState.queueState;
+                contract.ImagesQueueStateId = (int)ShokoService.CmdProcessorImages.QueueState.queueState;
                 contract.ImagesQueueStateParams = ShokoService.CmdProcessorImages.QueueState.extraParams;
 
                 var helper = ShokoService.AnidbProcessor;
@@ -379,7 +379,7 @@ namespace Shoko.Server
         }
 
         [HttpPost("CloudAccount/Directory/{cloudaccountid}")]
-        public List<string> DirectoriesFromImportFolderPath(int cloudaccountid, [FromForm]string path)
+        public List<string> DirectoriesFromImportFolderPath(int cloudaccountid, [FromForm] string path)
         {
             if (path == null) path = "null";
             List<string> result = new List<string>();
@@ -524,20 +524,20 @@ namespace Shoko.Server
                 ServerSettings.Instance.AniDb.MyList_ReadWatched = contractIn.AniDB_MyList_ReadWatched;
                 ServerSettings.Instance.AniDb.MyList_SetUnwatched = contractIn.AniDB_MyList_SetUnwatched;
                 ServerSettings.Instance.AniDb.MyList_SetWatched = contractIn.AniDB_MyList_SetWatched;
-                ServerSettings.Instance.AniDb.MyList_StorageState = (AniDBFile_State) contractIn.AniDB_MyList_StorageState;
-                ServerSettings.Instance.AniDb.MyList_DeleteType = (AniDBFileDeleteType) contractIn.AniDB_MyList_DeleteType;
+                ServerSettings.Instance.AniDb.MyList_StorageState = (AniDBFile_State)contractIn.AniDB_MyList_StorageState;
+                ServerSettings.Instance.AniDb.MyList_DeleteType = (AniDBFileDeleteType)contractIn.AniDB_MyList_DeleteType;
                 //ServerSettings.Instance.AniDb.MaxRelationDepth = contractIn.AniDB_MaxRelationDepth;
 
                 ServerSettings.Instance.AniDb.MyList_UpdateFrequency =
-                    (ScheduledUpdateFrequency) contractIn.AniDB_MyList_UpdateFrequency;
+                    (ScheduledUpdateFrequency)contractIn.AniDB_MyList_UpdateFrequency;
                 ServerSettings.Instance.AniDb.Calendar_UpdateFrequency =
-                    (ScheduledUpdateFrequency) contractIn.AniDB_Calendar_UpdateFrequency;
+                    (ScheduledUpdateFrequency)contractIn.AniDB_Calendar_UpdateFrequency;
                 ServerSettings.Instance.AniDb.Anime_UpdateFrequency =
-                    (ScheduledUpdateFrequency) contractIn.AniDB_Anime_UpdateFrequency;
+                    (ScheduledUpdateFrequency)contractIn.AniDB_Anime_UpdateFrequency;
                 ServerSettings.Instance.AniDb.MyListStats_UpdateFrequency =
-                    (ScheduledUpdateFrequency) contractIn.AniDB_MyListStats_UpdateFrequency;
+                    (ScheduledUpdateFrequency)contractIn.AniDB_MyListStats_UpdateFrequency;
                 ServerSettings.Instance.AniDb.File_UpdateFrequency =
-                    (ScheduledUpdateFrequency) contractIn.AniDB_File_UpdateFrequency;
+                    (ScheduledUpdateFrequency)contractIn.AniDB_File_UpdateFrequency;
 
                 ServerSettings.Instance.AniDb.DownloadCharacters = contractIn.AniDB_DownloadCharacters;
                 ServerSettings.Instance.AniDb.DownloadCreators = contractIn.AniDB_DownloadCreators;
@@ -559,7 +559,7 @@ namespace Shoko.Server
                 ServerSettings.Instance.TvDB.AutoPostersAmount = contractIn.TvDB_AutoPostersAmount;
                 ServerSettings.Instance.TvDB.AutoWideBanners = contractIn.TvDB_AutoWideBanners;
                 ServerSettings.Instance.TvDB.AutoWideBannersAmount = contractIn.TvDB_AutoWideBannersAmount;
-                ServerSettings.Instance.TvDB.UpdateFrequency = (ScheduledUpdateFrequency) contractIn.TvDB_UpdateFrequency;
+                ServerSettings.Instance.TvDB.UpdateFrequency = (ScheduledUpdateFrequency)contractIn.TvDB_UpdateFrequency;
                 ServerSettings.Instance.TvDB.Language = contractIn.TvDB_Language;
 
                 // MovieDB
@@ -587,17 +587,17 @@ namespace Shoko.Server
                 // Language
                 ServerSettings.Instance.LanguagePreference = contractIn.LanguagePreference.Split(',').ToList();
                 ServerSettings.Instance.LanguageUseSynonyms = contractIn.LanguageUseSynonyms;
-                ServerSettings.Instance.EpisodeTitleSource = (DataSourceType) contractIn.EpisodeTitleSource;
-                ServerSettings.Instance.SeriesDescriptionSource = (DataSourceType) contractIn.SeriesDescriptionSource;
-                ServerSettings.Instance.SeriesNameSource = (DataSourceType) contractIn.SeriesNameSource;
+                ServerSettings.Instance.EpisodeTitleSource = (DataSourceType)contractIn.EpisodeTitleSource;
+                ServerSettings.Instance.SeriesDescriptionSource = (DataSourceType)contractIn.SeriesDescriptionSource;
+                ServerSettings.Instance.SeriesNameSource = (DataSourceType)contractIn.SeriesNameSource;
 
                 // Trakt
                 ServerSettings.Instance.TraktTv.Enabled = contractIn.Trakt_IsEnabled;
                 ServerSettings.Instance.TraktTv.AuthToken = contractIn.Trakt_AuthToken;
                 ServerSettings.Instance.TraktTv.RefreshToken = contractIn.Trakt_RefreshToken;
                 ServerSettings.Instance.TraktTv.TokenExpirationDate = contractIn.Trakt_TokenExpirationDate;
-                ServerSettings.Instance.TraktTv.UpdateFrequency = (ScheduledUpdateFrequency) contractIn.Trakt_UpdateFrequency;
-                ServerSettings.Instance.TraktTv.SyncFrequency = (ScheduledUpdateFrequency) contractIn.Trakt_SyncFrequency;
+                ServerSettings.Instance.TraktTv.UpdateFrequency = (ScheduledUpdateFrequency)contractIn.Trakt_UpdateFrequency;
+                ServerSettings.Instance.TraktTv.SyncFrequency = (ScheduledUpdateFrequency)contractIn.Trakt_SyncFrequency;
 
                 //Plex
                 ServerSettings.Instance.Plex.Server = contractIn.Plex_ServerHost;
@@ -878,7 +878,7 @@ namespace Shoko.Server
         {
             try
             {
-                ImageEntityType imgType = (ImageEntityType) imageType;
+                ImageEntityType imgType = (ImageEntityType)imageType;
 
                 switch (imgType)
                 {
@@ -939,7 +939,7 @@ namespace Shoko.Server
         {
             try
             {
-                ImageEntityType imgType = (ImageEntityType) imageType;
+                ImageEntityType imgType = (ImageEntityType)imageType;
                 ImageSizeType sizeType = ImageSizeType.Poster;
 
                 switch (imgType)
@@ -966,7 +966,7 @@ namespace Shoko.Server
                     // which esssential means deleting the record
 
                     AniDB_Anime_DefaultImage img =
-                        RepoFactory.AniDB_Anime_DefaultImage.GetByAnimeIDAndImagezSizeType(animeID, (int) sizeType);
+                        RepoFactory.AniDB_Anime_DefaultImage.GetByAnimeIDAndImagezSizeType(animeID, (int)sizeType);
                     if (img != null)
                         RepoFactory.AniDB_Anime_DefaultImage.Delete(img.AniDB_Anime_DefaultImageID);
                 }
@@ -974,14 +974,14 @@ namespace Shoko.Server
                 {
                     // making the image the default for it's type (poster, fanart etc)
                     AniDB_Anime_DefaultImage img =
-                        RepoFactory.AniDB_Anime_DefaultImage.GetByAnimeIDAndImagezSizeType(animeID, (int) sizeType);
+                        RepoFactory.AniDB_Anime_DefaultImage.GetByAnimeIDAndImagezSizeType(animeID, (int)sizeType);
                     if (img == null)
                         img = new AniDB_Anime_DefaultImage();
 
                     img.AnimeID = animeID;
                     img.ImageParentID = imageID;
-                    img.ImageParentType = (int) imgType;
-                    img.ImageType = (int) sizeType;
+                    img.ImageParentType = (int)imgType;
+                    img.ImageType = (int)sizeType;
                     RepoFactory.AniDB_Anime_DefaultImage.Save(img);
                 }
 
@@ -1146,8 +1146,8 @@ namespace Shoko.Server
                 List<AniDB_Vote> animeVotes = new List<AniDB_Vote>();
                 foreach (AniDB_Vote vote in allVotes)
                 {
-                    if (vote.VoteType != (int) AniDBVoteType.Anime &&
-                        vote.VoteType != (int) AniDBVoteType.AnimeTemp)
+                    if (vote.VoteType != (int)AniDBVoteType.Anime &&
+                        vote.VoteType != (int)AniDBVoteType.AnimeTemp)
                         continue;
 
                     if (dictIgnored.ContainsKey(vote.EntityID)) continue;

@@ -358,7 +358,7 @@ namespace LeanWork.IO.FileSystem
             if (eventHandler != null)
             {
                 if (_containedFSW.SynchronizingObject != null && _containedFSW.SynchronizingObject.InvokeRequired)
-                    _containedFSW.SynchronizingObject.BeginInvoke(eventHandler, new object[] {this, e});
+                    _containedFSW.SynchronizingObject.BeginInvoke(eventHandler, new object[] { this, e });
                 else
                     eventHandler(this, e);
             }
@@ -369,7 +369,7 @@ namespace LeanWork.IO.FileSystem
             if (eventHandler != null)
             {
                 if (_containedFSW.SynchronizingObject != null && _containedFSW.SynchronizingObject.InvokeRequired)
-                    _containedFSW.SynchronizingObject.BeginInvoke(eventHandler, new object[] {this, e});
+                    _containedFSW.SynchronizingObject.BeginInvoke(eventHandler, new object[] { this, e });
                 else
                     eventHandler(this, e);
             }
@@ -380,7 +380,7 @@ namespace LeanWork.IO.FileSystem
             if (eventHandler != null)
             {
                 if (_containedFSW.SynchronizingObject != null && _containedFSW.SynchronizingObject.InvokeRequired)
-                    _containedFSW.SynchronizingObject.BeginInvoke(eventHandler, new object[] {this, e});
+                    _containedFSW.SynchronizingObject.BeginInvoke(eventHandler, new object[] { this, e });
                 else
                     eventHandler(this, e);
             }

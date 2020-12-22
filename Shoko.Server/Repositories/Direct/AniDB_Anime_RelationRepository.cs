@@ -52,13 +52,13 @@ namespace Shoko.Server.Repositories.Direct
         public HashSet<int> GetLinearRelations(ISession session, int id)
         {
             var cats = (from relation in session.QueryOver<AniDB_Anime_Relation>()
-                where (relation.AnimeID == id || relation.RelatedAnimeID == id) &&
-                      (relation.RelationType == "Prequel" || relation.RelationType == "Sequel")
-                select relation.AnimeID).Future<int>();
+                        where (relation.AnimeID == id || relation.RelatedAnimeID == id) &&
+                              (relation.RelationType == "Prequel" || relation.RelationType == "Sequel")
+                        select relation.AnimeID).Future<int>();
             var cats2 = (from relation in session.QueryOver<AniDB_Anime_Relation>()
-                where (relation.AnimeID == id || relation.RelatedAnimeID == id) &&
-                      (relation.RelationType == "Prequel" || relation.RelationType == "Sequel")
-                select relation.RelatedAnimeID).Future<int>();
+                         where (relation.AnimeID == id || relation.RelatedAnimeID == id) &&
+                               (relation.RelationType == "Prequel" || relation.RelationType == "Sequel")
+                         select relation.RelatedAnimeID).Future<int>();
             return new HashSet<int>(cats.Concat(cats2));
         }
 

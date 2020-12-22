@@ -14,31 +14,31 @@ namespace Shoko.Server.API.v3.Models.Shoko
         /// Import Folder ID
         /// </summary>
         public int ID { get; set; }
-        
+
         /// <summary>
         /// Is the Folder watched by the filesystem watcher
         /// </summary>
         /// <returns></returns>
         public bool WatchForNewFiles { get; set; }
-        
+
         /// <summary>
         /// Whether the import folder is a drop folder
         /// </summary>
         public DropFolderType DropFolderType { get; set; }
-        
+
         /// <summary>
         /// Path on the server where the import folder exists. For docker, it's inside the container, so it'll look excessively simple
         /// </summary>
         public string Path { get; set; }
-        
+
         /// <summary>
         /// Total FileSize of the contents of the ImportFolder
         /// </summary>
         public long FileSize { get; set; }
-        
+
         // TODO Maybe add cloud stuff. It's nicer to add later than to take away
-        
-        public ImportFolder() {}
+
+        public ImportFolder() { }
 
         public ImportFolder(SVR_ImportFolder folder)
         {
@@ -70,15 +70,15 @@ namespace Shoko.Server.API.v3.Models.Shoko
             {
                 ImportFolderID = ID,
                 ImportFolderName = Name,
-                ImportFolderType = (int) ImportFolderType.HDD,
+                ImportFolderType = (int)ImportFolderType.HDD,
                 ImportFolderLocation = Path,
                 IsWatched = WatchForNewFiles ? 1 : 0,
-                IsDropDestination = DropFolderType.HasFlag(DropFolderType.Destination) ? 1  : 0,
+                IsDropDestination = DropFolderType.HasFlag(DropFolderType.Destination) ? 1 : 0,
                 IsDropSource = DropFolderType.HasFlag(DropFolderType.Source) ? 1 : 0
             };
         }
     }
-    
+
     [Flags]
     public enum DropFolderType
     {

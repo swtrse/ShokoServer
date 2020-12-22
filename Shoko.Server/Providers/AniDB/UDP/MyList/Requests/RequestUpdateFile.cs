@@ -46,7 +46,7 @@ namespace Shoko.Server.Providers.AniDB.UDP.MyList.Requests
             {
                 case AniDBUDPReturnCode.MYLIST_ENTRY_EDITED:
                 case AniDBUDPReturnCode.NO_SUCH_MYLIST_ENTRY:
-                    return new UDPBaseResponse<Void> {Code = code};
+                    return new UDPBaseResponse<Void> { Code = code };
             }
             throw new UnexpectedAniDBResponseException(code, receivedData);
         }

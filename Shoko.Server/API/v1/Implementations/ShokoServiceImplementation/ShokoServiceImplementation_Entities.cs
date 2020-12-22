@@ -44,7 +44,7 @@ namespace Shoko.Server
                 if (series == null) return null;
 
                 List<AniDB_Episode> anieps = RepoFactory.AniDB_Episode.GetByAnimeIDAndEpisodeTypeNumber(series.AniDB_ID,
-                    (EpisodeType) epType,
+                    (EpisodeType)epType,
                     epNum);
                 if (anieps.Count == 0) return null;
 
@@ -100,8 +100,8 @@ namespace Shoko.Server
                     if (dictAniEps.ContainsKey(ep.AniDB_EpisodeID))
                     {
                         AniDB_Episode anidbep = dictAniEps[ep.AniDB_EpisodeID];
-                        if (anidbep.EpisodeType == (int) EpisodeType.Episode ||
-                            anidbep.EpisodeType == (int) EpisodeType.Special)
+                        if (anidbep.EpisodeType == (int)EpisodeType.Episode ||
+                            anidbep.EpisodeType == (int)EpisodeType.Special)
                         {
                             SVR_AnimeEpisode_User userRecord = null;
                             if (dictEpUsers.ContainsKey(ep.AnimeEpisodeID))
@@ -203,7 +203,7 @@ namespace Shoko.Server
                     // if it already exists we can leave
                     foreach (SVR_GroupFilter gfTemp in lockedGFs)
                     {
-                        if (gfTemp.FilterType == (int) GroupFilterType.ContinueWatching)
+                        if (gfTemp.FilterType == (int)GroupFilterType.ContinueWatching)
                         {
                             gf = gfTemp;
                             break;
@@ -233,7 +233,7 @@ namespace Shoko.Server
 
                         if (seriesWatching.Count > 0)
                         {
-                            if (ser.GetAnime().AnimeType == (int) AnimeType.TVSeries)
+                            if (ser.GetAnime().AnimeType == (int)AnimeType.TVSeries)
                             {
                                 // make sure this series is not a sequel to an existing series we have already added
                                 foreach (AniDB_Anime_Relation rel in ser.GetAnime().GetRelatedAnime())
@@ -256,7 +256,7 @@ namespace Shoko.Server
                             if (retEps.Count == maxRecords)
                                 return retEps;
 
-                            if (ser.GetAnime().AnimeType == (int) AnimeType.TVSeries)
+                            if (ser.GetAnime().AnimeType == (int)AnimeType.TVSeries)
                                 seriesWatching.Add(ser.AniDB_ID);
                         }
                     }
@@ -629,7 +629,7 @@ namespace Shoko.Server
                         RepoFactory.CrossRef_File_Episode.GetByHashAndEpisodeID(vid.Hash, ep.AniDB_EpisodeID);
                     if (xref != null)
                     {
-                        if (xref.CrossRefSource == (int) CrossRefSource.AniDB)
+                        if (xref.CrossRefSource == (int)CrossRefSource.AniDB)
                             return "Cannot remove associations created from AniDB data";
 
                         // delete cross ref from web cache
@@ -751,9 +751,9 @@ namespace Shoko.Server
                 SVR_AnimeSeries ser = RepoFactory.AnimeSeries.GetByID(animeSeriesID);
                 if (ser == null)
                     return "Could not find anime series record";
-                
+
                 RemoveXRefsForFile(videoLocalID);
-                
+
                 for (int i = startingEpisodeNumber; i <= endEpisodeNumber; i++)
                 {
                     AniDB_Episode aniep = RepoFactory.AniDB_Episode.GetByAnimeIDAndEpisodeNumber(ser.AniDB_ID, i)[0];
@@ -843,7 +843,7 @@ namespace Shoko.Server
                     var com = new CommandRequest_LinkFileManually(videoLocalID, ep.AnimeEpisodeID);
                     if (singleEpisode)
                     {
-                        com.Percentage = (int) Math.Round((double) count / total * 100);
+                        com.Percentage = (int)Math.Round((double)count / total * 100);
                     }
                     com.Save();
 
@@ -943,7 +943,7 @@ namespace Shoko.Server
                 return ex.Message;
             }
         }
-        
+
         /// <summary>
         ///     Deletes the VideoLocal record and the associated physical file
         /// </summary>
@@ -1059,7 +1059,7 @@ namespace Shoko.Server
                 epUserRecord.JMMUserID = userID;
                 //epUserRecord.WatchedDate = DateTime.Now;
 
-                switch ((StatCountType) statCountType)
+                switch ((StatCountType)statCountType)
                 {
                     case StatCountType.Played:
                         epUserRecord.PlayedCount++;
@@ -1081,7 +1081,7 @@ namespace Shoko.Server
                 if (userRecord == null)
                     userRecord = new SVR_AnimeSeries_User(userID, ser.AnimeSeriesID);
 
-                switch ((StatCountType) statCountType)
+                switch ((StatCountType)statCountType)
                 {
                     case StatCountType.Played:
                         userRecord.PlayedCount++;
@@ -1368,7 +1368,7 @@ namespace Shoko.Server
         public CL_Response<CL_AnimeEpisode_User> ToggleWatchedStatusOnEpisode(int animeEpisodeID, bool watchedStatus, int userID)
         {
             CL_Response<CL_AnimeEpisode_User> response = new CL_Response<CL_AnimeEpisode_User>
-                {ErrorMessage = "", Result = null};
+            { ErrorMessage = "", Result = null };
             try
             {
                 SVR_AnimeEpisode ep = RepoFactory.AnimeEpisode.GetByID(animeEpisodeID);
@@ -1568,7 +1568,7 @@ namespace Shoko.Server
         /// <param name="voteValue">Must be 1 or 2 (Anime or Anime Temp(</param>
         /// <param name="voteType"></param>
         [HttpPost("AniDB/Vote/{animeID}/{voteType}")]
-        public void VoteAnime(int animeID, [FromForm]decimal voteValue, int voteType)
+        public void VoteAnime(int animeID, [FromForm] decimal voteValue, int voteType)
         {
             string msg = $"Voting for anime: {animeID} - Value: {voteValue}";
             logger.Info(msg);
@@ -1589,9 +1589,9 @@ namespace Shoko.Server
 
             int iVoteValue = 0;
             if (voteValue > 0)
-                iVoteValue = (int) (voteValue * 100);
+                iVoteValue = (int)(voteValue * 100);
             else
-                iVoteValue = (int) voteValue;
+                iVoteValue = (int)voteValue;
 
             msg = $"Voting for anime Formatted: {animeID} - Value: {iVoteValue}";
             logger.Info(msg);
@@ -1613,8 +1613,8 @@ namespace Shoko.Server
             foreach (AniDB_Vote dbVote in dbVotes)
             {
                 // we can only have anime permanent or anime temp but not both
-                if (dbVote.VoteType == (int) AniDBVoteType.Anime ||
-                    dbVote.VoteType == (int) AniDBVoteType.AnimeTemp)
+                if (dbVote.VoteType == (int)AniDBVoteType.Anime ||
+                    dbVote.VoteType == (int)AniDBVoteType.AnimeTemp)
                 {
                     thisVote = dbVote;
                 }
@@ -1646,7 +1646,7 @@ namespace Shoko.Server
                 foreach (SVR_AnimeEpisode ep in eps)
                 {
                     if (ep?.AniDB_Episode == null) continue;
-                    if (ep.EpisodeTypeEnum == (EpisodeType) episodeType &&
+                    if (ep.EpisodeTypeEnum == (EpisodeType)episodeType &&
                         ep.AniDB_Episode.EpisodeNumber <= maxEpisodeNumber)
                     {
                         // check if this episode is already watched
@@ -2546,7 +2546,7 @@ namespace Shoko.Server
                                 bool success;
                                 string result;
                                 if (index < places.Count - 1)
-                                     (success, result) = place.RemoveAndDeleteFile(false);
+                                    (success, result) = place.RemoveAndDeleteFile(false);
                                 else
                                     (success, result) = place.RemoveAndDeleteFile();
                                 if (!success) return result;
@@ -2628,9 +2628,9 @@ namespace Shoko.Server
                 foreach (SVR_AnimeSeries ser in series)
                     dictSeries[ser.AniDB_ID] = ser;
 
-                RatingCollectionState _collectionState = (RatingCollectionState) collectionState;
-                RatingWatchedState _watchedState = (RatingWatchedState) watchedState;
-                RatingVotedState _ratingVotedState = (RatingVotedState) ratingVotedState;
+                RatingCollectionState _collectionState = (RatingCollectionState)collectionState;
+                RatingWatchedState _watchedState = (RatingWatchedState)watchedState;
+                RatingVotedState _ratingVotedState = (RatingVotedState)ratingVotedState;
 
                 IReadOnlyList<SVR_AniDB_Anime> animes = RepoFactory.AniDB_Anime.GetAll();
 
@@ -2691,8 +2691,8 @@ namespace Shoko.Server
                         foreach (AniDB_Vote vote in allVotes)
                         {
                             if (vote.EntityID == anime.AnimeID &&
-                                (vote.VoteType == (int) AniDBVoteType.Anime ||
-                                 vote.VoteType == (int) AniDBVoteType.AnimeTemp))
+                                (vote.VoteType == (int)AniDBVoteType.Anime ||
+                                 vote.VoteType == (int)AniDBVoteType.AnimeTemp))
                             {
                                 voted = true;
                                 break;
@@ -2708,8 +2708,8 @@ namespace Shoko.Server
                         foreach (AniDB_Vote vote in allVotes)
                         {
                             if (vote.EntityID == anime.AnimeID &&
-                                (vote.VoteType == (int) AniDBVoteType.Anime ||
-                                 vote.VoteType == (int) AniDBVoteType.AnimeTemp))
+                                (vote.VoteType == (int)AniDBVoteType.Anime ||
+                                 vote.VoteType == (int)AniDBVoteType.AnimeTemp))
                             {
                                 voted = true;
                                 break;

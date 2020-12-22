@@ -134,7 +134,7 @@ namespace AniDBAPI.Commands
                             inf.SetInput(input);
                             inf.Inflate(buff);
                             byReceivedAdd = buff;
-                            received = (int) inf.TotalOut;
+                            received = (int)inf.TotalOut;
                         }
                     }
                     catch (SocketException sex)
@@ -181,7 +181,7 @@ namespace AniDBAPI.Commands
                     {
                         //Lets handle multipart
                         part++;
-                        string[] sp1 = decodedstring.Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries);
+                        string[] sp1 = decodedstring.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
                         if (sp1[0].StartsWith("233 ANIMEDESC") || sp1[0].StartsWith("233  ANIMEDESC"))
                         {

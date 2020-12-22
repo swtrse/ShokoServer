@@ -14,11 +14,11 @@ namespace Shoko.Server.Utilities
         private const string AnalyticsId = "UA-128934547-1";
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-//#if !DEBUG
+        //#if !DEBUG
         //private const string Endpoint = "https://www.google-analytics.com/debug";
-//#else
+        //#else
         private const string Endpoint = "https://www.google-analytics.com";
-//#endif
+        //#endif
         /// <summary>
         /// Send the event to Google.
         /// </summary>
@@ -36,14 +36,14 @@ namespace Shoko.Server.Utilities
 
         internal static bool PostException(Exception ex, bool fatal = false)
         {
-                SentrySdk.CaptureException(ex);
+            SentrySdk.CaptureException(ex);
 
-                return PostData("exception",
-                new Dictionary<string, string>
-                {
+            return PostData("exception",
+            new Dictionary<string, string>
+            {
                     {"exd", ex.GetType().FullName},
                     {"exf", (fatal ? 1 : 0).ToString()}
-                });
+            });
         }
 
         private static bool PostData(string type, IDictionary<string, string> extraData)

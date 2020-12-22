@@ -17,18 +17,18 @@ namespace Shoko.Server.API.v3.Models.Shoko
         /// The ID of the File. You'll need this to play it.
         /// </summary>
         public int ID { get; set; }
-        
+
         /// <summary>
         /// The Filesize in bytes
         /// </summary>
         public long Size { get; set; }
-        
+
         /// <summary>
         /// The calculated hashes of the file
         /// </summary>
         /// <returns></returns>
         public Hashes Hashes { get; set; }
-        
+
         /// <summary>
         /// All of the Locations that this file exists in
         /// </summary>
@@ -38,28 +38,28 @@ namespace Shoko.Server.API.v3.Models.Shoko
         /// The last watched date for the current user. Is null if unwatched
         /// </summary>
         /// <value></value>
-        public DateTime? Watched { get; set; }
+        public DateTime? Watched { get; set; }
 
         /// <summary>
         /// Number of ticks into the video to resume from
         /// </summary>
-        public long? ResumePosition { get; set; }
-        
+        public long? ResumePosition { get; set; }
+
         /// <summary>
         /// Try to fit this file's resolution to something like 1080p, 480p, etc
         /// </summary>
         public string RoundedStandardResolution { get; set; }
-        
+
         /// <summary>
         /// The file creation date of this file
         /// </summary>
         [JsonConverter(typeof(IsoDateTimeConverter))]
         public DateTime Created { get; set; }
 
-        public File() {}
+        public File() { }
 
-        public File(SVR_VideoLocal vl) : this(null, vl) {}
-        
+        public File(SVR_VideoLocal vl) : this(null, vl) { }
+
         public File(HttpContext ctx, SVR_VideoLocal vl)
         {
             ID = vl.VideoLocalID;
@@ -128,7 +128,7 @@ namespace Shoko.Server.API.v3.Models.Shoko
                     Name = anidb.Anime_GroupName,
                     ShortName = anidb.Anime_GroupNameShort
                 },
-                AudioCodecs = anidb.File_AudioCodec.Split(new[] {'\'', '`', '"'}, StringSplitOptions.RemoveEmptyEntries)
+                AudioCodecs = anidb.File_AudioCodec.Split(new[] { '\'', '`', '"' }, StringSplitOptions.RemoveEmptyEntries)
                     .ToList(),
                 AudioLanguages = anidb.Languages.Select(a => a.LanguageName).ToList(),
                 SubLanguages = anidb.Subtitles.Select(a => a.LanguageName).ToList()
@@ -141,12 +141,12 @@ namespace Shoko.Server.API.v3.Models.Shoko
             /// The Import Folder that this file resides in 
             /// </summary>
             public int ImportFolderID { get; set; }
-            
+
             /// <summary>
             /// The relative path from the import folder's path on the server. The Filename can be easily extracted from this. Using the ImportFolder, you can get the full server path of the file or map it if the client has remote access to the filesystem. 
             /// </summary>
             public string RelativePath { get; set; }
-            
+
             /// <summary>
             /// Can the server access the file right now
             /// </summary>
@@ -183,7 +183,7 @@ namespace Shoko.Server.API.v3.Models.Shoko
             /// Is the file marked as deprecated. Generally, yes if there's a V2, and this isn't it
             /// </summary>
             public bool IsDeprecated { get; set; }
-            
+
             /// <summary>
             /// The file's version, Usually 1, sometimes more when there are edits released later
             /// </summary>
@@ -203,17 +203,17 @@ namespace Shoko.Server.API.v3.Models.Shoko
             /// The reported FileSize. If you got this far and it doesn't match, something very odd has occurred
             /// </summary>
             public long FileSize { get; set; }
-            
+
             /// <summary>
             /// The reported duration of the file
             /// </summary>
             public TimeSpan Duration { get; set; }
-            
+
             /// <summary>
             /// The reported resolution in 1920x1080 format. Not modelled further because there's no point
             /// </summary>
             public string Resolution { get; set; }
-            
+
             /// <summary>
             /// Any comments that were added to the file, such as something wrong with it.
             /// </summary>
@@ -223,12 +223,12 @@ namespace Shoko.Server.API.v3.Models.Shoko
             /// The reported audio codecs. This may be very wrong on large files with lots of audio tracks, as AniDB's API has a hard limit on data
             /// </summary>
             public List<string> AudioCodecs { get; set; }
-            
+
             /// <summary>
             /// The audio languages
             /// </summary>
             public List<string> AudioLanguages { get; set; }
-            
+
             /// <summary>
             /// Sub languages
             /// </summary>
@@ -238,12 +238,12 @@ namespace Shoko.Server.API.v3.Models.Shoko
             /// The reported Video Codec. Technically, there is a possibility of this needing a list, but it should only have one video track. 
             /// </summary>
             public string VideoCodec { get; set; }
-            
+
             /// <summary>
             /// Does the file have chapters. This may be wrong, since it was only added in AVDump2 (a more recent version at that)
             /// </summary>
             public bool Chaptered { get; set; }
-            
+
             /// <summary>
             /// When we last got data on this file
             /// </summary>
@@ -256,12 +256,12 @@ namespace Shoko.Server.API.v3.Models.Shoko
                 /// The Release Group's Name (Unlimited Translation Works)
                 /// </summary>
                 public string Name { get; set; }
-                
+
                 /// <summary>
                 /// The Release Group's Name (UTW)
                 /// </summary>
                 public string ShortName { get; set; }
-                
+
                 /// <summary>
                 /// AniDB ID
                 /// </summary>
@@ -307,9 +307,9 @@ namespace Shoko.Server.API.v3.Models.Shoko
             /// </summary>
             public List<SeriesXRefs> SeriesIDs { get; set; }
 
-            public FileDetailed() {}
+            public FileDetailed() { }
 
-            public FileDetailed(SVR_VideoLocal vl) : this(null, vl) {}
+            public FileDetailed(SVR_VideoLocal vl) : this(null, vl) { }
 
             public FileDetailed(HttpContext ctx, SVR_VideoLocal vl) : base(ctx, vl)
             {

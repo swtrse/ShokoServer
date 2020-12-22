@@ -20,7 +20,7 @@ namespace Shoko.Server.Commands.Azure
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.SendAnimeFull,
-            extraParams = new[] {AnimeID.ToString()}
+            extraParams = new[] { AnimeID.ToString() }
         };
 
         public CommandRequest_Azure_SendAnimeFull()
@@ -30,7 +30,7 @@ namespace Shoko.Server.Commands.Azure
         public CommandRequest_Azure_SendAnimeFull(int animeID)
         {
             AnimeID = animeID;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

@@ -4,7 +4,7 @@ using NLog;
 using NLog.Config;
 using NLog.Targets;
 
- namespace Shoko.Server.API.SignalR.NLog
+namespace Shoko.Server.API.SignalR.NLog
 {
     [Target("SignalR")]
     public class SignalRTarget : TargetWithLayout

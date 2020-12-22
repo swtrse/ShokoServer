@@ -12,24 +12,24 @@ namespace Shoko.Server.API.v3.Models.Common
         /// </summary>
         [Required]
         public string Language { get; set; }
-        
+
         /// <summary>
         /// The person who plays a character, writes the music, etc.
         /// </summary>
         [Required]
         public Person Staff { get; set; }
-        
+
         /// <summary>
         /// The character played, if applicable
         /// </summary>
         public Person Character { get; set; }
-        
+
         /// <summary>
         /// The role that the staff plays, cv, writer, director, etc
         /// </summary>
         [Required]
         public string RoleName { get; set; }
-        
+
         /// <summary>
         /// Extra info about the role. For example, role can be voice actor, while role_details is Main Character
         /// </summary>

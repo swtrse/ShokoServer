@@ -49,9 +49,9 @@ namespace Shoko.Server.Repositories.Cached
                     .AddEntity("series", typeof(TvDB_Series))
                     .SetParameterList("animeIds", animeIds)
                     .List<object[]>()
-                    .ToLookup(r => ((CrossRef_AniDB_TvDB) r[0]).AniDBID,
-                        r => new Tuple<CrossRef_AniDB_TvDB, TvDB_Series>((CrossRef_AniDB_TvDB) r[0],
-                            (TvDB_Series) r[1]));
+                    .ToLookup(r => ((CrossRef_AniDB_TvDB)r[0]).AniDBID,
+                        r => new Tuple<CrossRef_AniDB_TvDB, TvDB_Series>((CrossRef_AniDB_TvDB)r[0],
+                            (TvDB_Series)r[1]));
 
                 return tvDbSeriesByAnime;
             }

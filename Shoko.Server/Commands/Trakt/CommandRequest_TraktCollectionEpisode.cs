@@ -18,14 +18,14 @@ namespace Shoko.Server.Commands
         public int AnimeEpisodeID { get; set; }
         public int Action { get; set; }
 
-        public TraktSyncAction ActionEnum => (TraktSyncAction) Action;
+        public TraktSyncAction ActionEnum => (TraktSyncAction)Action;
 
         public override CommandRequestPriority DefaultPriority => CommandRequestPriority.Priority9;
 
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.SyncTraktEpisodes,
-            extraParams = new[] {AnimeEpisodeID.ToString(), Action.ToString()}
+            extraParams = new[] { AnimeEpisodeID.ToString(), Action.ToString() }
         };
 
         public CommandRequest_TraktCollectionEpisode()
@@ -35,8 +35,8 @@ namespace Shoko.Server.Commands
         public CommandRequest_TraktCollectionEpisode(int animeEpisodeID, TraktSyncAction action)
         {
             AnimeEpisodeID = animeEpisodeID;
-            Action = (int) action;
-            Priority = (int) DefaultPriority;
+            Action = (int)action;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

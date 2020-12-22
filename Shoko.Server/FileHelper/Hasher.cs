@@ -146,7 +146,7 @@ namespace Shoko.Server.FileHelper
 
                 if (gotHash)
                     return rhash;
-                
+
                 logger.Error("Error using DLL to get hash (Functon returned {0}), trying C# code instead: {0}", rval, strPath);
             }
             return CalculateHashes_here(strPath, onHashProgress, getCRC32, getMD5, getSHA1);
@@ -180,7 +180,7 @@ namespace Shoko.Server.FileHelper
             if (nBytes > lChunkSize)
                 nBytesToRead = lChunkSize;
             else
-                nBytesToRead = (int) nBytesRemaining;
+                nBytesToRead = (int)nBytesRemaining;
 
             onHashProgress?.Invoke(strPath, 0);
 
@@ -204,7 +204,7 @@ namespace Shoko.Server.FileHelper
                 if (getED2k)
                 {
                     byte[] baHash = md4.ComputeHash(ByteArray, 0, nBytesRead);
-                    int j = (int) ((iChunkCount - 1) * 16);
+                    int j = (int)((iChunkCount - 1) * 16);
                     for (int i = 0; i < 16; i++)
                         baED2KHash[j + i] = baHash[i];
                 }
@@ -219,7 +219,7 @@ namespace Shoko.Server.FileHelper
                 iOffSet += lChunkSize;
                 nBytesRemaining = nBytes - iOffSet;
                 if (nBytesRemaining < lChunkSize)
-                    nBytesToRead = (int) nBytesRemaining;
+                    nBytesToRead = (int)nBytesRemaining;
             }
             if (getMD5) md5.TransformFinalBlock(ByteArray, 0, 0);
             if (getSHA1) sha1.TransformFinalBlock(ByteArray, 0, 0);

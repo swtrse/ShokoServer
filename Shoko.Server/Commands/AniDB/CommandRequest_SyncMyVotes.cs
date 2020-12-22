@@ -29,7 +29,7 @@ namespace Shoko.Server.Commands
 
         public CommandRequest_SyncMyVotes()
         {
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }
@@ -55,8 +55,8 @@ namespace Shoko.Server.Commands
                             if (myVote.VoteType == AniDBVoteType.Anime ||
                                 myVote.VoteType == AniDBVoteType.AnimeTemp)
                             {
-                                if (dbVote.VoteType == (int) AniDBVoteType.Anime ||
-                                    dbVote.VoteType == (int) AniDBVoteType.AnimeTemp)
+                                if (dbVote.VoteType == (int)AniDBVoteType.Anime ||
+                                    dbVote.VoteType == (int)AniDBVoteType.AnimeTemp)
                                 {
                                     thisVote = dbVote;
                                 }
@@ -74,7 +74,7 @@ namespace Shoko.Server.Commands
                                 EntityID = myVote.EntityID
                             };
                         }
-                        thisVote.VoteType = (int) myVote.VoteType;
+                        thisVote.VoteType = (int)myVote.VoteType;
                         thisVote.VoteValue = myVote.VoteValue;
 
                         RepoFactory.AniDB_Vote.Save(thisVote);

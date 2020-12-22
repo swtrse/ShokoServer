@@ -18,25 +18,25 @@ namespace Shoko.Server.Providers.AniDB.UDP.MyList.Requests
 
             ResponseMyListStats stats = new ResponseMyListStats
             {
-                Anime = (int) parsedData[0],
-                Episodes = (int) parsedData[1],
-                Files = (int) parsedData[2],
+                Anime = (int)parsedData[0],
+                Episodes = (int)parsedData[1],
+                Files = (int)parsedData[2],
                 SizeOfFiles = parsedData[3],
-                AddedAnime = (int) parsedData[4],
-                AddedEpisodes = (int) parsedData[5],
-                AddedFiles = (int) parsedData[6],
-                AddedGroups = (int) parsedData[7],
-                LeechPercent = (int) parsedData[8],
-                GloryPercent = (int) parsedData[9],
-                ViewedPercent = (int) parsedData[10],
-                MyListPercent = (int) parsedData[11],
-                ViewedMyListPercent = (int) parsedData[12],
-                EpisodesViewed = (int) parsedData[13],
-                Votes = (int) parsedData[14],
-                Reviews = (int) parsedData[15],
+                AddedAnime = (int)parsedData[4],
+                AddedEpisodes = (int)parsedData[5],
+                AddedFiles = (int)parsedData[6],
+                AddedGroups = (int)parsedData[7],
+                LeechPercent = (int)parsedData[8],
+                GloryPercent = (int)parsedData[9],
+                ViewedPercent = (int)parsedData[10],
+                MyListPercent = (int)parsedData[11],
+                ViewedMyListPercent = (int)parsedData[12],
+                EpisodesViewed = (int)parsedData[13],
+                Votes = (int)parsedData[14],
+                Reviews = (int)parsedData[15],
                 ViewedLength = parsedData[16]
             };
-            return new UDPBaseResponse<ResponseMyListStats>{Code = code, Response = stats};
+            return new UDPBaseResponse<ResponseMyListStats> { Code = code, Response = stats };
         }
     }
 }

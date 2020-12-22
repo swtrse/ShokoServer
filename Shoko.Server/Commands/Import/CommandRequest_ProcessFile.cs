@@ -27,7 +27,7 @@ namespace Shoko.Server.Commands
     {
         public int VideoLocalID { get; set; }
         public bool ForceAniDB { get; set; }
-        
+
         public bool SkipMyList { get; set; }
 
         private SVR_VideoLocal vlocal;
@@ -42,12 +42,12 @@ namespace Shoko.Server.Commands
                     return new QueueStateStruct
                     {
                         queueState = QueueStateEnum.FileInfo,
-                        extraParams = new[] {vlocal.FileName}
+                        extraParams = new[] { vlocal.FileName }
                     };
                 return new QueueStateStruct
                 {
                     queueState = QueueStateEnum.FileInfo,
-                    extraParams = new[] {VideoLocalID.ToString()}
+                    extraParams = new[] { VideoLocalID.ToString() }
                 };
             }
         }
@@ -60,7 +60,7 @@ namespace Shoko.Server.Commands
         {
             VideoLocalID = vidLocalID;
             ForceAniDB = forceAniDB;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
             SkipMyList = skipMyList;
 
             GenerateCommandID();
@@ -380,7 +380,7 @@ namespace Shoko.Server.Commands
                     Hash = vidLocal.ED2KHash,
                     FileName = fileName,
                     FileSize = vidLocal.FileSize,
-                    CrossRefSource = (int) CrossRefSource.WebCache,
+                    CrossRefSource = (int)CrossRefSource.WebCache,
                     AnimeID = xref.AnimeID,
                     EpisodeID = xref.EpisodeID,
                     Percentage = xref.Percentage,

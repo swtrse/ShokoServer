@@ -32,7 +32,7 @@ namespace Shoko.Server.API.v3.Controllers
             if (videoLocal == null) return BadRequest("No File with ID");
             return new File(HttpContext, videoLocal);
         }
-        
+
         /// <summary>
         /// Get the AniDB details for file with Shoko ID
         /// </summary>
@@ -47,7 +47,7 @@ namespace Shoko.Server.API.v3.Controllers
             if (anidb == null) return BadRequest("AniDB data not found");
             return Models.Shoko.File.GetAniDBInfo(id);
         }
-        
+
         /// <summary>
         /// Get the MediaInfo model for file with VideoLocal ID
         /// </summary>
@@ -60,7 +60,7 @@ namespace Shoko.Server.API.v3.Controllers
             if (videoLocal == null) return BadRequest("No File with ID");
             return Models.Shoko.File.GetMedia(id);
         }
-        
+
         /// <summary>
         /// Mark a file as watched or unwatched
         /// </summary>
@@ -72,7 +72,7 @@ namespace Shoko.Server.API.v3.Controllers
         {
             var file = RepoFactory.VideoLocal.GetByID(id);
             if (file == null) return BadRequest("Could not get the videolocal with ID: " + id);
-            
+
             file.ToggleWatchedStatus(watched, User.JMMUserID);
             return Ok();
         }
@@ -112,7 +112,7 @@ namespace Shoko.Server.API.v3.Controllers
 
             return Ok();
         }
-        
+
         /// <summary>
         /// Run a file through AVDump
         /// </summary>
@@ -123,13 +123,13 @@ namespace Shoko.Server.API.v3.Controllers
         {
             if (string.IsNullOrWhiteSpace(ServerSettings.Instance.AniDb.AVDumpKey))
                 return BadRequest("Missing AVDump API key");
-            
+
             var vl = RepoFactory.VideoLocal.GetByID(id);
             if (vl == null) return NotFound();
-            
+
             var file = vl.GetBestVideoLocalPlace(true)?.FullServerPath;
             if (string.IsNullOrEmpty(file)) return this.NoContent();
-            
+
             var result = AVDumpHelper.DumpFile(file).Replace("\r", "");
 
             return new AVDumpResult()
@@ -161,7 +161,7 @@ namespace Shoko.Server.API.v3.Controllers
                 }).Select(a => new File.FileDetailed(HttpContext, a)).ToList();
             return results;
         }
-        
+
         /// <summary>
         /// Search for a file by path or name via regex. Internally, it will convert \/ to the system directory separator and match against the string
         /// </summary>
@@ -186,7 +186,7 @@ namespace Shoko.Server.API.v3.Controllers
                 }).Select(a => new File.FileDetailed(HttpContext, a)).ToList();
             return results;
         }
-        
+
         /// <summary>
         /// Get Recently Added Files
         /// </summary>

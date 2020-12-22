@@ -31,7 +31,7 @@ namespace Shoko.Server.Commands.AniDB
         public CommandRequest_UpdateMyListStats(bool forced)
         {
             ForceRefresh = forced;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }
@@ -45,7 +45,7 @@ namespace Shoko.Server.Commands.AniDB
                 // we will always assume that an anime was downloaded via http first
 
                 ScheduledUpdate sched =
-                    RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.AniDBMylistStats);
+                    RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.AniDBMylistStats);
                 if (sched == null)
                 {
                     sched = new ScheduledUpdate

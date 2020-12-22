@@ -84,7 +84,7 @@ namespace Shoko.Server.Settings
         public ImportSettings Import { get; set; } = new ImportSettings();
 
         public PlexSettings Plex { get; set; } = new PlexSettings();
-        
+
         public PluginSettings Plugins { get; set; } = new PluginSettings();
 
         public bool AutoGroupSeries { get; set; }
@@ -173,7 +173,7 @@ namespace Shoko.Server.Settings
                 ImagesPath = legacy.ImagesPath,
                 AnimeXmlDirectory = legacy.AnimeXmlDirectory,
                 MyListDirectory = legacy.MyListDirectory,
-                ServerPort = (ushort) legacy.JMMServerPort,
+                ServerPort = (ushort)legacy.JMMServerPort,
                 PluginAutoWatchThreshold = double.Parse(legacy.PluginAutoWatchThreshold, CultureInfo.InvariantCulture),
                 Culture = legacy.Culture,
                 WebUI_Settings = legacy.WebUI_Settings,
@@ -292,7 +292,9 @@ namespace Shoko.Server.Settings
                 UpdateChannel = legacy.UpdateChannel,
                 Linux = new LinuxSettings
                 {
-                    UID = legacy.Linux_UID, GID = legacy.Linux_GID, Permission = legacy.Linux_Permission
+                    UID = legacy.Linux_UID,
+                    GID = legacy.Linux_GID,
+                    Permission = legacy.Linux_Permission
                 },
                 TraceLog = legacy.TraceLog,
                 Database = new DatabaseSettings
@@ -332,7 +334,7 @@ namespace Shoko.Server.Settings
             var serializerSettings = new JsonSerializerSettings
             {
                 ContractResolver = new NullToDefaultValueResolver(),
-                Converters = new List<JsonConverter>{new StringEnumConverter()},
+                Converters = new List<JsonConverter> { new StringEnumConverter() },
                 Error = (sender, args) => { args.ErrorContext.Handled = true; },
                 ObjectCreationHandling = ObjectCreationHandling.Replace,
                 MissingMemberHandling = MissingMemberHandling.Ignore,
@@ -375,7 +377,7 @@ namespace Shoko.Server.Settings
             if (json.Contains("\"FirstRun\":")) return;
             var serializerSettings = new JsonSerializerSettings
             {
-                Converters = new List<JsonConverter>{new StringEnumConverter()},
+                Converters = new List<JsonConverter> { new StringEnumConverter() },
                 Error = (sender, args) => { args.ErrorContext.Handled = true; },
                 ObjectCreationHandling = ObjectCreationHandling.Replace,
                 MissingMemberHandling = MissingMemberHandling.Ignore,
@@ -414,7 +416,7 @@ namespace Shoko.Server.Settings
                 Formatting = indent ? Formatting.Indented : Formatting.None,
                 DefaultValueHandling = DefaultValueHandling.Include,
                 MissingMemberHandling = MissingMemberHandling.Ignore,
-                Converters = new List<JsonConverter> {new StringEnumConverter()}
+                Converters = new List<JsonConverter> { new StringEnumConverter() }
             };
             return JsonConvert.SerializeObject(obj, serializerSettings);
         }

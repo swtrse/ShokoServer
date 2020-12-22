@@ -17,7 +17,7 @@ namespace Shoko.Server
         public static readonly string AVDumpZipDestination = Path.Combine(Destination, "avdump2.zip");
 
         public const string AVDump2URL = @"http://static.anidb.net/client/avdump2/avdump2_7100.zip";
-        
+
         public static readonly string avdumpDestination = Path.Combine(Destination, "AVDump2CL.exe");
 
         public static readonly string[] OldAVDump =
@@ -76,7 +76,7 @@ namespace Shoko.Server
             }
             return true;
         }
-        
+
         private static void DeleteOldAVDump()
         {
             var oldPath = Directory.GetParent(Destination).FullName;
@@ -130,7 +130,7 @@ namespace Shoko.Server
             while ((len = input.Read(buffer, 0, buffer.Length)) > 0)
                 output.Write(buffer, 0, len);
         }
-        
+
         public static string DumpFile(int vid)
         {
             var vl = RepoFactory.VideoLocal.GetByID(vid);
@@ -154,7 +154,7 @@ namespace Shoko.Server
                 var filenameArgs = GetFilenameAndArgsForOS(file);
 
                 logger.Info($"Dumping File with AVDump: {filenameArgs.Item1} {filenameArgs.Item2}");
-                
+
                 Process pProcess = new Process
                 {
                     StartInfo =

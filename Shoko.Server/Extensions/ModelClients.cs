@@ -194,7 +194,7 @@ namespace Shoko.Server.Extensions
 
         public static CL_AniDB_Anime_DefaultImage ToClient(this AniDB_Anime_DefaultImage defaultImage)
         {
-            ImageEntityType imgType = (ImageEntityType) defaultImage.ImageParentType;
+            ImageEntityType imgType = (ImageEntityType)defaultImage.ImageParentType;
             IImageEntity parentImage = null;
 
             switch (imgType)
@@ -230,7 +230,7 @@ namespace Shoko.Server.Extensions
                 ImageParentType = defaultimage.ImageParentType,
                 ImageType = defaultimage.ImageType
             };
-            ImageEntityType imgType = (ImageEntityType) defaultimage.ImageParentType;
+            ImageEntityType imgType = (ImageEntityType)defaultimage.ImageParentType;
 
             switch (imgType)
             {

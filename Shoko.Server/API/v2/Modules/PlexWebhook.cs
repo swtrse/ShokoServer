@@ -77,7 +77,7 @@ namespace Shoko.Server.API.v2.Modules
 
             float per = 100 * (metadata.ViewOffset / (float)vl.Duration); //this will be nice if plex would ever give me the duration, so I don't have to guess it.
 
-            ScrobblePlayingType scrobbleType = episode.GetAnimeSeries()?.GetAnime()?.AnimeType == (int) AnimeType.Movie
+            ScrobblePlayingType scrobbleType = episode.GetAnimeSeries()?.GetAnime()?.AnimeType == (int)AnimeType.Movie
                 ? ScrobblePlayingType.movie
                 : ScrobblePlayingType.episode;
 
@@ -333,7 +333,7 @@ namespace Shoko.Server.API.v2.Modules
                 var result = JsonConvert.DeserializeObject(valueAsString, bindingContext.ModelType, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
                 if (result != null)
                 {
-                    
+
                     bindingContext.Result = ModelBindingResult.Success(result);
                     return Task.CompletedTask;
                 }

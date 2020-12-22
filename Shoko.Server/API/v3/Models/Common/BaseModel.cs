@@ -9,13 +9,13 @@ namespace Shoko.Server.API.v3.Models.Common
         /// </summary>
         [Required]
         public string Name { get; set; }
-        
+
         /// <summary>
         /// number of direct children (number of series in group, eps in series, etc)
         /// </summary>
         [Required]
         public int Size { get; set; }
-        
+
         /// <summary>
         /// Sizes object, has totals
         /// </summary>

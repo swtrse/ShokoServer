@@ -14,7 +14,7 @@ namespace Shoko.Server.API.Annotations
         {
             ConnectionTimer.Elapsed += TimerElapsed;
         }
-        
+
         /// <summary>
         ///  A list of open connections to the API
         /// </summary>
@@ -24,7 +24,7 @@ namespace Shoko.Server.API.Annotations
         /// This prevents flickering of the state for UI
         /// </summary>
         private static readonly Timer ConnectionTimer = new Timer(5000);
-        
+
         private static void AddConnection(HttpContext ctx)
         {
             lock (OpenConnections)
@@ -33,7 +33,7 @@ namespace Shoko.Server.API.Annotations
                 ServerState.Instance.ApiInUse = OpenConnections.Count > 0;
             }
         }
-        
+
         private static void RemoveConnection(HttpContext ctx)
         {
             lock (OpenConnections)
@@ -64,7 +64,7 @@ namespace Shoko.Server.API.Annotations
         {
             AddConnection(context.HttpContext);
         }
-        
+
         public void OnResultExecuted(ResultExecutedContext context)
         {
             RemoveConnection(context.HttpContext);

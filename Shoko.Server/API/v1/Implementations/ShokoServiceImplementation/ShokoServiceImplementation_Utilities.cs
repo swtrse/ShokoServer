@@ -102,7 +102,7 @@ namespace Shoko.Server
             if (a?.Contract?.AniDBAnime?.AniDBAnime.AllTitles == null) return 1;
             double dist = 1;
             SorensenDice dice = new SorensenDice();
-            var languages = new HashSet<string> {"en", "x-jat"};
+            var languages = new HashSet<string> { "en", "x-jat" };
             languages.UnionWith(ServerSettings.Instance.LanguagePreference.Select(b => b.ToLower()));
             foreach (string title in a.Contract.AniDBAnime.AnimeTitles
                 .Where(b => b.TitleType != Shoko.Models.Constants.AnimeTitleType.ShortName &&
@@ -123,7 +123,7 @@ namespace Shoko.Server
         }
 
         [HttpPost("AniDB/Anime/SearchFilename/{uid}")]
-        public List<CL_AniDB_Anime> SearchAnimeWithFilename(int uid, [FromForm]string query)
+        public List<CL_AniDB_Anime> SearchAnimeWithFilename(int uid, [FromForm] string query)
         {
             string input = query ?? string.Empty;
             input = input.ToLower(CultureInfo.InvariantCulture);
@@ -543,7 +543,7 @@ namespace Shoko.Server
                     return ret;
                 }
                 if (ret.VideoLocal == null)
-                    ret.VideoLocal = new CL_VideoLocal {VideoLocalID = videoLocalID };
+                    ret.VideoLocal = new CL_VideoLocal { VideoLocalID = videoLocalID };
             }
             catch (Exception ex)
             {

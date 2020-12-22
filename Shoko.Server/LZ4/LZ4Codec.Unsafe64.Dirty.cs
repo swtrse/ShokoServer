@@ -72,7 +72,7 @@ namespace LZ4pn
 
     public static partial class LZ4Codec
     {
-        #region LZ4_compressCtx_64
+    #region LZ4_compressCtx_64
 
         private static unsafe int LZ4_compressCtx_64(
             uint* hash_table,
@@ -298,9 +298,9 @@ namespace LZ4pn
             }
         }
 
-        #endregion
+    #endregion
 
-        #region LZ4_compress64kCtx_64
+    #region LZ4_compress64kCtx_64
 
         private static unsafe int LZ4_compress64kCtx_64(
             ushort* hash_table,
@@ -530,9 +530,9 @@ namespace LZ4pn
             }
         }
 
-        #endregion
+    #endregion
 
-        #region LZ4_uncompress_64
+    #region LZ4_uncompress_64
 
         private static unsafe int LZ4_uncompress_64(
             byte* src,
@@ -664,9 +664,9 @@ namespace LZ4pn
             }
         }
 
-        #endregion
+    #endregion
 
-        #region LZ4_uncompress_unknownOutputSize_64
+    #region LZ4_uncompress_unknownOutputSize_64
 
         private static unsafe int LZ4_uncompress_unknownOutputSize_64(
             byte* src,
@@ -813,7 +813,7 @@ namespace LZ4pn
             }
         }
 
-        #endregion
+    #endregion
     }
 
 #endif

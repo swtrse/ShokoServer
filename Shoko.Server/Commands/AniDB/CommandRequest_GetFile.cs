@@ -29,12 +29,12 @@ namespace Shoko.Server.Commands
                     return new QueueStateStruct
                     {
                         queueState = QueueStateEnum.GetFileInfo,
-                        extraParams = new[] {vlocal.FileName}
+                        extraParams = new[] { vlocal.FileName }
                     };
                 return new QueueStateStruct
                 {
                     queueState = QueueStateEnum.GetFileInfo,
-                    extraParams = new[] {VideoLocalID.ToString()}
+                    extraParams = new[] { VideoLocalID.ToString() }
                 };
             }
         }
@@ -47,7 +47,7 @@ namespace Shoko.Server.Commands
         {
             VideoLocalID = vidLocalID;
             ForceAniDB = forceAniDB;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

@@ -47,15 +47,15 @@ namespace Shoko.Server.API.v3.Controllers
                 return contract.WatchedEpisodeCount == a.GetAnimeEpisodesAndSpecialsCountWithVideoLocal();
             });
 
-            decimal hours = Math.Round((decimal) watchedEpisodes.Select(a => a.GetVideoLocals().FirstOrDefault())
+            decimal hours = Math.Round((decimal)watchedEpisodes.Select(a => a.GetVideoLocals().FirstOrDefault())
                 .Where(a => a != null).Sum(a => a.Media?.GeneralStream?.Duration ?? 0) / 3600, 1, MidpointRounding.AwayFromZero); // Duration in s => 60m*60s = 3600
 
             List<SVR_VideoLocal_Place> places = files.SelectMany(a => a.Places).ToList();
             int duplicate = places.Where(a => a.VideoLocal.IsVariation == 0).SelectMany(a => RepoFactory.CrossRef_File_Episode.GetByHash(a.VideoLocal.Hash))
                 .GroupBy(a => a.EpisodeID).Count(a => a.Count() > 1);
 
-            decimal percentDupe = places.Count == 0 ? 0 : 
-                Math.Round((decimal) duplicate * 100 / places.Count, 2, MidpointRounding.AwayFromZero);
+            decimal percentDupe = places.Count == 0 ? 0 :
+                Math.Round((decimal)duplicate * 100 / places.Count, 2, MidpointRounding.AwayFromZero);
 
             int missing = series.Sum(a => a.MissingEpisodeCount);
             int missingCollecting = series.Sum(a => a.MissingEpisodeCountGroups);
@@ -138,7 +138,7 @@ namespace Shoko.Server.API.v3.Controllers
         public Dictionary<CommandRequestType, int> GetQueueSummary()
         {
             return RepoFactory.CommandRequest.GetAll().GroupBy(a => a.CommandType)
-                .ToDictionary(a => (CommandRequestType) a.Key, a => a.Count());
+                .ToDictionary(a => (CommandRequestType)a.Key, a => a.Count());
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Shoko.Server.API.v3.Controllers
         [HttpGet("SeriesSummary")]
         public Dashboard.SeriesSummary GetSeriesSummary()
         {
-            var series = RepoFactory.AnimeSeries.GetAll().Where(a => User.AllowedSeries(a)).GroupBy(a => (AnimeType) (a.GetAnime()?.AnimeType ?? -1))
+            var series = RepoFactory.AnimeSeries.GetAll().Where(a => User.AllowedSeries(a)).GroupBy(a => (AnimeType)(a.GetAnime()?.AnimeType ?? -1))
                 .ToDictionary(a => a.Key, a => a.Count());
 
             if (!series.TryGetValue(AnimeType.TVSeries, out int seriesCount)) seriesCount = 0;

@@ -29,39 +29,39 @@ namespace Shoko.Server.API.v1.Implementations
         [HttpGet("Filters/{userId}")]
         public MediaContainer GetFilters(string userId)
         {
-            return _impl.GetFilters(new PlexProvider {HttpContext = HttpContext}, userId);
+            return _impl.GetFilters(new PlexProvider { HttpContext = HttpContext }, userId);
         }
 
         [HttpGet("Metadata/{userId}/{type}/{id}/{historyinfo}/{filterid?}")]
         public MediaContainer GetMetadata(string userId, int type, string id, string historyinfo, int? filterid)
         {
-            return _impl.GetMetadata(new PlexProvider {HttpContext = HttpContext}, userId, type, id, historyinfo,
+            return _impl.GetMetadata(new PlexProvider { HttpContext = HttpContext }, userId, type, id, historyinfo,
                 false, filterid);
         }
 
         [HttpGet("User")]
         public PlexContract_Users GetUsers()
         {
-            return _impl.GetUsers(new PlexProvider {HttpContext = HttpContext});
+            return _impl.GetUsers(new PlexProvider { HttpContext = HttpContext });
         }
 
         [HttpGet("Search/{userId}/{limit}/{query}")]
         public MediaContainer Search(string userId, int limit, string query)
         {
-            return _impl.Search(new PlexProvider {HttpContext = HttpContext}, userId, limit, query, false);
+            return _impl.Search(new PlexProvider { HttpContext = HttpContext }, userId, limit, query, false);
         }
 
         [HttpGet("Serie/Watch/{userId}/{epid}/{status}")]
         public Response ToggleWatchedStatusOnEpisode(string userId, int epid, bool status)
         {
-            return _impl.ToggleWatchedStatusOnEpisode(new PlexProvider {HttpContext = HttpContext}, userId, epid,
+            return _impl.ToggleWatchedStatusOnEpisode(new PlexProvider { HttpContext = HttpContext }, userId, epid,
                 status);
         }
 
         [HttpGet("Vote/{userId}/{id}/{votevalue}/{votetype}")]
         public Response Vote(string userId, int id, float votevalue, int votetype)
         {
-            return _impl.VoteAnime(new PlexProvider {HttpContext = HttpContext}, userId, id, votevalue,
+            return _impl.VoteAnime(new PlexProvider { HttpContext = HttpContext }, userId, id, votevalue,
                 votetype);
         }
 

@@ -26,7 +26,7 @@ namespace Shoko.Server.Commands
     {
         public string FileName { get; set; }
         public bool ForceHash { get; set; }
-        
+
         public bool SkipMyList { get; set; }
 
         public override CommandRequestPriority DefaultPriority => CommandRequestPriority.Priority4;
@@ -34,13 +34,13 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.CheckingFile,
-            extraParams = new[] {FileName}
+            extraParams = new[] { FileName }
         };
 
         public QueueStateStruct PrettyDescriptionHashing => new QueueStateStruct
         {
             queueState = QueueStateEnum.HashingFile,
-            extraParams = new[] {FileName}
+            extraParams = new[] { FileName }
         };
 
         public CommandRequest_HashFile()
@@ -51,7 +51,7 @@ namespace Shoko.Server.Commands
         {
             FileName = filename;
             ForceHash = force;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
             SkipMyList = skipMyList;
 
             GenerateCommandID();
@@ -105,7 +105,7 @@ namespace Shoko.Server.Commands
                 {
                     // ignore, we tried
                 }
-                
+
                 e = ex;
                 return 0;
             }
@@ -121,8 +121,8 @@ namespace Shoko.Server.Commands
                 var now = DateTime.Now;
                 // check that the size is also equal, since some copy utilities apply the previous modified date
                 var size = CanAccessFile(FileName, writeAccess, ref e);
-                if (lastWrite <= now && lastWrite.AddSeconds(Seconds) >= now || 
-                    creation <= now && creation.AddSeconds(Seconds) > now || 
+                if (lastWrite <= now && lastWrite.AddSeconds(Seconds) >= now ||
+                    creation <= now && creation.AddSeconds(Seconds) > now ||
                     lastFileSize != size)
                 {
                     lastFileSize = size;
@@ -173,7 +173,7 @@ namespace Shoko.Server.Commands
                     bool writeAccess = folder.IsDropSource == 1;
 
                     bool aggressive = ServerSettings.Instance.Import.AggressiveFileLockChecking;
-                    
+
                     // At least 1s between to ensure that size has the chance to change
                     int waitTime = ServerSettings.Instance.Import.FileLockWaitTimeMS;
                     if (waitTime < 1000)
@@ -249,7 +249,7 @@ namespace Shoko.Server.Commands
                 logger.Error("Could not access file: " + FileName);
                 return;
             }
-            IFile source_file = (IFile) source.Result;
+            IFile source_file = (IFile)source.Result;
             if (folder.CloudID.HasValue)
                 filesize = source_file.Size;
             nshareID = folder.ImportFolderID;
@@ -331,7 +331,7 @@ namespace Shoko.Server.Commands
                     if (crossRefs.Any())
                     {
                         vlocal.Hash = crossRefs[0].Hash;
-                        vlocal.HashSource = (int) HashSource.DirectHash;
+                        vlocal.HashSource = (int)HashSource.DirectHash;
                     }
                 }
 
@@ -356,7 +356,7 @@ namespace Shoko.Server.Commands
                     {
                         logger.Trace("Got hash from LOCAL cache: {0} ({1})", FileName, fnhashes[0].Hash);
                         vlocal.Hash = fnhashes[0].Hash;
-                        vlocal.HashSource = (int) HashSource.WebCacheFileName;
+                        vlocal.HashSource = (int)HashSource.WebCacheFileName;
                     }
                 }
 
@@ -392,7 +392,7 @@ namespace Shoko.Server.Commands
                     vlocal.CRC32 = hashes.CRC32?.ToUpperInvariant();
                     vlocal.MD5 = hashes.MD5?.ToUpperInvariant();
                     vlocal.SHA1 = hashes.SHA1?.ToUpperInvariant();
-                    vlocal.HashSource = (int) HashSource.DirectHash;
+                    vlocal.HashSource = (int)HashSource.DirectHash;
                 }
                 FillMissingHashes(vlocal);
                 // We should have a hash by now
@@ -565,7 +565,7 @@ namespace Shoko.Server.Commands
                     vlocal.MD5 = hashes.MD5?.ToUpperInvariant();
                 if (needcrc32)
                     vlocal.CRC32 = hashes.CRC32?.ToUpperInvariant();
-                if (ServerSettings.Instance.WebCache.Enabled) AzureWebAPI.Send_FileHash(new List<SVR_VideoLocal> {vlocal});
+                if (ServerSettings.Instance.WebCache.Enabled) AzureWebAPI.Send_FileHash(new List<SVR_VideoLocal> { vlocal });
             }
         }
 

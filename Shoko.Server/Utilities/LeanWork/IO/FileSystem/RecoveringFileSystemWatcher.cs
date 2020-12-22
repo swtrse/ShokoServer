@@ -209,7 +209,7 @@ namespace LeanWork.IO.FileSystem
             if (eventHandler != null)
             {
                 if (SynchronizingObject != null && SynchronizingObject.InvokeRequired)
-                    SynchronizingObject.BeginInvoke(eventHandler, new object[] {this, e});
+                    SynchronizingObject.BeginInvoke(eventHandler, new object[] { this, e });
                 else
                     eventHandler(this, e);
             }

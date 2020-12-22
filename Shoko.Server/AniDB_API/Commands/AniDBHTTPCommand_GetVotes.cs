@@ -52,7 +52,7 @@ namespace Shoko.Server.AniDB_API.Commands
                 myVotes = AniDBHTTPHelper.ProcessVotes(docAnime);
                 return AniDBUDPResponseCode.GotVotesHTTP;
             }
-            
+
             return AniDBUDPResponseCode.NoSuchAnime;
         }
 

@@ -28,10 +28,10 @@ namespace Shoko.Server.Repositories.Cached
         public override void PopulateIndexes()
         {
             Series = Cache.CreateIndex(a => a.AnimeSeriesID);
-            UsersEpisodes = Cache.CreateIndex(a => (ulong) a.JMMUserID << 48 | (ulong) a.AnimeEpisodeID);
+            UsersEpisodes = Cache.CreateIndex(a => (ulong)a.JMMUserID << 48 | (ulong)a.AnimeEpisodeID);
             Users = Cache.CreateIndex(a => a.JMMUserID);
             Episodes = Cache.CreateIndex(a => a.AnimeEpisodeID);
-            UsersSeries = Cache.CreateIndex(a => (ulong) a.JMMUserID << 48 | (ulong) a.AnimeSeriesID);
+            UsersSeries = Cache.CreateIndex(a => (ulong)a.JMMUserID << 48 | (ulong)a.AnimeSeriesID);
         }
 
         public override void RegenerateDb()
@@ -104,7 +104,7 @@ namespace Shoko.Server.Repositories.Cached
         {
             lock (Cache)
             {
-                return UsersEpisodes.GetOne((ulong) userid << 48 | (ulong) epid);
+                return UsersEpisodes.GetOne((ulong)userid << 48 | (ulong)epid);
             }
         }
 
@@ -137,7 +137,7 @@ namespace Shoko.Server.Repositories.Cached
         {
             lock (Cache)
             {
-                return UsersSeries.GetMultiple((ulong) userid << 48 | (ulong) seriesid).Where(a => a.WatchedCount > 0)
+                return UsersSeries.GetMultiple((ulong)userid << 48 | (ulong)seriesid).Where(a => a.WatchedCount > 0)
                     .OrderByDescending(a => a.WatchedDate).FirstOrDefault();
             }
         }
@@ -154,7 +154,7 @@ namespace Shoko.Server.Repositories.Cached
         {
             lock (Cache)
             {
-                return UsersSeries.GetMultiple((ulong) userid << 48 | (ulong) seriesid);
+                return UsersSeries.GetMultiple((ulong)userid << 48 | (ulong)seriesid);
             }
         }
 

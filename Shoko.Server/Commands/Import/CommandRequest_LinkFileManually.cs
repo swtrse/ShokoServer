@@ -37,12 +37,12 @@ namespace Shoko.Server.Commands
                     return new QueueStateStruct
                     {
                         queueState = QueueStateEnum.LinkFileManually,
-                        extraParams = new[] {vlocal.FileName, episode.Title}
+                        extraParams = new[] { vlocal.FileName, episode.Title }
                     };
                 return new QueueStateStruct
                 {
                     queueState = QueueStateEnum.LinkFileManually,
-                    extraParams = new[] {VideoLocalID.ToString(), EpisodeID.ToString()}
+                    extraParams = new[] { VideoLocalID.ToString(), EpisodeID.ToString() }
                 };
             }
         }
@@ -55,7 +55,7 @@ namespace Shoko.Server.Commands
         {
             VideoLocalID = vidLocalID;
             EpisodeID = episodeID;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }
@@ -154,7 +154,7 @@ namespace Shoko.Server.Commands
                 EpisodeID = int.Parse(TryGetProperty(docCreator, "CommandRequest_LinkFileManually", "EpisodeID"));
                 Percentage = int.Parse(TryGetProperty(docCreator, "CommandRequest_LinkFileManually", "Percentage"));
                 vlocal = RepoFactory.VideoLocal.GetByID(VideoLocalID);
-                if (null==vlocal)
+                if (null == vlocal)
                 {
                     logger.Info("videolocal object {0} not found", VideoLocalID);
                     return false;

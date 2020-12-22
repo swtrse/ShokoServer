@@ -60,7 +60,7 @@ namespace AniDBAPI.Commands
             commandID = "MarkingFileUnknown File: " + lid;
 
             commandText = "MYLISTADD lid=" + lid;
-            commandText += "&state=" + (int) AniDBFile_State.Unknown;
+            commandText += "&state=" + (int)AniDBFile_State.Unknown;
             commandText += "&edit=1";
         }
     }

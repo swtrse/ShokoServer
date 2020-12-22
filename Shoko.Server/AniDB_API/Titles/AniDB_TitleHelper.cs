@@ -17,7 +17,7 @@ namespace Shoko.Server.AniDB_API.Titles
         private static readonly object accessLock = new object();
 
         private static readonly string CacheFilePath = Path.Combine(ServerSettings.ApplicationPath, "anime-titles.xml");
-        
+
         private static readonly string CacheFilePathTemp =
             Path.Combine(ServerSettings.ApplicationPath, "anime-titles.xml") + ".temp";
 
@@ -66,7 +66,7 @@ namespace Shoko.Server.AniDB_API.Titles
                 if (!File.Exists(CacheFilePath))
                     lock (accessLock) DownloadCache();
             }
-            
+
             if (!File.Exists(CacheFilePath)) return;
 
             lock (accessLock)
@@ -111,7 +111,7 @@ namespace Shoko.Server.AniDB_API.Titles
                 var textResponse = new StreamReader(gzip).ReadToEnd();
                 if (File.Exists(CacheFilePathTemp)) File.Delete(CacheFilePathTemp);
                 File.WriteAllText(CacheFilePathTemp, textResponse);
-                
+
                 // backup the old one
                 if (File.Exists(CacheFilePath)) File.Move(CacheFilePath, CacheFilePathBak);
 
@@ -128,12 +128,12 @@ namespace Shoko.Server.AniDB_API.Titles
             try
             {
                 if (File.Exists(CacheFilePathTemp)) File.Delete(CacheFilePathTemp);
-                
+
                 // Ignore all certificate failures.
-                ServicePointManager.Expect100Continue = true;                
+                ServicePointManager.Expect100Continue = true;
                 //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 //ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-                
+
                 // Download the file
                 using (var client = new WebClient())
                 {
@@ -147,7 +147,7 @@ namespace Shoko.Server.AniDB_API.Titles
                     var textResponse = new StreamReader(gzip).ReadToEnd();
                     File.WriteAllText(CacheFilePathTemp, textResponse);
                 }
-                
+
                 // backup the old one
                 if (File.Exists(CacheFilePath)) File.Move(CacheFilePath, CacheFilePathBak);
 

@@ -20,7 +20,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.WebCacheDeleteXRefAniDBOther,
-            extraParams = new[] {AnimeID.ToString()}
+            extraParams = new[] { AnimeID.ToString() }
         };
 
         public CommandRequest_WebCacheDeleteXRefAniDBOther()
@@ -30,8 +30,8 @@ namespace Shoko.Server.Commands
         public CommandRequest_WebCacheDeleteXRefAniDBOther(int animeID, CrossRefType xrefType)
         {
             AnimeID = animeID;
-            CrossRefType = (int) xrefType;
-            Priority = (int) DefaultPriority;
+            CrossRefType = (int)xrefType;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }
@@ -40,11 +40,11 @@ namespace Shoko.Server.Commands
         {
             try
             {
-                AzureWebAPI.Delete_CrossRefAniDBOther(AnimeID, (CrossRefType) CrossRefType);
+                AzureWebAPI.Delete_CrossRefAniDBOther(AnimeID, (CrossRefType)CrossRefType);
             }
             catch (Exception ex)
             {
-                logger.Error(ex, 
+                logger.Error(ex,
                     "Error processing CommandRequest_WebCacheDeleteXRefAniDBOther: {0}" + ex);
             }
         }

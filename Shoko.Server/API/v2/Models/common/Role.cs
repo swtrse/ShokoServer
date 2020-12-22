@@ -21,7 +21,7 @@
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((Role) obj);
+            return Equals((Role)obj);
         }
 
         public override int GetHashCode()

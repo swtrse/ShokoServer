@@ -63,7 +63,7 @@ namespace Shoko.Server.API.v2.Modules
                     return contract?.UnwatchedEpisodeCount == 0;
                 });
 
-                hours = Math.Round((decimal)  watched.Select(a => RepoFactory.VideoLocal.GetByID(a.VideoLocalID)).Where(a => a != null)
+                hours = Math.Round((decimal)watched.Select(a => RepoFactory.VideoLocal.GetByID(a.VideoLocalID)).Where(a => a != null)
                     .Sum(a => a.Media?.GeneralStream?.Duration ?? 0) / 3600, 1, MidpointRounding.AwayFromZero); // 60s * 60m = ?h
 
                 tags = RepoFactory.AniDB_Anime_Tag.GetAllForLocalSeries().GroupBy(a => a.TagID)
@@ -105,7 +105,7 @@ namespace Shoko.Server.API.v2.Modules
             };
         }
 
-        private static readonly string[] SizeSuffixes = 
+        private static readonly string[] SizeSuffixes =
             { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
 
         private static string SizeSuffix(long value, int decimalPlaces = 1)

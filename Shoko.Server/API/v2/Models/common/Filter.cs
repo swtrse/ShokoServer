@@ -85,7 +85,7 @@ namespace Shoko.Server.API.v2.Models.common
                             filter.art.fanart.Add(new Art
                             {
                                 index = 0,
-                                url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) ImageEntityType.TvDB_FanArt,
+                                url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)ImageEntityType.TvDB_FanArt,
                                     fanart.TvDB_ImageFanartID)
                             });
                         }
@@ -97,14 +97,14 @@ namespace Shoko.Server.API.v2.Models.common
                             filter.art.banner.Add(new Art
                             {
                                 index = 0,
-                                url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) ImageEntityType.TvDB_Banner,
+                                url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)ImageEntityType.TvDB_Banner,
                                     banner.TvDB_ImageWideBannerID)
                             });
                         }
 
                         filter.art.thumb.Add(new Art
                         {
-                            url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) ImageEntityType.AniDB_Cover,
+                            url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)ImageEntityType.AniDB_Cover,
                                 anime.AniDB_ID),
                             index = 0
                         });

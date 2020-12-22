@@ -19,7 +19,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
             if (!(reader.Value is string existingString)) return existingValue;
             try
             {
-                string[] strings = existingString.Split(new[] {"/", " ", "-"}, StringSplitOptions.RemoveEmptyEntries);
+                string[] strings = existingString.Split(new[] { "/", " ", "-" }, StringSplitOptions.RemoveEmptyEntries);
                 if (strings.Length == 1)
                 {
                     if (int.TryParse(strings[0], out int result)) return result;

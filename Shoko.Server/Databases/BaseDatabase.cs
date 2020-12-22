@@ -481,7 +481,7 @@ namespace Shoko.Server.Databases
                 "DO REPLACE '<' '('" + Environment.NewLine +
                 "DO REPLACE '>' ')'" + Environment.NewLine +
                 "DO REPLACE ':' '-'" + Environment.NewLine +
-                "DO REPLACE '" + ((char) 34) + "' '`'" + Environment.NewLine +
+                "DO REPLACE '" + ((char)34) + "' '`'" + Environment.NewLine +
                 "DO REPLACE '/' '_'" + Environment.NewLine +
                 "DO REPLACE '/' '_'" + Environment.NewLine +
                 "DO REPLACE '\\' '_'" + Environment.NewLine +

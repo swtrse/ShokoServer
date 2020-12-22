@@ -70,8 +70,8 @@ namespace NutzCode.InMemoryIndex
 
         public S Get(T key)
         {
-            return _dict.ContainsKey(key) 
-                ? _dict[key] 
+            return _dict.ContainsKey(key)
+                ? _dict[key]
                 : null;
         }
 
@@ -132,8 +132,8 @@ namespace NutzCode.InMemoryIndex
             if (_cache == null || !_dict.ContainsInverseKey(key))
                 return null;
             HashSet<T> hashes = _dict.FindInverse(key);
-            return hashes.Count == 0 
-                ? null 
+            return hashes.Count == 0
+                ? null
                 : _cache.Get(hashes.First());
         }
 
@@ -324,8 +324,8 @@ namespace NutzCode.InMemoryIndex
 
         public HashSet<T> FindInverse(S k)
         {
-            return inverse.ContainsKey(k) 
-                ? inverse[k] 
+            return inverse.ContainsKey(k)
+                ? inverse[k]
                 : new HashSet<T>();
         }
 
@@ -417,8 +417,8 @@ namespace NutzCode.InMemoryIndex
 
         public HashSet<T> FindInverse(S k)
         {
-            return inverse.ContainsKey(k) 
-                ? inverse[k] 
+            return inverse.ContainsKey(k)
+                ? inverse[k]
                 : new HashSet<T>();
         }
 

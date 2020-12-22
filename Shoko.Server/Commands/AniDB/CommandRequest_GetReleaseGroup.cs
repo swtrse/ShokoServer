@@ -20,7 +20,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.GetReleaseInfo,
-            extraParams = new[] {GroupID.ToString()}
+            extraParams = new[] { GroupID.ToString() }
         };
 
         public CommandRequest_GetReleaseGroup()
@@ -31,7 +31,7 @@ namespace Shoko.Server.Commands
         {
             GroupID = grpid;
             ForceRefresh = forced;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

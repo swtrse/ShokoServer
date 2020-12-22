@@ -59,7 +59,7 @@ namespace Shoko.Server.Utilities
                 StartScan();
             }
         }
-        
+
         public void StartScan()
         {
             if (ActiveScan == null)
@@ -117,7 +117,8 @@ namespace Shoko.Server.Utilities
                 {
                     activeScan = value;
                     Refresh();
-                    Utils.MainThreadDispatch(() => {
+                    Utils.MainThreadDispatch(() =>
+                    {
                         ActiveErrorFiles.Clear();
                         if (value != null)
                             RepoFactory.ScanFile.GetWithError(value.ScanID).ForEach(a => ActiveErrorFiles.Add(a));
@@ -188,7 +189,7 @@ namespace Shoko.Server.Utilities
                 bool paused = ShokoService.CmdProcessorHasher.Paused;
                 ShokoService.CmdProcessorHasher.Paused = true;
                 SVR_Scan s = RunScan;
-                s.Status = (int) ScanStatus.Running;
+                s.Status = (int)ScanStatus.Running;
                 RepoFactory.Scan.Save(s);
                 Refresh();
                 List<ScanFile> files = RepoFactory.ScanFile.GetWaiting(s.ScanID);
@@ -198,12 +199,12 @@ namespace Shoko.Server.Utilities
                     try
                     {
                         if (!File.Exists(sf.FullName))
-                            sf.Status = (int) ScanFileStatus.ErrorFileNotFound;
+                            sf.Status = (int)ScanFileStatus.ErrorFileNotFound;
                         else
                         {
                             FileInfo f = new FileInfo(sf.FullName);
                             if (sf.FileSize != f.Length)
-                                sf.Status = (int) ScanFileStatus.ErrorInvalidSize;
+                                sf.Status = (int)ScanFileStatus.ErrorInvalidSize;
                             else
                             {
                                 ShokoService.CmdProcessorHasher.QueueState = new QueueStateStruct
@@ -215,27 +216,27 @@ namespace Shoko.Server.Utilities
                                     FileHashHelper.GetHashInfo(sf.FullName, true, OnHashProgress, false, false, false);
                                 if (string.IsNullOrEmpty(hashes.ED2K))
                                 {
-                                    sf.Status = (int) ScanFileStatus.ErrorMissingHash;
+                                    sf.Status = (int)ScanFileStatus.ErrorMissingHash;
                                 }
                                 else
                                 {
                                     sf.HashResult = hashes.ED2K;
                                     if (!sf.Hash.Equals(sf.HashResult, StringComparison.InvariantCultureIgnoreCase))
-                                        sf.Status = (int) ScanFileStatus.ErrorInvalidHash;
+                                        sf.Status = (int)ScanFileStatus.ErrorInvalidHash;
                                     else
-                                        sf.Status = (int) ScanFileStatus.ProcessedOK;
+                                        sf.Status = (int)ScanFileStatus.ProcessedOK;
                                 }
                             }
                         }
                     }
                     catch (Exception)
                     {
-                        sf.Status = (int) ScanFileStatus.ErrorIOError;
+                        sf.Status = (int)ScanFileStatus.ErrorIOError;
                     }
                     cnt++;
                     sf.CheckDate = DateTime.Now;
                     RepoFactory.ScanFile.Save(sf);
-                    if (sf.Status > (int) ScanFileStatus.ProcessedOK)
+                    if (sf.Status > (int)ScanFileStatus.ProcessedOK)
                         Instance.AddErrorScan(sf);
                     Refresh();
 
@@ -243,9 +244,9 @@ namespace Shoko.Server.Utilities
                         break;
                 }
                 if (files.Any(a => a.GetScanFileStatus() == ScanFileStatus.Waiting))
-                    s.Status = (int) ScanStatus.Standby;
+                    s.Status = (int)ScanStatus.Standby;
                 else
-                    s.Status = (int) ScanStatus.Finish;
+                    s.Status = (int)ScanStatus.Finish;
                 RepoFactory.Scan.Save(s);
                 Refresh();
                 RunScan = null;

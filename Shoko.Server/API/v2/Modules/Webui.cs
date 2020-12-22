@@ -70,7 +70,7 @@ namespace Shoko.Server.API.v2.Modules
         [HttpGet("latest")]
         public ComponentVersion WebUILatestStableVersion()
         {
-            ComponentVersion version = new ComponentVersion {version = WebUIHelper.WebUIGetLatestVersion(true)};
+            ComponentVersion version = new ComponentVersion { version = WebUIHelper.WebUIGetLatestVersion(true) };
 
             return version;
         }

@@ -30,7 +30,7 @@ namespace Shoko.Server.LZ4
             byte[] data =
                 Encoding.UTF8.GetBytes(multiinheritance
                     ? JsonConvert.SerializeObject(obj,
-                        new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All})
+                        new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All })
                     : JsonConvert.SerializeObject(obj));
             originalsize = data.Length;
             return Encode(data, 0, data.Length);
@@ -78,15 +78,15 @@ namespace Shoko.Server.LZ4
         public static int Encode(byte[] input, int inputOffset, int inputLength, byte[] output, int outputOffset,
             int outputLength)
         {
-            return is64bit 
-                ? LZ4Codec.Encode64(input, inputOffset, inputLength, output, outputOffset, outputLength) 
+            return is64bit
+                ? LZ4Codec.Encode64(input, inputOffset, inputLength, output, outputOffset, outputLength)
                 : LZ4Codec.Encode32(input, inputOffset, inputLength, output, outputOffset, outputLength);
         }
 
         public static byte[] Decode(byte[] input, int inputOffset, int inputLength, int outputlength)
         {
-            return is64bit 
-                ? LZ4Codec.Decode64(input, inputOffset, inputLength, outputlength) 
+            return is64bit
+                ? LZ4Codec.Decode64(input, inputOffset, inputLength, outputlength)
                 : LZ4Codec.Decode32(input, inputOffset, inputLength, outputlength);
         }
 

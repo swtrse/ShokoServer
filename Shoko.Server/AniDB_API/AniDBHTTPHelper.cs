@@ -42,14 +42,14 @@ namespace AniDBAPI
                 string uri = string.Format(AnimeURL, animeID);
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(ServerSettings.Instance.Culture);
                 DateTime start = DateTime.Now;
-                string msg = string.Format(Resources.AniDB_GettingAnimeXML, animeID)+"; prevUpdate: "+prevUpdate;
+                string msg = string.Format(Resources.AniDB_GettingAnimeXML, animeID) + "; prevUpdate: " + prevUpdate;
                 ShokoService.LogToSystem(Constants.DBLogType.APIAniDBHTTP, msg);
 
                 string rawXML = APIUtils.DownloadWebPage(uri);
 
                 // Putting this here for no chance of error. It is ALWAYS created or updated when AniDB is called!
                 if (anime == null)
-                    anime = new AniDB_AnimeUpdate {AnimeID = animeID, UpdatedAt = DateTime.Now};
+                    anime = new AniDB_AnimeUpdate { AnimeID = animeID, UpdatedAt = DateTime.Now };
                 else
                     anime.UpdatedAt = DateTime.Now;
                 RepoFactory.AniDB_AnimeUpdate.Save(anime);
@@ -291,22 +291,22 @@ namespace AniDBAPI
                 if (string.IsNullOrEmpty(name)) continue;
                 if (!int.TryParse(TryGetAttribute(node, "count"), out int iCount)) continue;
                 if (!decimal.TryParse(node.InnerText.Trim(), style, culture, out decimal iRating)) continue;
-                iRating = (int) Math.Round(iRating * 100);
+                iRating = (int)Math.Round(iRating * 100);
 
                 if (name.Equals("permanent"))
                 {
                     anime.VoteCount = iCount;
-                    anime.Rating = (int) iRating;
+                    anime.Rating = (int)iRating;
                 }
                 else if (name.Equals("temporary"))
                 {
                     anime.TempVoteCount = iCount;
-                    anime.TempRating = (int) iRating;
+                    anime.TempRating = (int)iRating;
                 }
                 else if (name.Equals("review"))
                 {
                     anime.ReviewCount = iCount;
-                    anime.AvgReviewRating = (int) iRating;
+                    anime.AvgReviewRating = (int)iRating;
                 }
             }
 

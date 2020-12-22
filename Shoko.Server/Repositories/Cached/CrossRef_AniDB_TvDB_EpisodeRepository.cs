@@ -88,7 +88,7 @@ WHERE CrossRef_AniDB_TvDB_Episode.MatchRating != :rating AND CrossRef_AniDB_TvDB
     WHERE AniDB_Episode.AnimeID = :animeid
   ) x
 );")
-                                .SetInt32("animeid", AnimeID).SetInt32("rating", (int) MatchRating.UserVerified)
+                                .SetInt32("animeid", AnimeID).SetInt32("rating", (int)MatchRating.UserVerified)
                                 .ExecuteUpdate();
 
                             try
@@ -122,7 +122,7 @@ WHERE CrossRef_AniDB_TvDB_Episode.MatchRating != :rating AND CrossRef_AniDB_TvDB
                             foreach (var episode in toRemove) Cache.Remove(episode);
                             session.CreateSQLQuery(
                                     "DELETE FROM CrossRef_AniDB_TvDB_Episode WHERE MatchRating != :rating;")
-                                .SetInt32("rating", (int) MatchRating.UserVerified)
+                                .SetInt32("rating", (int)MatchRating.UserVerified)
                                 .ExecuteUpdate();
                             transaction.Commit();
                         }

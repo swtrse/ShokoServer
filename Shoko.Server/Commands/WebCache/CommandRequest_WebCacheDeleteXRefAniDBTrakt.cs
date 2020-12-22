@@ -23,7 +23,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.WebCacheDeleteXRefAniDBTrakt,
-            extraParams = new[] {AnimeID.ToString()}
+            extraParams = new[] { AnimeID.ToString() }
         };
 
         public CommandRequest_WebCacheDeleteXRefAniDBTrakt()
@@ -41,7 +41,7 @@ namespace Shoko.Server.Commands
             TraktID = traktID;
             TraktSeasonNumber = traktSeasonNumber;
             TraktStartEpisodeNumber = traktStartEpisodeNumber;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

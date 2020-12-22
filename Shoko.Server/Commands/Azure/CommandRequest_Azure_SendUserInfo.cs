@@ -28,7 +28,7 @@ namespace Shoko.Server.Commands.Azure
         public CommandRequest_Azure_SendUserInfo(string username)
         {
             Username = username;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

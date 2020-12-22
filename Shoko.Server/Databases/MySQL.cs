@@ -865,7 +865,7 @@ namespace Shoko.Server.Databases
                     ArrayList rows = ExecuteReader(conn, sql);
                     if (rows.Count > 0)
                     {
-                        string db = (string) ((object[]) rows[0])[0];
+                        string db = (string)((object[])rows[0])[0];
                         Logger.Trace("Found db already exists: {0}", db);
                         return true;
                     }
@@ -951,7 +951,7 @@ namespace Shoko.Server.Databases
 
         private static void MySQLFixUTF8()
         {
-            string sql = 
+            string sql =
                 "SELECT `TABLE_SCHEMA`, `TABLE_NAME`, `COLUMN_NAME`, `DATA_TYPE`, `CHARACTER_MAXIMUM_LENGTH` " +
                 "FROM information_schema.COLUMNS " +
                 $"WHERE table_schema = '{ServerSettings.Instance.Database.Schema}' " +

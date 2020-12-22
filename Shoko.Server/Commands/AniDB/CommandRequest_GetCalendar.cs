@@ -20,7 +20,7 @@ namespace Shoko.Server.Commands
 
         public override CommandRequestPriority DefaultPriority => CommandRequestPriority.Priority5;
 
-        public override QueueStateStruct PrettyDescription => new QueueStateStruct {queueState = QueueStateEnum.GetCalendar, extraParams = new string[0]};
+        public override QueueStateStruct PrettyDescription => new QueueStateStruct { queueState = QueueStateEnum.GetCalendar, extraParams = new string[0] };
 
         public CommandRequest_GetCalendar()
         {
@@ -29,7 +29,7 @@ namespace Shoko.Server.Commands
         public CommandRequest_GetCalendar(bool forced)
         {
             ForceRefresh = forced;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }
@@ -43,7 +43,7 @@ namespace Shoko.Server.Commands
                 // we will always assume that an anime was downloaded via http first
 
                 ScheduledUpdate sched =
-                    RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.AniDBCalendar);
+                    RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.AniDBCalendar);
                 if (sched == null)
                 {
                     sched = new ScheduledUpdate

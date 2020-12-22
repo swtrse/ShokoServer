@@ -6,7 +6,7 @@ namespace Shoko.Plugin.Abstractions.DataModels
         /// The Import Folder's name. This is user specified in WebUI, or NA for legacy
         /// </summary>
         string Name { get; }
-        
+
         /// <summary>
         /// The Base Location of the Import Folder in the host, VM, or container filesystem
         /// </summary>

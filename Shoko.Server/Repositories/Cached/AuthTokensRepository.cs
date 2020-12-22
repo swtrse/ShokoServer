@@ -89,7 +89,7 @@ namespace Shoko.Server.Repositories.Cached
 
                 apiKey = Guid.NewGuid().ToString().ToLowerInvariant().Trim();
                 AuthTokens newToken =
-                    new AuthTokens {UserID = uid, DeviceName = device.Trim().ToLowerInvariant(), Token = apiKey};
+                    new AuthTokens { UserID = uid, DeviceName = device.Trim().ToLowerInvariant(), Token = apiKey };
                 Save(newToken);
 
                 return apiKey;

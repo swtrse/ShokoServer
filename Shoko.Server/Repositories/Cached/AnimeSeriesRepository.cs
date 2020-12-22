@@ -216,7 +216,7 @@ namespace Shoko.Server.Repositories.Cached
                     if (startyear != 0)
                     {
                         allyears = startyear == endyear
-                            ? new HashSet<int> {startyear}
+                            ? new HashSet<int> { startyear }
                             : new HashSet<int>(Enumerable.Range(startyear, endyear - startyear + 1));
                     }
 

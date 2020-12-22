@@ -90,7 +90,7 @@ namespace LZ4pn
             while (len-- > 0) *dst++ = val;
         }
 
-        #region Encode32
+    #region Encode32
 
         /// <summary>Encodes the specified input.</summary>
         /// <param name="input">The input.</param>
@@ -178,9 +178,9 @@ namespace LZ4pn
             return result;
         }
 
-        #endregion
+    #endregion
 
-        #region Decode32
+    #region Decode32
 
         /// <summary>Decodes the specified input.</summary>
         /// <param name="input">The input.</param>
@@ -264,9 +264,9 @@ namespace LZ4pn
             return result;
         }
 
-        #endregion
+    #endregion
 
-        #region Encode64
+    #region Encode64
 
         /// <summary>Encodes the specified input.</summary>
         /// <param name="input">The input.</param>
@@ -354,9 +354,9 @@ namespace LZ4pn
             return result;
         }
 
-        #endregion
+    #endregion
 
-        #region Decode64
+    #region Decode64
 
         /// <summary>Decodes the specified input.</summary>
         /// <param name="input">The input.</param>
@@ -440,9 +440,9 @@ namespace LZ4pn
             return result;
         }
 
-        #endregion
+    #endregion
 
-        #region HC utilities
+    #region HC utilities
 
         // ReSharper disable InconsistentNaming
 
@@ -476,9 +476,9 @@ namespace LZ4pn
             return hc4;
         }
 
-        #endregion
+    #endregion
 
-        #region Encode32HC
+    #region Encode32HC
 
         private static unsafe int LZ4_compressHC_32(byte* input, byte* output, int inputLength, int outputLength)
         {
@@ -542,9 +542,9 @@ namespace LZ4pn
             return result;
         }
 
-        #endregion
+    #endregion
 
-        #region Encode64HC
+    #region Encode64HC
 
         private static unsafe int LZ4_compressHC_64(byte* input, byte* output, int inputLength, int outputLength)
         {
@@ -608,7 +608,7 @@ namespace LZ4pn
             return result;
         }
 
-        #endregion
+    #endregion
     }
 
 #endif

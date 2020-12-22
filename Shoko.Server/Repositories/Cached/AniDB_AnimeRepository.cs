@@ -189,34 +189,34 @@ namespace Shoko.Server.Repositories
                     .AddEntity("movPoster", typeof(MovieDB_Poster))
                     .AddEntity("movFanart", typeof(MovieDB_Fanart))
                     .SetParameterList("animeIds", animeIds)
-                    .SetInt32("tvdbBannerType", (int) ImageEntityType.TvDB_Banner)
-                    .SetInt32("tvdbCoverType", (int) ImageEntityType.TvDB_Cover)
-                    .SetInt32("tvdbFanartType", (int) ImageEntityType.TvDB_FanArt)
-                    .SetInt32("movdbPosterType", (int) ImageEntityType.MovieDB_Poster)
-                    .SetInt32("movdbFanartType", (int) ImageEntityType.MovieDB_FanArt)
+                    .SetInt32("tvdbBannerType", (int)ImageEntityType.TvDB_Banner)
+                    .SetInt32("tvdbCoverType", (int)ImageEntityType.TvDB_Cover)
+                    .SetInt32("tvdbFanartType", (int)ImageEntityType.TvDB_FanArt)
+                    .SetInt32("movdbPosterType", (int)ImageEntityType.MovieDB_Poster)
+                    .SetInt32("movdbFanartType", (int)ImageEntityType.MovieDB_FanArt)
                     .List<object[]>();
 
                 foreach (object[] result in results)
                 {
-                    var aniDbDefImage = (AniDB_Anime_DefaultImage) result[0];
+                    var aniDbDefImage = (AniDB_Anime_DefaultImage)result[0];
                     IImageEntity parentImage = null;
 
-                    switch ((ImageEntityType) aniDbDefImage.ImageParentType)
+                    switch ((ImageEntityType)aniDbDefImage.ImageParentType)
                     {
                         case ImageEntityType.TvDB_Banner:
-                            parentImage = (IImageEntity) result[1];
+                            parentImage = (IImageEntity)result[1];
                             break;
                         case ImageEntityType.TvDB_Cover:
-                            parentImage = (IImageEntity) result[2];
+                            parentImage = (IImageEntity)result[2];
                             break;
                         case ImageEntityType.TvDB_FanArt:
-                            parentImage = (IImageEntity) result[3];
+                            parentImage = (IImageEntity)result[3];
                             break;
                         case ImageEntityType.MovieDB_Poster:
-                            parentImage = (IImageEntity) result[4];
+                            parentImage = (IImageEntity)result[4];
                             break;
                         case ImageEntityType.MovieDB_FanArt:
-                            parentImage = (IImageEntity) result[5];
+                            parentImage = (IImageEntity)result[5];
                             break;
                     }
 
@@ -229,7 +229,7 @@ namespace Shoko.Server.Repositories
 
                     if (!defImagesByAnime.TryGetValue(aniDbDefImage.AnimeID, out DefaultAnimeImages defImages))
                     {
-                        defImages = new DefaultAnimeImages {AnimeID = aniDbDefImage.AnimeID};
+                        defImages = new DefaultAnimeImages { AnimeID = aniDbDefImage.AnimeID };
                         defImagesByAnime.Add(defImages.AnimeID, defImages);
                     }
 
@@ -264,7 +264,7 @@ namespace Shoko.Server.Repositories
             return new CL_AniDB_Anime_DefaultImage
             {
                 AnimeID = AnimeID,
-                ImageType = (int) ImageEntityType.AniDB_Cover
+                ImageType = (int)ImageEntityType.AniDB_Cover
             };
         }
 
@@ -321,10 +321,10 @@ namespace Shoko.Server.Repositories
         public TImageType GetParentImage<TImageType>()
             where TImageType : class, IImageEntity => _parentImage as TImageType;
 
-        public ImageSizeType AniDBImageSizeType => (ImageSizeType) AniDBImage.ImageType;
+        public ImageSizeType AniDBImageSizeType => (ImageSizeType)AniDBImage.ImageType;
 
         public AniDB_Anime_DefaultImage AniDBImage { get; private set; }
 
-        public ImageEntityType ParentImageType => (ImageEntityType) AniDBImage.ImageParentType;
+        public ImageEntityType ParentImageType => (ImageEntityType)AniDBImage.ImageParentType;
     }
 }

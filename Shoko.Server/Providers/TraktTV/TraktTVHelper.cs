@@ -56,7 +56,7 @@ namespace Shoko.Server.Providers.TraktTV
                              "json: " + json + Environment.NewLine;
                 logger.Trace(msg);
 
-                var request = (HttpWebRequest) WebRequest.Create(uri);
+                var request = (HttpWebRequest)WebRequest.Create(uri);
                 request.KeepAlive = true;
 
                 request.Method = verb;
@@ -74,7 +74,7 @@ namespace Shoko.Server.Providers.TraktTV
                 postStream.Write(data, 0, data.Length);
 
                 // get the response
-                var response = (HttpWebResponse) request.GetResponse();
+                var response = (HttpWebResponse)request.GetResponse();
 
                 Stream responseStream = response.GetResponseStream();
                 if (responseStream == null) return ret;
@@ -82,7 +82,7 @@ namespace Shoko.Server.Providers.TraktTV
                 StreamReader reader = new StreamReader(responseStream);
                 string strResponse = reader.ReadToEnd();
 
-                int statusCode = (int) response.StatusCode;
+                int statusCode = (int)response.StatusCode;
 
                 // cleanup
                 postStream.Close();
@@ -105,8 +105,8 @@ namespace Shoko.Server.Providers.TraktTV
                 {
                     if (webEx.Response is HttpWebResponse response)
                     {
-                        logger.Error($"Error in SendData: {(int) response.StatusCode} - {webEx}");
-                        ret = (int) response.StatusCode;
+                        logger.Error($"Error in SendData: {(int)response.StatusCode} - {webEx}");
+                        ret = (int)response.StatusCode;
 
                         try
                         {
@@ -140,7 +140,7 @@ namespace Shoko.Server.Providers.TraktTV
 
         public static string GetFromTrakt(string uri, ref int traktCode)
         {
-            var request = (HttpWebRequest) WebRequest.Create(uri);
+            var request = (HttpWebRequest)WebRequest.Create(uri);
 
             string msg = "Trakt GET Data" + Environment.NewLine +
                          "uri: " + uri + Environment.NewLine;
@@ -159,7 +159,7 @@ namespace Shoko.Server.Providers.TraktTV
 
             try
             {
-                WebResponse response = (HttpWebResponse) request.GetResponse();
+                WebResponse response = (HttpWebResponse)request.GetResponse();
                 var httpResponse = (HttpWebResponse)response;
                 traktCode = (int)httpResponse.StatusCode;
                 Stream stream = response.GetResponseStream();
@@ -187,8 +187,8 @@ namespace Shoko.Server.Providers.TraktTV
             {
                 logger.Error("Error in GetFromTrakt: {0}", e);
 
-                var httpResponse = (HttpWebResponse) e.Response;
-                traktCode = (int) httpResponse.StatusCode;
+                var httpResponse = (HttpWebResponse)e.Response;
+                traktCode = (int)httpResponse.StatusCode;
 
                 return null;
             }
@@ -414,14 +414,14 @@ namespace Shoko.Server.Providers.TraktTV
         {
             List<CrossRef_AniDB_TraktV2> xrefTemps = RepoFactory.CrossRef_AniDB_TraktV2.GetByAnimeIDEpTypeEpNumber(
                 session, animeID,
-                (int) aniEpType,
+                (int)aniEpType,
                 aniEpNumber);
             if (xrefTemps != null && xrefTemps.Count > 0)
             {
                 foreach (CrossRef_AniDB_TraktV2 xrefTemp in xrefTemps)
                 {
                     // delete the existing one if we are updating
-                    RemoveLinkAniDBTrakt(xrefTemp.AnimeID, (EpisodeType) xrefTemp.AniDBStartEpisodeType,
+                    RemoveLinkAniDBTrakt(xrefTemp.AnimeID, (EpisodeType)xrefTemp.AniDBStartEpisodeType,
                         xrefTemp.AniDBStartEpisodeNumber,
                         xrefTemp.TraktID, xrefTemp.TraktSeasonNumber, xrefTemp.TraktStartEpisodeNumber);
                 }
@@ -443,10 +443,10 @@ namespace Shoko.Server.Providers.TraktTV
             CrossRef_AniDB_TraktV2 xref = RepoFactory.CrossRef_AniDB_TraktV2.GetByTraktID(session, traktID,
                                               seasonNumber, traktEpNumber,
                                               animeID,
-                                              (int) aniEpType, aniEpNumber) ?? new CrossRef_AniDB_TraktV2();
+                                              (int)aniEpType, aniEpNumber) ?? new CrossRef_AniDB_TraktV2();
 
             xref.AnimeID = animeID;
-            xref.AniDBStartEpisodeType = (int) aniEpType;
+            xref.AniDBStartEpisodeType = (int)aniEpType;
             xref.AniDBStartEpisodeNumber = aniEpNumber;
 
             xref.TraktID = traktID;
@@ -456,9 +456,9 @@ namespace Shoko.Server.Providers.TraktTV
                 xref.TraktTitle = traktShow.Title;
 
             if (excludeFromWebCache)
-                xref.CrossRefSource = (int) CrossRefSource.WebCache;
+                xref.CrossRefSource = (int)CrossRefSource.WebCache;
             else
-                xref.CrossRefSource = (int) CrossRefSource.User;
+                xref.CrossRefSource = (int)CrossRefSource.User;
 
             RepoFactory.CrossRef_AniDB_TraktV2.Save(xref);
 
@@ -481,7 +481,7 @@ namespace Shoko.Server.Providers.TraktTV
         {
             CrossRef_AniDB_TraktV2 xref = RepoFactory.CrossRef_AniDB_TraktV2.GetByTraktID(traktID, seasonNumber,
                 traktEpNumber, animeID,
-                (int) aniEpType,
+                (int)aniEpType,
                 aniEpNumber);
             if (xref == null) return;
 
@@ -493,7 +493,7 @@ namespace Shoko.Server.Providers.TraktTV
             {
                 CommandRequest_WebCacheDeleteXRefAniDBTrakt req =
                     new CommandRequest_WebCacheDeleteXRefAniDBTrakt(animeID,
-                        (int) aniEpType, aniEpNumber,
+                        (int)aniEpType, aniEpNumber,
                         traktID, seasonNumber, traktEpNumber);
                 req.Save();
             }
@@ -583,7 +583,7 @@ namespace Shoko.Server.Providers.TraktTV
                         CrossRef_AniDB_TraktV2 xrefBase = null;
                         foreach (CrossRef_AniDB_TraktV2 xrefTrakt in traktCrossRef)
                         {
-                            if (xrefTrakt.AniDBStartEpisodeType != (int) EpisodeType.Episode) continue;
+                            if (xrefTrakt.AniDBStartEpisodeType != (int)EpisodeType.Episode) continue;
                             if (ep.EpisodeNumber >= xrefTrakt.AniDBStartEpisodeNumber)
                             {
                                 foundStartingPoint = true;
@@ -642,7 +642,7 @@ namespace Shoko.Server.Providers.TraktTV
                     CrossRef_AniDB_TraktV2 xrefBase = null;
                     foreach (CrossRef_AniDB_TraktV2 xrefTrakt in traktCrossRef)
                     {
-                        if (xrefTrakt.AniDBStartEpisodeType != (int) EpisodeType.Special) continue;
+                        if (xrefTrakt.AniDBStartEpisodeType != (int)EpisodeType.Special) continue;
                         if (ep.EpisodeNumber >= xrefTrakt.AniDBStartEpisodeNumber)
                         {
                             foundStartingPoint = true;

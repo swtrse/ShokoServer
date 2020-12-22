@@ -284,11 +284,11 @@ namespace Shoko.Server.Providers.MovieDB
 
             xref.AnimeID = animeID;
             if (fromWebCache)
-                xref.CrossRefSource = (int) CrossRefSource.WebCache;
+                xref.CrossRefSource = (int)CrossRefSource.WebCache;
             else
-                xref.CrossRefSource = (int) CrossRefSource.User;
+                xref.CrossRefSource = (int)CrossRefSource.User;
 
-            xref.CrossRefType = (int) CrossRefType.MovieDB;
+            xref.CrossRefType = (int)CrossRefType.MovieDB;
             xref.CrossRefID = movieDBID.ToString();
             RepoFactory.CrossRef_AniDB_Other.Save(xref);
             SVR_AniDB_Anime.UpdateStatsByAnimeID(animeID);

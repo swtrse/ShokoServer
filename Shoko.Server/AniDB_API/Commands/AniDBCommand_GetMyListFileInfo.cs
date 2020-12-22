@@ -55,11 +55,11 @@ namespace AniDBAPI.Commands
             switch (sMsgType)
             {
                 case "221":
-                {
-                    myListFile = new Raw_AniDB_MyListFile(socketResponse);
-                    //BaseConfig.MyAnimeLog.Write(myListFile.ToString());
-                    return AniDBUDPResponseCode.GotMyListFileInfo;
-                }
+                    {
+                        myListFile = new Raw_AniDB_MyListFile(socketResponse);
+                        //BaseConfig.MyAnimeLog.Write(myListFile.ToString());
+                        return AniDBUDPResponseCode.GotMyListFileInfo;
+                    }
                 case "321": return AniDBUDPResponseCode.NoSuchMyListFile;
                 case "501": return AniDBUDPResponseCode.LoginRequired;
             }

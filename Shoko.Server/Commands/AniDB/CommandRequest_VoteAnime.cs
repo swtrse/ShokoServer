@@ -22,7 +22,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.VoteAnime,
-            extraParams = new[] {AnimeID.ToString(), VoteValue.ToString()}
+            extraParams = new[] { AnimeID.ToString(), VoteValue.ToString() }
         };
 
         public CommandRequest_VoteAnime()
@@ -34,7 +34,7 @@ namespace Shoko.Server.Commands
             AnimeID = animeID;
             VoteType = voteType;
             VoteValue = voteValue;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }
@@ -46,7 +46,7 @@ namespace Shoko.Server.Commands
 
             try
             {
-                ShokoService.AnidbProcessor.VoteAnime(AnimeID, VoteValue, (AniDBVoteType) VoteType);
+                ShokoService.AnidbProcessor.VoteAnime(AnimeID, VoteValue, (AniDBVoteType)VoteType);
             }
             catch (Exception ex)
             {

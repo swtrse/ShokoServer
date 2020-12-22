@@ -104,9 +104,9 @@ namespace Shoko.Server.Server
         public static List<UserCulture> userLanguages = new List<UserCulture>();
 
         public IOAuthProvider OAuthProvider { get; set; } = new AuthProvider();
-        
+
         public static IServiceProvider ServiceContainer { get; private set; }
-        
+
         private Mutex mutex;
 
         private static void ConfigureServices(IServiceCollection services)
@@ -122,7 +122,7 @@ namespace Shoko.Server.Server
                     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).Build());
             });
         }
-        
+
         public string[] GetSupportedDatabases()
         {
             return new[]
@@ -135,7 +135,7 @@ namespace Shoko.Server.Server
 
         private ShokoServer()
         {
-            
+
         }
 
         ~ShokoServer()
@@ -146,7 +146,7 @@ namespace Shoko.Server.Server
 
         public void InitLogger()
         {
-            var target = (FileTarget) LogManager.Configuration.FindTargetByName("file");
+            var target = (FileTarget)LogManager.Configuration.FindTargetByName("file");
             if (target != null)
             {
                 target.FileName = ServerSettings.ApplicationPath + "/logs/${shortdate}.log";
@@ -171,7 +171,7 @@ namespace Shoko.Server.Server
                     // All Sentry Options are accessible here.
                     o.Dsn = new Dsn("https://47df427564ab42f4be998e637b3ec45a@sentry.io/1851880");
                     o.AttachStacktrace = true;
-                    o.BeforeSend += delegate(SentryEvent e)
+                    o.BeforeSend += delegate (SentryEvent e)
                     {
                         // Filter out some things. With Custom Exception Types, we can do this more gracefully, but meh
                         if (e.Message.Contains("AniDB ban or No Such Anime returned")) return null;
@@ -185,7 +185,7 @@ namespace Shoko.Server.Server
                 });
             var signalrTarget =
                 new AsyncTargetWrapper(
-                    new SignalRTarget {Name = "signalr", MaxLogsCount = 1000, Layout = "${message}"}, 50,
+                    new SignalRTarget { Name = "signalr", MaxLogsCount = 1000, Layout = "${message}" }, 50,
                     AsyncTargetWrapperOverflowAction.Discard);
             LogManager.Configuration.AddTarget("signalr", signalrTarget);
             LogManager.Configuration.LoggingRules.Add(new LoggingRule("*", LogLevel.Info, signalrTarget));
@@ -238,7 +238,7 @@ namespace Shoko.Server.Server
             string path = Path.Combine(ServerSettings.ApplicationPath, "settings.json");
             if (File.Exists(path))
             {
-                Thread t = new Thread(UninstallJMMServer) {IsBackground = true};
+                Thread t = new Thread(UninstallJMMServer) { IsBackground = true };
                 t.Start();
             }
 
@@ -627,7 +627,7 @@ namespace Shoko.Server.Server
                 logger.Error(exception);
                 evt = null;
             }
-            while(evt != null)
+            while (evt != null)
             {
                 try
                 {
@@ -659,7 +659,7 @@ namespace Shoko.Server.Server
 
                                 foreach (string file in files)
                                 {
-                                    if (ServerSettings.Instance.Import.Exclude.Any(s => Regex.IsMatch(file,s)))
+                                    if (ServerSettings.Instance.Import.Exclude.Any(s => Regex.IsMatch(file, s)))
                                     {
                                         logger.Info("Import exclusion, skipping file {0}", file);
                                     }
@@ -676,7 +676,7 @@ namespace Shoko.Server.Server
                             {
                                 logger.Info("New file detected: {0}: {1}", evt.FullPath, evt.ChangeType);
 
-                                if (ServerSettings.Instance.Import.Exclude.Any(s => Regex.IsMatch(evt.FullPath,s)))
+                                if (ServerSettings.Instance.Import.Exclude.Any(s => Regex.IsMatch(evt.FullPath, s)))
                                 {
                                     logger.Info("Import exclusion, skipping file: {0}", evt.FullPath);
                                 }
@@ -710,7 +710,7 @@ namespace Shoko.Server.Server
 
                     //This is needed to prevent infinite looping of an event/file that causes an exception, 
                     //otherwise evt will not be cleared and the same event/file that caused the error will be looped over again.
-                    evt = queueFileEvents.GetNextItem(); 
+                    evt = queueFileEvents.GetNextItem();
                 }
             }
         }
@@ -829,7 +829,7 @@ namespace Shoko.Server.Server
 
             return true;
         }
-        
+
         public void RestartAniDBSocket()
         {
             AniDBDispose();
@@ -1688,7 +1688,7 @@ namespace Shoko.Server.Server
                 }
                 catch (Exception ex)
                 {
-                    logger.Debug(ex , "Creating autostart key");
+                    logger.Debug(ex, "Creating autostart key");
                 }
             }
             else if (state.autostartMethod == AutostartMethod.TaskScheduler)

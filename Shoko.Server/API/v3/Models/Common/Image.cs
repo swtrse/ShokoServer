@@ -20,13 +20,13 @@ namespace Shoko.Server.API.v3.Models.Common
         /// </summary>
         [Required]
         public string Source { get; set; }
-        
+
         /// <summary>
         /// text representation of type of image. fanart, poster, etc. Mainly so clients know what they are getting
         /// </summary>
         [Required]
         public string Type { get; set; }
-        
+
         /// <summary>
         /// The image's ID, usually an int, but in the case of Static resources, it is the resource name.
         /// </summary>
@@ -38,12 +38,12 @@ namespace Shoko.Server.API.v3.Models.Common
         /// these for quick access and no need for caching
         /// </summary>
         public string RelativeFilepath { get; set; }
-        
+
         /// <summary>
         /// Is it marked as default. Multiple defaults are possible
         /// </summary>
         public bool Preferred { get; set; }
-        
+
         /// <summary>
         /// Is it marked as disabled. You must explicitly ask for these, for obvious reasons.
         /// </summary>
@@ -53,7 +53,7 @@ namespace Shoko.Server.API.v3.Models.Common
         {
             if (type == ImageEntityType.Static)
                 throw new ArgumentException("Static Resources do not use an integer ID");
-            
+
             RelativeFilepath = GetImagePath(type, id)?.Replace(ImageUtils.GetBaseImagesPath(), "")
                 .Replace("\\", "/");
             if (RelativeFilepath != null && !RelativeFilepath.StartsWith("/"))
@@ -122,7 +122,7 @@ namespace Shoko.Server.API.v3.Models.Common
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
-        
+
         /// <summary>
         /// Gets the enum ImageEntityType from the text url segments
         /// </summary>
@@ -158,19 +158,19 @@ namespace Shoko.Server.API.v3.Models.Common
                         case "FANART": return ImageEntityType.MovieDB_FanArt;
                         default: throw new ArgumentOutOfRangeException(nameof(type), type, msg);
                     }
-                    case "SHOKO":
-                        switch (type)
-                        {
-                            case "STATIC": return ImageEntityType.Static;
-                            case "CHARACTER": return ImageEntityType.Character;
-                            case "STAFF": return ImageEntityType.Staff;
-                            default: throw new ArgumentOutOfRangeException(nameof(type), type, msg);
-                        }
+                case "SHOKO":
+                    switch (type)
+                    {
+                        case "STATIC": return ImageEntityType.Static;
+                        case "CHARACTER": return ImageEntityType.Character;
+                        case "STAFF": return ImageEntityType.Staff;
+                        default: throw new ArgumentOutOfRangeException(nameof(type), type, msg);
+                    }
                 default:
                     throw new ArgumentOutOfRangeException(nameof(source), source, @"The provider was not valid.");
             }
         }
-        
+
         public static string GetImagePath(ImageEntityType type, int id)
         {
             string path;

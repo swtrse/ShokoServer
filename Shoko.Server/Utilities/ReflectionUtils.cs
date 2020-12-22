@@ -58,7 +58,7 @@ namespace Shoko.Server.Utilities
             Expression instanceExp = Expression.Parameter(type, "instance");
             MethodCallExpression mtdExp = Expression.Call(instanceExp, mtd, argsExp);
             LambdaExpression lambda = Expression.Lambda<ObjectMethodActivator<T>>(mtdExp, param);
-            return (ObjectMethodActivator<T>) lambda.Compile();
+            return (ObjectMethodActivator<T>)lambda.Compile();
         }
 
         public static ObjectMethodActivator<T> GetMethodActivator<T>(Type type, string methodName) =>

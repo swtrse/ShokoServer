@@ -50,12 +50,12 @@ namespace Shoko.Server.Repositories.Direct
                     WHERE cr.AnimeID IN (:animeIds)")
                 .AddEntity("cr", typeof(CrossRef_AniDB_Other))
                 .AddEntity("movie", typeof(MovieDB_Movie))
-                .SetInt32("crossRefType", (int) CrossRefType.MovieDB)
+                .SetInt32("crossRefType", (int)CrossRefType.MovieDB)
                 .SetParameterList("animeIds", animeIds)
                 .List<object[]>()
-                .ToDictionary(r => ((CrossRef_AniDB_Other) r[0]).AnimeID,
-                    r => new Tuple<CrossRef_AniDB_Other, MovieDB_Movie>((CrossRef_AniDB_Other) r[0],
-                        (MovieDB_Movie) r[1]));
+                .ToDictionary(r => ((CrossRef_AniDB_Other)r[0]).AnimeID,
+                    r => new Tuple<CrossRef_AniDB_Other, MovieDB_Movie>((CrossRef_AniDB_Other)r[0],
+                        (MovieDB_Movie)r[1]));
 
             return movieByAnime;
         }

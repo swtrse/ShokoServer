@@ -9,7 +9,7 @@ namespace Shoko.Server.Providers.AniDB.UDP.Requests
         protected override UDPBaseResponse<Void> ParseResponse(AniDBUDPReturnCode code, string receivedData)
         {
             if (code != AniDBUDPReturnCode.PONG) throw new UnexpectedAniDBResponseException(code, receivedData);
-            return new UDPBaseResponse<Void> {Code = code};
+            return new UDPBaseResponse<Void> { Code = code };
         }
 
         protected override void PreExecute(string sessionID)

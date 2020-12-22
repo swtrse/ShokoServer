@@ -66,7 +66,7 @@ namespace Shoko.Server.Security
             // 256 values representing ASCII character codes. 
             for (int i = 0; i < 256; i++)
             {
-                dwCrc = (uint) i;
+                dwCrc = (uint)i;
                 for (int j = 8; j > 0; j--)
                 {
                     if ((dwCrc & 1) == 1)
@@ -103,7 +103,7 @@ namespace Shoko.Server.Security
         {
             HashSizeValue = 32;
 
-            crc32Table = (uint[]) cachedCRC32Tables[aPolynomial];
+            crc32Table = (uint[])cachedCRC32Tables[aPolynomial];
             if (crc32Table == null)
             {
                 crc32Table = BuildCRC32Table(aPolynomial);
@@ -149,10 +149,10 @@ namespace Shoko.Server.Security
             byte[] finalHash = new byte[4];
             ulong finalCRC = m_crc ^ AllOnes;
 
-            finalHash[0] = (byte) ((finalCRC >> 24) & 0xFF);
-            finalHash[1] = (byte) ((finalCRC >> 16) & 0xFF);
-            finalHash[2] = (byte) ((finalCRC >> 8) & 0xFF);
-            finalHash[3] = (byte) ((finalCRC >> 0) & 0xFF);
+            finalHash[0] = (byte)((finalCRC >> 24) & 0xFF);
+            finalHash[1] = (byte)((finalCRC >> 16) & 0xFF);
+            finalHash[2] = (byte)((finalCRC >> 8) & 0xFF);
+            finalHash[3] = (byte)((finalCRC >> 0) & 0xFF);
 
             return finalHash;
         }

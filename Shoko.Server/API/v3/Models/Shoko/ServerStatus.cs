@@ -38,7 +38,7 @@ namespace Shoko.Server.API.v3.Models.Shoko
             /// </summary>
             Waiting = 4
         }
-        
+
         /// <summary>
         /// This is true in situations where there can be absolutely no write operations.
         /// This is for polling. Ideally, a client will use the Events SignalR Hub.

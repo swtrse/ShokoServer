@@ -112,13 +112,13 @@ namespace Shoko.Server.API.v2.Models.common
                         var role = new Role
                         {
                             character = character.Name,
-                            character_image = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) ImageEntityType.Character,
+                            character_image = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)ImageEntityType.Character,
                                 xref.RoleID.Value),
                             staff = staff.Name,
-                            staff_image = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) ImageEntityType.Staff,
+                            staff_image = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)ImageEntityType.Staff,
                                 xref.StaffID),
                             role = xref.Role,
-                            type = ((StaffRoleType) xref.RoleType).ToString()
+                            type = ((StaffRoleType)xref.RoleType).ToString()
                         };
                         if (g.roles == null) g.roles = new List<Role>();
                         g.roles.Add(role);
@@ -186,7 +186,7 @@ namespace Shoko.Server.API.v2.Models.common
                         {
                             grp.art.fanart.Add(new Art
                             {
-                                url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) ImageEntityType.TvDB_FanArt,
+                                url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)ImageEntityType.TvDB_FanArt,
                                     cont_image.TvDB_ImageFanartID),
                                 index = pic_index
                             });
@@ -205,7 +205,7 @@ namespace Shoko.Server.API.v2.Models.common
                         {
                             grp.art.banner.Add(new Art
                             {
-                                url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) ImageEntityType.TvDB_Banner,
+                                url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)ImageEntityType.TvDB_Banner,
                                     cont_image.TvDB_ImageWideBannerID),
                                 index = pic_index
                             });
@@ -222,7 +222,7 @@ namespace Shoko.Server.API.v2.Models.common
                     var poster = anime.GetDefaultPosterDetailsNoBlanks();
                     grp.art.thumb.Add(new Art
                     {
-                        url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) poster.ImageType, poster.ImageID),
+                        url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)poster.ImageType, poster.ImageID),
                         index = 0
                     });
 
@@ -244,7 +244,7 @@ namespace Shoko.Server.API.v2.Models.common
                             var tvdbart = fanarts[rand.Next(fanarts.Count)];
                             grp.art.fanart.Add(new Art
                             {
-                                url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) ImageEntityType.TvDB_FanArt,
+                                url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)ImageEntityType.TvDB_FanArt,
                                     tvdbart.TvDB_ImageFanartID),
                                 index = 0
                             });
@@ -269,7 +269,7 @@ namespace Shoko.Server.API.v2.Models.common
                             var tvdbart = banners[rand.Next(banners.Count)];
                             grp.art.banner.Add(new Art
                             {
-                                url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) ImageEntityType.TvDB_Banner,
+                                url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)ImageEntityType.TvDB_Banner,
                                     tvdbart.TvDB_ImageWideBannerID),
                                 index = 0
                             });
@@ -312,47 +312,47 @@ namespace Shoko.Server.API.v2.Models.common
                 switch (ep.EpisodeTypeEnum)
                 {
                     case EpisodeType.Episode:
-                    {
-                        eps++;
-                        if (local) local_eps++;
-                        if ((ep.GetUserRecord(uid)?.WatchedCount ?? 0) > 0) watched_eps++;
-                        break;
-                    }
+                        {
+                            eps++;
+                            if (local) local_eps++;
+                            if ((ep.GetUserRecord(uid)?.WatchedCount ?? 0) > 0) watched_eps++;
+                            break;
+                        }
                     case EpisodeType.Credits:
-                    {
-                        credits++;
-                        if (local) local_credits++;
-                        if ((ep.GetUserRecord(uid)?.WatchedCount ?? 0) > 0) watched_credits++;
-                        break;
-                    }
+                        {
+                            credits++;
+                            if (local) local_credits++;
+                            if ((ep.GetUserRecord(uid)?.WatchedCount ?? 0) > 0) watched_credits++;
+                            break;
+                        }
                     case EpisodeType.Special:
-                    {
-                        specials++;
-                        if (local) local_specials++;
-                        if ((ep.GetUserRecord(uid)?.WatchedCount ?? 0) > 0) watched_specials++;
-                        break;
-                    }
+                        {
+                            specials++;
+                            if (local) local_specials++;
+                            if ((ep.GetUserRecord(uid)?.WatchedCount ?? 0) > 0) watched_specials++;
+                            break;
+                        }
                     case EpisodeType.Trailer:
-                    {
-                        trailers++;
-                        if (local) local_trailers++;
-                        if ((ep.GetUserRecord(uid)?.WatchedCount ?? 0) > 0) watched_trailers++;
-                        break;
-                    }
+                        {
+                            trailers++;
+                            if (local) local_trailers++;
+                            if ((ep.GetUserRecord(uid)?.WatchedCount ?? 0) > 0) watched_trailers++;
+                            break;
+                        }
                     case EpisodeType.Parody:
-                    {
-                        parodies++;
-                        if (local) local_parodies++;
-                        if ((ep.GetUserRecord(uid)?.WatchedCount ?? 0) > 0) watched_parodies++;
-                        break;
-                    }
+                        {
+                            parodies++;
+                            if (local) local_parodies++;
+                            if ((ep.GetUserRecord(uid)?.WatchedCount ?? 0) > 0) watched_parodies++;
+                            break;
+                        }
                     case EpisodeType.Other:
-                    {
-                        others++;
-                        if (local) local_others++;
-                        if ((ep.GetUserRecord(uid)?.WatchedCount ?? 0) > 0) watched_others++;
-                        break;
-                    }
+                        {
+                            others++;
+                            if (local) local_others++;
+                            if ((ep.GetUserRecord(uid)?.WatchedCount ?? 0) > 0) watched_others++;
+                            break;
+                        }
                 }
             }
 

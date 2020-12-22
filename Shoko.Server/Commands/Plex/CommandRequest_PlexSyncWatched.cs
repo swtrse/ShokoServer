@@ -38,14 +38,14 @@ namespace Shoko.Server.Commands.Plex
             {
                 if (!ServerSettings.Instance.Plex.Libraries.Contains(section.Key)) continue;
 
-                var allSeries = ((SVR_Directory) section).GetShows();
+                var allSeries = ((SVR_Directory)section).GetShows();
                 foreach (var series in allSeries)
                 {
-                    var episodes = ((SVR_PlexLibrary) series)?.GetEpisodes()?.Where(s => s != null);
+                    var episodes = ((SVR_PlexLibrary)series)?.GetEpisodes()?.Where(s => s != null);
                     if (episodes == null) continue;
                     foreach (var ep in episodes)
                     {
-                        var episode = (SVR_Episode) ep;
+                        var episode = (SVR_Episode)ep;
 
                         var animeEpisode = episode.AnimeEpisode;
                         if (animeEpisode == null) continue;
@@ -54,7 +54,7 @@ namespace Shoko.Server.Commands.Plex
                         var lastWatched = userRecord?.WatchedDate;
                         if (userRecord?.WatchedCount == 0 && isWatched && episode.LastViewedAt != null)
                         {
-                            lastWatched = FromUnixTime((long) episode.LastViewedAt);
+                            lastWatched = FromUnixTime((long)episode.LastViewedAt);
                         }
 
                         SVR_VideoLocal video = animeEpisode.GetVideoLocals()?.FirstOrDefault();
@@ -81,7 +81,7 @@ namespace Shoko.Server.Commands.Plex
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.SyncPlex,
-            extraParams = new[] {_jmmuser.Username}
+            extraParams = new[] { _jmmuser.Username }
         };
 
         public override bool LoadFromDBCommand(CommandRequest cq)

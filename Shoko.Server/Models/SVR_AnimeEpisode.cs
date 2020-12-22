@@ -18,7 +18,7 @@ namespace Shoko.Server.Models
 {
     public class SVR_AnimeEpisode : AnimeEpisode, IEpisode
     {
-        public EpisodeType EpisodeTypeEnum => (EpisodeType) AniDB_Episode.EpisodeType;
+        public EpisodeType EpisodeTypeEnum => (EpisodeType)AniDB_Episode.EpisodeType;
 
         public AniDB_Episode AniDB_Episode => RepoFactory.AniDB_Episode.GetByEpisodeID(AniDB_EpisodeID);
 
@@ -170,7 +170,7 @@ namespace Shoko.Server.Models
                 vid.SetResumePosition(0, userID);
             }
         }
-        
+
         public void RemoveVideoLocals(bool deleteFiles)
         {
             GetVideoLocals().SelectMany(a => a.Places).ForEach(place =>
@@ -205,14 +205,14 @@ namespace Shoko.Server.Models
 
         IReadOnlyList<AnimeTitle> IEpisode.Titles => RepoFactory.AniDB_Episode_Title.GetByEpisodeID(AniDB_EpisodeID)
             .Select(a => new AnimeTitle
-                {LanguageCode = a.Language, Language = SVR_AniDB_Anime.GetLanguage(a.Language), Title = a.Title})
+            { LanguageCode = a.Language, Language = SVR_AniDB_Anime.GetLanguage(a.Language), Title = a.Title })
             .ToList();
         int IEpisode.EpisodeID => AniDB_EpisodeID;
         int IEpisode.AnimeID => AniDB_Episode?.AnimeID ?? 0;
         int IEpisode.Duration => AniDB_Episode?.LengthSeconds ?? 0;
         int IEpisode.Number => AniDB_Episode?.EpisodeNumber ?? 0;
         Shoko.Plugin.Abstractions.DataModels.EpisodeType IEpisode.Type =>
-            (Shoko.Plugin.Abstractions.DataModels.EpisodeType) (AniDB_Episode?.EpisodeType ?? 0);
+            (Shoko.Plugin.Abstractions.DataModels.EpisodeType)(AniDB_Episode?.EpisodeType ?? 0);
         DateTime? IEpisode.AirDate => AniDB_Episode?.GetAirDateAsDate();
     }
 }

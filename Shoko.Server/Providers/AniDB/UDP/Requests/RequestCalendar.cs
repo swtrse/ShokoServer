@@ -13,7 +13,7 @@ namespace Shoko.Server.Providers.AniDB.UDP.Requests
         protected override UDPBaseResponse<ResponseCalendar> ParseResponse(AniDBUDPReturnCode code, string receivedData)
         {
             if (code == AniDBUDPReturnCode.CALENDAR_EMPTY)
-                return new UDPBaseResponse<ResponseCalendar> {Response = null, Code = code};
+                return new UDPBaseResponse<ResponseCalendar> { Response = null, Code = code };
 
             var calendar = new ResponseCalendar
             {
@@ -21,14 +21,14 @@ namespace Shoko.Server.Providers.AniDB.UDP.Requests
                 Previous25Anime = new List<ResponseCalendar.CalendarEntry>()
             };
 
-            foreach (var parts in receivedData.Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries)
+            foreach (var parts in receivedData.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(line => line.Split('\n')))
             {
                 if (parts.Length != 3) continue;
                 if (!int.TryParse(parts[0], out int animeID)) continue;
                 if (!int.TryParse(parts[1], out int epochElapsed)) continue;
                 if (!int.TryParse(parts[2], out int flagInt)) continue;
-                var flags = (ResponseCalendar.CalendarFlags) flagInt;
+                var flags = (ResponseCalendar.CalendarFlags)flagInt;
                 var date = Commons.Utils.AniDB.GetAniDBDateAsDate(epochElapsed);
                 var entry = new ResponseCalendar.CalendarEntry
                 {
@@ -45,7 +45,8 @@ namespace Shoko.Server.Providers.AniDB.UDP.Requests
 
             return new UDPBaseResponse<ResponseCalendar>
             {
-                Response = calendar, Code = code
+                Response = calendar,
+                Code = code
             };
         }
     }

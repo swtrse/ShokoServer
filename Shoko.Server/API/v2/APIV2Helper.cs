@@ -23,19 +23,19 @@ namespace Shoko.Server.API.v2
         [Obsolete]
         public static string ConstructGroupIdUrl(HttpContext ctx, string gid, bool short_url = false)
         {
-            return APIHelper.ProperURL(ctx, "__TEST__" + (int) JMMType.Group + "/" + gid, short_url);
+            return APIHelper.ProperURL(ctx, "__TEST__" + (int)JMMType.Group + "/" + gid, short_url);
         }
 
         [Obsolete]
         public static string ConstructSerieIdUrl(HttpContext ctx, string sid, bool short_url = false)
         {
-            return APIHelper.ProperURL(ctx, "__TEST__" + (int) JMMType.Serie + " / " + sid, short_url);
+            return APIHelper.ProperURL(ctx, "__TEST__" + (int)JMMType.Serie + " / " + sid, short_url);
         }
 
         [Obsolete]
         public static string ConstructVideoUrl(HttpContext ctx, string vid, JMMType type, bool short_url = false)
         {
-            return APIHelper.ProperURL(ctx, "__TEST__" + (int) type + "/" + vid, short_url);
+            return APIHelper.ProperURL(ctx, "__TEST__" + (int)type + "/" + vid, short_url);
         }
 
         public static string ConstructFilterIdUrl(HttpContext ctx, int groupfilter_id, bool short_url = false)
@@ -70,22 +70,22 @@ namespace Shoko.Server.API.v2
         [Obsolete]
         public static string ConstructPlaylistUrl(HttpContext ctx, bool short_url = false)
         {
-            return APIHelper.ProperURL(ctx, "/api/metadata/" + (int) JMMType.Playlist + "/0", short_url);
+            return APIHelper.ProperURL(ctx, "/api/metadata/" + (int)JMMType.Playlist + "/0", short_url);
         }
 
         [Obsolete]
         public static string ConstructPlaylistIdUrl(HttpContext ctx, int pid, bool short_url = false)
         {
-            return APIHelper.ProperURL(ctx, "/api/metadata/" + (int) JMMType.Playlist + "/" + pid, short_url);
+            return APIHelper.ProperURL(ctx, "/api/metadata/" + (int)JMMType.Playlist + "/" + pid, short_url);
         }
 
-        
+
 
         public static string ConstructVideoLocalStream(HttpContext ctx, int userid, string vid, string name, bool autowatch)
         {
             return APIHelper.ProperURL(ctx, "/Stream/" + vid + "/" + userid + "/" + autowatch + "/" + name);
         }
-        
+
         public static string ConstructSupportImageLink(HttpContext ctx, string name, bool short_url = true)
         {
             return APIHelper.ProperURL(ctx, "/api/v2/image/support/" + name, short_url);
@@ -95,14 +95,14 @@ namespace Shoko.Server.API.v2
         {
             return ConvertRestImageToNonRestUrl(ctx, path, short_url);
         }
-        
+
         private static string ConvertRestImageToNonRestUrl(HttpContext ctx, string url, bool short_url)
         {
             // Rest URLs should always end in either type/id or type/id/ratio
             // Regardless of ',' or '.', ratio will not parse as int
             if (string.IsNullOrEmpty(url)) return null;
             string link = url.ToLower();
-            string[] split = link.Split(new[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
+            string[] split = link.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
             int type;
             if (int.TryParse(split[split.Length - 1], out int id)) // no ratio
             {
@@ -122,8 +122,8 @@ namespace Shoko.Server.API.v2
         }
 
         #endregion
-        
-         public static Filter FilterFromGroupFilter(HttpContext ctx, SVR_GroupFilter gg, int uid)
+
+        public static Filter FilterFromGroupFilter(HttpContext ctx, SVR_GroupFilter gg, int uid)
         {
             Filter ob = new Filter
             {
@@ -145,7 +145,7 @@ namespace Shoko.Server.API.v2
                         Video v = ag.GetPlexContract(uid);
                         if (v?.Art != null && v.Thumb != null)
                         {
-                            ob.art.fanart.Add(new Art {url = ConstructImageLinkFromRest(ctx, v.Art), index = 0});
+                            ob.art.fanart.Add(new Art { url = ConstructImageLinkFromRest(ctx, v.Art), index = 0 });
                             ob.art.thumb.Add(new Art
                             {
                                 url = ConstructImageLinkFromRest(ctx, v.Thumb),
@@ -181,12 +181,12 @@ namespace Shoko.Server.API.v2
                     {
                         ob.art.fanart.Add(new Art
                         {
-                            url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) fanart.ImageType, fanart.ImageID),
+                            url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)fanart.ImageType, fanart.ImageID),
                             index = ob.art.fanart.Count
                         });
                         ob.art.thumb.Add(new Art
                         {
-                            url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) fanart.ImageType, fanart.ImageID),
+                            url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)fanart.ImageType, fanart.ImageID),
                             index = ob.art.thumb.Count
                         });
                     }
@@ -195,7 +195,7 @@ namespace Shoko.Server.API.v2
                     {
                         ob.art.banner.Add(new Art
                         {
-                            url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) banner.ImageType, banner.ImageID),
+                            url = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)banner.ImageType, banner.ImageID),
                             index = ob.art.banner.Count
                         });
                     }

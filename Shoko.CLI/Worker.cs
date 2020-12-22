@@ -16,7 +16,7 @@ namespace Shoko.CLI
 
         public ProgramArguments Args { get; set; }
         private IHostApplicationLifetime AppLifetime { get; set; }
-        
+
         public Worker()
         {
             Args = null;
@@ -33,7 +33,7 @@ namespace Shoko.CLI
             if (!string.IsNullOrEmpty(Args?.Instance)) ServerSettings.DefaultInstance = Args.Instance;
 
             ShokoServer.Instance.InitLogger();
-            
+
             ServerSettings.LoadSettings();
             ServerState.Instance.LoadSettings();
             if (!ShokoServer.Instance.StartUpServer()) return;

@@ -125,22 +125,22 @@ namespace Shoko.Server
 
             try
             {
-                return (IRenamer) Activator.CreateInstance(LegacyScriptImplementations[script.RenamerType], script);
+                return (IRenamer)Activator.CreateInstance(LegacyScriptImplementations[script.RenamerType], script);
             }
             catch (MissingMethodException)
             {
                 return (IRenamer)Activator.CreateInstance(LegacyScriptImplementations[script.RenamerType]);
             }
         }
-        
+
         internal static void FindRenamers(IList<Assembly> assemblies)
         {
-            var implementations = assemblies.SelectMany(a => 
+            var implementations = assemblies.SelectMany(a =>
                 {
                     try
                     {
                         return a.GetTypes();
-                    } 
+                    }
                     catch
                     {
                         return new Type[0];

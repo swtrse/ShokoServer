@@ -58,7 +58,7 @@ namespace Shoko.Server.Commands
         {
             AnimeID = animeID;
             ForceDownload = forced;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }
@@ -98,7 +98,7 @@ namespace Shoko.Server.Commands
                         case ImageEntityType.AniDB_Character:
                             if (!ServerSettings.Instance.AniDb.DownloadCharacters) continue;
                             var chrs = (from xref1 in RepoFactory.AniDB_Anime_Character.GetByAnimeID(AnimeID)
-                                    select RepoFactory.AniDB_Character.GetByCharID(xref1.CharID))
+                                        select RepoFactory.AniDB_Character.GetByCharID(xref1.CharID))
                                 .Where(a => !string.IsNullOrEmpty(a?.PicName))
                                 .DistinctBy(a => a.CharID)
                                 .ToList();
@@ -122,8 +122,8 @@ namespace Shoko.Server.Commands
                             if (!ServerSettings.Instance.AniDb.DownloadCreators) continue;
 
                             var creators = (from xref1 in RepoFactory.AniDB_Anime_Character.GetByAnimeID(AnimeID)
-                                    from xref2 in RepoFactory.AniDB_Character_Seiyuu.GetByCharID(xref1.CharID)
-                                    select RepoFactory.AniDB_Seiyuu.GetBySeiyuuID(xref2.SeiyuuID))
+                                            from xref2 in RepoFactory.AniDB_Character_Seiyuu.GetByCharID(xref1.CharID)
+                                            select RepoFactory.AniDB_Seiyuu.GetBySeiyuuID(xref2.SeiyuuID))
                                 .Where(a => !string.IsNullOrEmpty(a?.PicName))
                                 .DistinctBy(a => a.SeiyuuID)
                                 .ToList();
@@ -198,7 +198,8 @@ namespace Shoko.Server.Commands
                                 downloadURLs[i],
                                 AnimeID,
                                 e.Message);
-                        }catch (Exception e)
+                        }
+                        catch (Exception e)
                         {
                             logger.Error("Error processing CommandRequest_DownloadAniDBImages: {0} ({1}) - {2}",
                                 downloadURLs[i],
@@ -223,7 +224,7 @@ namespace Shoko.Server.Commands
                 if (downloadURL.Length <= 0) return;
 
                 // Ignore all certificate failures.
-                ServicePointManager.Expect100Continue = true;                
+                ServicePointManager.Expect100Continue = true;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
@@ -264,7 +265,7 @@ namespace Shoko.Server.Commands
 
                     if (extension.Length <= 0) return;
                     string newFile = Path.ChangeExtension(tempFilePath, extension);
-                    if(newFile == null) return;
+                    if (newFile == null) return;
 
                     if (File.Exists(newFile)) File.Delete(newFile);
                     using (var fs = new FileStream(newFile, FileMode.Create, FileAccess.Write))

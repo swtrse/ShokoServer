@@ -60,7 +60,7 @@ namespace AniDBAPI.Commands
             commandID = "MarkingFileRemote File: " + lid;
 
             commandText = "MYLISTADD lid=" + lid;
-            commandText += "&state=" + (int) AniDBFile_State.Remote;
+            commandText += "&state=" + (int)AniDBFile_State.Remote;
             commandText += "&edit=1";
         }
     }

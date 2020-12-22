@@ -1,26 +1,26 @@
-﻿﻿using System;
- using System.Collections.Generic;
- using System.IO;
- using System.Linq;
- using System.Net;
- using System.Reflection;
- using System.Text;
- using System.Threading.Tasks;
- using System.Web;
- using NLog;
- using Shoko.Models.Azure;
- using Shoko.Models.Enums;
- using Shoko.Models.PlexAndKodi;
- using Shoko.Models.Server;
- using Shoko.Server.Extensions;
- using Shoko.Server.Models;
- using Shoko.Server.Repositories;
- using Shoko.Server.Server;
- using Shoko.Server.Settings;
- using Stream = System.IO.Stream;
- using Utils = Shoko.Server.Utilities.Utils;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using NLog;
+using Shoko.Models.Azure;
+using Shoko.Models.Enums;
+using Shoko.Models.PlexAndKodi;
+using Shoko.Models.Server;
+using Shoko.Server.Extensions;
+using Shoko.Server.Models;
+using Shoko.Server.Repositories;
+using Shoko.Server.Server;
+using Shoko.Server.Settings;
+using Stream = System.IO.Stream;
+using Utils = Shoko.Server.Utilities.Utils;
 
- namespace Shoko.Server.Providers.Azure
+namespace Shoko.Server.Providers.Azure
 {
     public static class AzureWebAPI
     {
@@ -183,7 +183,7 @@
 
                 string uri =
                     $@"http://{azureHostBaseAddress}/api/CrossRef_AniDB_Other/{animeID}?p={username}&p2={
-                            (int) xrefType
+                            (int)xrefType
                         }";
                 string msg = $"Getting AniDB/Other Cross Ref From Cache: {animeID}";
 
@@ -230,7 +230,7 @@
             string username = Constants.AnonWebCacheUsername;
 
             string uri =
-                $@"http://{azureHostBaseAddress}/api/CrossRef_AniDB_Other/{animeID}?p={username}&p2={(int) xrefType}";
+                $@"http://{azureHostBaseAddress}/api/CrossRef_AniDB_Other/{animeID}?p={username}&p2={(int)xrefType}";
 
 
             DeleteDataJson(uri);
@@ -434,8 +434,8 @@
                     var response = webEx.Response as HttpWebResponse;
                     if (response != null)
                     {
-                        if (!uri.Contains("Admin") || (int) response.StatusCode != 400)
-                            logger.Error("HTTP Status Code: " + (int) response.StatusCode);
+                        if (!uri.Contains("Admin") || (int)response.StatusCode != 400)
+                            logger.Error("HTTP Status Code: " + (int)response.StatusCode);
                         ret = response.StatusCode.ToString();
                     }
                 }
@@ -460,7 +460,7 @@
             return string.Empty;
             try
             {
-                HttpWebRequest webReq = (HttpWebRequest) WebRequest.Create(uri);
+                HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(uri);
                 webReq.Timeout = 30000; // 30 seconds
                 webReq.Proxy = null;
                 webReq.Method = "GET";
@@ -468,7 +468,7 @@
                 webReq.ContentType = "application/json; charset=UTF-8"; // content type
                 webReq.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
-                using (HttpWebResponse webResponse = (HttpWebResponse) webReq.GetResponse())
+                using (HttpWebResponse webResponse = (HttpWebResponse)webReq.GetResponse())
                 {
                     using (Stream responseStream = webResponse.GetResponseStream())
                     {
@@ -500,7 +500,7 @@
         {
             try
             {
-                HttpWebRequest webReq = (HttpWebRequest) WebRequest.Create(uri);
+                HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(uri);
                 webReq.Timeout = 30000; // 30 seconds
                 webReq.Proxy = null;
                 webReq.Method = "DELETE";
@@ -508,7 +508,7 @@
                 webReq.ContentType = "application/json; charset=UTF-8"; // content type
                 webReq.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
-                using (HttpWebResponse WebResponse = (HttpWebResponse) webReq.GetResponse())
+                using (HttpWebResponse WebResponse = (HttpWebResponse)webReq.GetResponse())
                 {
                     using (Stream responseStream = WebResponse.GetResponseStream())
                     {
@@ -539,7 +539,7 @@
         {
             try
             {
-                HttpWebRequest webReq = (HttpWebRequest) WebRequest.Create(uri);
+                HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(uri);
                 webReq.Timeout = 30000; // 30 seconds
                 webReq.Proxy = null;
                 webReq.Method = "GET";
@@ -547,7 +547,7 @@
                 webReq.ContentType = "text/xml"; // content type
                 webReq.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
-                using (var webResponse = (HttpWebResponse) webReq.GetResponse())
+                using (var webResponse = (HttpWebResponse)webReq.GetResponse())
                 {
                     using (Stream responseStream = webResponse.GetResponseStream())
                     {
@@ -615,7 +615,7 @@
                 // this field is not actually used
                 uinfo.LastEpisodeWatchedAsDate = DateTime.Now.AddDays(-5);
 
-                uinfo.LocalUserCount = (int) RepoFactory.JMMUser.GetTotalRecordCount();
+                uinfo.LocalUserCount = (int)RepoFactory.JMMUser.GetTotalRecordCount();
 
                 uinfo.FileCount = RepoFactory.VideoLocal.GetTotalRecordCount();
 
@@ -714,7 +714,7 @@
             {
                 try
                 {
-                    string uri = $@"http://{azureHostBaseAddress}/api/FileHash/{(int) hashType}?p={hashDetails}";
+                    string uri = $@"http://{azureHostBaseAddress}/api/FileHash/{(int)hashType}?p={hashDetails}";
                     string msg = $"Getting File Hash From Cache: {hashType} - {hashDetails}";
 
                     DateTime start = DateTime.Now;
@@ -750,7 +750,7 @@
             try
             {
                 string uri = $@"http://{azureHostBaseAddress}/api/Media";
-    
+
                 List<Azure_Media_Request> inputs = new List<Azure_Media_Request>();
                 // send a max of 25 at a time
                 // send a max of 25 at a time
@@ -769,7 +769,7 @@
                         inputs.Clear();
                     }
                 }
-    
+
                 if (inputs.Count <= 0)
                 {
                     string json = JSONHelper.Serialize(inputs);
@@ -823,7 +823,8 @@
                                            new List<Azure_Media>();
 
                 return medias;
-            }catch
+            }
+            catch
             {
                 return new List<Azure_Media>();
             }

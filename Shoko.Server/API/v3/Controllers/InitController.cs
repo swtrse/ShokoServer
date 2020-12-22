@@ -130,7 +130,7 @@ namespace Shoko.Server.API.v3.Controllers
             TimeSpan? uptime = ShokoServer.UpTime;
             string uptimemsg = uptime == null
                 ? null
-                : $"{(int) uptime.Value.TotalHours:00}:{uptime.Value.Minutes:00}:{uptime.Value.Seconds:00}";
+                : $"{(int)uptime.Value.TotalHours:00}:{uptime.Value.Minutes:00}:{uptime.Value.Seconds:00}";
 
             string message = null;
             ServerStatus.StartupState state = ServerStatus.StartupState.Waiting;
@@ -168,7 +168,7 @@ namespace Shoko.Server.API.v3.Controllers
         {
             return ServerState.Instance.ApiInUse;
         }
-        
+
         /// <summary>
         /// Gets the Default user's credentials. Will only return on first run
         /// </summary>
@@ -236,7 +236,7 @@ namespace Shoko.Server.API.v3.Controllers
             if (ServerSettings.Instance.Database.Type == Constants.DatabaseType.MySQL && new MySQL().TestConnection())
                 return Ok();
 
-            if (ServerSettings.Instance.Database.Type == Constants.DatabaseType.SqlServer  && new SQLServer().TestConnection())
+            if (ServerSettings.Instance.Database.Type == Constants.DatabaseType.SqlServer && new SQLServer().TestConnection())
                 return Ok();
 
             if (ServerSettings.Instance.Database.Type == Constants.DatabaseType.Sqlite)

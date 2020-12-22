@@ -48,7 +48,7 @@ namespace Shoko.Server.Repositories
         {
             if (obj.Anime_GroupName == null)
                 obj.Anime_GroupName = "UNKNOWN";
-            if (obj.Anime_GroupNameShort==null)
+            if (obj.Anime_GroupNameShort == null)
                 obj.Anime_GroupNameShort = "UNKNOWN";
             base.Save(obj);
             if (updateStats)

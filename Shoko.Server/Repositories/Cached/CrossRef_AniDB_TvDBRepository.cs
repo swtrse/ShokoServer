@@ -68,7 +68,7 @@ namespace Shoko.Server.Repositories.Cached
                 var anime = a.GetAnime();
                 if (anime == null) return false;
                 if (anime.Restricted > 0) return false;
-                if (anime.AnimeType == (int) AnimeType.Movie) return false;
+                if (anime.AnimeType == (int)AnimeType.Movie) return false;
                 return !GetByAnimeID(a.AniDB_ID).Any();
             }).ToList();
         }
@@ -86,27 +86,27 @@ namespace Shoko.Server.Repositories.Cached
         {
 
 
-           
+
             var overrides = RepoFactory.CrossRef_AniDB_TvDB_Episode_Override.GetByAnimeID(animeID);
             var normals = RepoFactory.CrossRef_AniDB_TvDB_Episode.GetByAnimeID(animeID);
-            List<(int anidb_episode, int tvdb_episode)> ls=new List<(int anidb_episode, int tvdb_episode)>();
+            List<(int anidb_episode, int tvdb_episode)> ls = new List<(int anidb_episode, int tvdb_episode)>();
             foreach (CrossRef_AniDB_TvDB_Episode epo in normals)
             {
                 CrossRef_AniDB_TvDB_Episode_Override ov = overrides.FirstOrDefault(a => a.AniDBEpisodeID == epo.AniDBEpisodeID);
                 if (ov != null)
                 {
-                    ls.Add((ov.AniDBEpisodeID,ov.TvDBEpisodeID));
+                    ls.Add((ov.AniDBEpisodeID, ov.TvDBEpisodeID));
                     overrides.Remove(ov);
                 }
                 else
                 {
-                    ls.Add((epo.AniDBEpisodeID,epo.TvDBEpisodeID));
+                    ls.Add((epo.AniDBEpisodeID, epo.TvDBEpisodeID));
                 }
             }
-            foreach(CrossRef_AniDB_TvDB_Episode_Override ov in overrides)
-                ls.Add((ov.AniDBEpisodeID,ov.TvDBEpisodeID));
+            foreach (CrossRef_AniDB_TvDB_Episode_Override ov in overrides)
+                ls.Add((ov.AniDBEpisodeID, ov.TvDBEpisodeID));
 
-            List<(AniDB_Episode AniDB, TvDB_Episode TvDB)> eplinks = ls.ToLookup(a=> RepoFactory.AniDB_Episode.GetByEpisodeID(a.anidb_episode),b=>RepoFactory.TvDB_Episode.GetByTvDBID(b.tvdb_episode))
+            List<(AniDB_Episode AniDB, TvDB_Episode TvDB)> eplinks = ls.ToLookup(a => RepoFactory.AniDB_Episode.GetByEpisodeID(a.anidb_episode), b => RepoFactory.TvDB_Episode.GetByTvDBID(b.tvdb_episode))
                 .Select(a => (AniDB: a.Key, TvDB: a.FirstOrDefault())).Where(a => a.AniDB != null && a.TvDB != null)
                 .OrderBy(a => a.AniDB.EpisodeType).ThenBy(a => a.AniDB.EpisodeNumber).ToList();
 

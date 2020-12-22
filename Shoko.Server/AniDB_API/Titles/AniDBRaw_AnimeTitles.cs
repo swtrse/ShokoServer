@@ -9,7 +9,7 @@ namespace Shoko.Server.AniDB_API.Titles
         [XmlElement("anime")]
         public List<AniDBRaw_AnimeTitle_Anime> Animes { get; set; }
     }
-    
+
     public class AniDBRaw_AnimeTitle_Anime
     {
         [XmlAttribute(DataType = "int", AttributeName = "aid")]
@@ -17,7 +17,7 @@ namespace Shoko.Server.AniDB_API.Titles
 
         [XmlElement("title")]
         public List<AniDBRaw_AnimeTitle> Titles { get; set; }
-        
+
     }
 
     public class AniDBRaw_AnimeTitle

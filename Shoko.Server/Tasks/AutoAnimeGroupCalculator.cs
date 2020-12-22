@@ -18,7 +18,7 @@ namespace Shoko.Server.Tasks
         private static readonly Regex TitleNoiseRegex = new Regex(@"[^\w\s]|\d|gekijouban|the animation|the movie",
             RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        private static readonly char[] Whitespace = {' ', '\t', '\r', '\n'};
+        private static readonly char[] Whitespace = { ' ', '\t', '\r', '\n' };
 
         private readonly ILookup<int, AnimeRelation> _relationMap;
         private readonly Dictionary<int, int> _animeGroupMap = new Dictionary<int, int>();
@@ -75,7 +75,7 @@ namespace Shoko.Server.Tasks
             if (!string.IsNullOrEmpty(exclusionsSetting))
             {
                 var exclusionTokens = exclusionsSetting
-                    .Split(new[] {'|'}, StringSplitOptions.RemoveEmptyEntries)
+                    .Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(s => s.Trim())
                     .Where(s => s.Length > 0)
                     .ToList();
@@ -148,17 +148,17 @@ namespace Shoko.Server.Tasks
                 {
                     var relation = new AnimeRelation
                     {
-                        FromId = (int) r[0],
-                        ToId = (int) r[1],
-                        FromType = (AnimeType) r[2],
-                        ToType = (AnimeType) r[3],
-                        FromMainTitle = (string) r[4],
-                        ToMainTitle = (string) r[5],
-                        FromAirDate = (DateTime?) r[6],
-                        ToAirDate = (DateTime?) r[7]
+                        FromId = (int)r[0],
+                        ToId = (int)r[1],
+                        FromType = (AnimeType)r[2],
+                        ToType = (AnimeType)r[3],
+                        FromMainTitle = (string)r[4],
+                        ToMainTitle = (string)r[5],
+                        FromAirDate = (DateTime?)r[6],
+                        ToAirDate = (DateTime?)r[7]
                     };
 
-                    switch (((string) r[8]).ToLowerInvariant())
+                    switch (((string)r[8]).ToLowerInvariant())
                     {
                         case "full story":
                             relation.RelationType = AnimeRelationType.FullStory;
@@ -270,7 +270,7 @@ namespace Shoko.Server.Tasks
 
             foreach (RelationNode node in nodes.Values)
             {
-                var stats = new AnimeRelationStats {AnimeNode = node};
+                var stats = new AnimeRelationStats { AnimeNode = node };
                 var visitedNodes = new HashSet<int>();
                 var toVisit = new Queue<int>();
 
@@ -407,7 +407,7 @@ namespace Shoko.Server.Tasks
         /// the group graph; otherwise, <c>false</c>.</returns>
         private bool ShouldConsiderAnimeRelation(AnimeRelation rel)
         {
-            if (((int) rel.RelationType & (int) _exclusions) != 0)
+            if (((int)rel.RelationType & (int)_exclusions) != 0)
             {
                 return false; // The relation is in the exclusion list, so ignore it
             }
@@ -457,7 +457,7 @@ namespace Shoko.Server.Tasks
 
             // Either approximately half the words must match,
             // or the total length of the matched words must equate to 40% or more of the shortest title
-            return (matches >= minTokenCount / 2) || matchLen >= Math.Max(1, (int) (shortestTitleLen * 0.4));
+            return (matches >= minTokenCount / 2) || matchLen >= Math.Max(1, (int)(shortestTitleLen * 0.4));
         }
 
         private static string[] CreateTokensFromTitle(string title)
@@ -607,9 +607,9 @@ namespace Shoko.Server.Tasks
                 {
                     int hashCode = AnimeId1;
 
-                    hashCode = (hashCode * 397) ^ (int) RelationType1;
+                    hashCode = (hashCode * 397) ^ (int)RelationType1;
                     hashCode = (hashCode * 397) ^ AnimeId2;
-                    hashCode = (hashCode * 397) ^ (int) RelationType2;
+                    hashCode = (hashCode * 397) ^ (int)RelationType2;
 
                     return hashCode;
                 }

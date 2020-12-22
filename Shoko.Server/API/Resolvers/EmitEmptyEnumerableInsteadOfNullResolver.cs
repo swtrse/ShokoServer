@@ -31,7 +31,7 @@ namespace Shoko.Server
                 ctx.HttpContext.RequestServices.GetRequiredService<ArrayPool<char>>()));
         }
     }
-    
+
     public class EmitEmptyEnumerableInsteadOfNullResolver : DefaultContractResolver
     {
         protected override IValueProvider CreateMemberValueProvider(MemberInfo member)
@@ -60,7 +60,7 @@ namespace Shoko.Server
             public EmptyListValueProvider(IValueProvider innerProvider, Type listType)
             {
                 _innerProvider = innerProvider;
-                
+
                 _defaultValue = GetDefault(listType);
             }
 
@@ -91,7 +91,7 @@ namespace Shoko.Server
 
                 // The rest are probably ones that require extra stuff to make, ex ILookup, this will prevent an error.
                 if (constructorInfo == null || enumerableInnerType == null) return GetNullOrDefault(t);
-                return constructorInfo.Invoke(new object[] {Array.CreateInstance(enumerableInnerType, 0)});
+                return constructorInfo.Invoke(new object[] { Array.CreateInstance(enumerableInnerType, 0) });
             }
 
             private object GetNullOrDefault(Type t)

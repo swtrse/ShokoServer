@@ -96,7 +96,7 @@ namespace Shoko.Server.Models
         public HashSet<string> GetAllTitles()
         {
             HashSet<string> titles = new HashSet<string>();
-            
+
             // Override
             if (SeriesNameOverride != null) titles.Add(SeriesNameOverride);
             // AniDB
@@ -175,7 +175,7 @@ namespace Shoko.Server.Models
         }
 
 
-#region TvDB
+        #region TvDB
 
         public List<CrossRef_AniDB_TvDB> GetCrossRefTvDB()
         {
@@ -247,12 +247,12 @@ namespace Shoko.Server.Models
         {
             try
             {
-                CL_AnimeSeries_User contract = (CL_AnimeSeries_User) Contract?.Clone();
+                CL_AnimeSeries_User contract = (CL_AnimeSeries_User)Contract?.Clone();
                 if (contract == null)
                 {
                     logger.Trace($"Series with ID [{AniDB_ID}] has a null contract on get. Updating");
                     RepoFactory.AnimeSeries.Save(this, false, false, true);
-                    contract = (CL_AnimeSeries_User) _contract?.Clone();
+                    contract = (CL_AnimeSeries_User)_contract?.Clone();
                 }
 
                 if (contract == null)
@@ -409,9 +409,9 @@ namespace Shoko.Server.Models
             if (anime == null) return;
 
             var eps = anime.GetAniDBEpisodes();
-            int one_forth = (int) Math.Round(eps.Count / 4D, 0, MidpointRounding.AwayFromZero);
-            int one_half = (int) Math.Round(eps.Count / 2D, 0, MidpointRounding.AwayFromZero);
-            int three_forths = (int) Math.Round(eps.Count * 3 / 4D, 0, MidpointRounding.AwayFromZero);
+            int one_forth = (int)Math.Round(eps.Count / 4D, 0, MidpointRounding.AwayFromZero);
+            int one_half = (int)Math.Round(eps.Count / 2D, 0, MidpointRounding.AwayFromZero);
+            int three_forths = (int)Math.Round(eps.Count * 3 / 4D, 0, MidpointRounding.AwayFromZero);
 
             logger.Trace($"Generating {eps.Count} episodes for {anime.MainTitle}");
             for (int i = 0; i < eps.Count; i++)
@@ -491,7 +491,7 @@ namespace Shoko.Server.Models
 
         public void UpdateGroupFilters(HashSet<GroupFilterConditionType> types, SVR_JMMUser user = null)
         {
-            IReadOnlyList<SVR_JMMUser> users = new List<SVR_JMMUser> {user};
+            IReadOnlyList<SVR_JMMUser> users = new List<SVR_JMMUser> { user };
             if (user == null)
                 users = RepoFactory.JMMUser.GetAll();
             List<SVR_GroupFilter> tosave = new List<SVR_GroupFilter>();
@@ -557,7 +557,7 @@ namespace Shoko.Server.Models
 
             foreach (SVR_AnimeSeries series in seriesBatch)
             {
-                CL_AnimeSeries_User contract = (CL_AnimeSeries_User) series.Contract?.Clone();
+                CL_AnimeSeries_User contract = (CL_AnimeSeries_User)series.Contract?.Clone();
                 bool seriesOnlyStats = onlyStats;
 
                 if (contract == null)
@@ -595,7 +595,7 @@ namespace Shoko.Server.Models
 
                     if (animeRec != null)
                     {
-                        contract.AniDBAnime = (CL_AniDB_AnimeDetailed) animeRec.Contract.Clone();
+                        contract.AniDBAnime = (CL_AniDB_AnimeDetailed)animeRec.Contract.Clone();
 
                         CL_AniDB_Anime aniDbAnime = contract.AniDBAnime.AniDBAnime;
 
@@ -651,9 +651,9 @@ namespace Shoko.Server.Models
         {
             DateTime start = DateTime.Now;
             TimeSpan ts;
-            CL_AnimeSeries_User contract = (CL_AnimeSeries_User) Contract?.Clone();
+            CL_AnimeSeries_User contract = (CL_AnimeSeries_User)Contract?.Clone();
             ts = DateTime.Now - start;
-                logger.Trace($"While Updating SERIES {GetAnime()?.MainTitle ?? AniDB_ID.ToString()}, Cloned Series Contract in {ts.TotalMilliseconds}ms");
+            logger.Trace($"While Updating SERIES {GetAnime()?.MainTitle ?? AniDB_ID.ToString()}, Cloned Series Contract in {ts.TotalMilliseconds}ms");
             if (contract == null)
             {
                 contract = new CL_AnimeSeries_User();
@@ -687,7 +687,7 @@ namespace Shoko.Server.Models
                 HashSet<GroupFilterConditionType> types2 = GetConditionTypesChanged(Contract, contract);
                 Contract = contract;
                 ts = DateTime.Now - start;
-                    logger.Trace($"While Updating SERIES {GetAnime()?.MainTitle ?? AniDB_ID.ToString()}, Got GroupFilterConditionTypesChanged in {ts.TotalMilliseconds}ms");
+                logger.Trace($"While Updating SERIES {GetAnime()?.MainTitle ?? AniDB_ID.ToString()}, Got GroupFilterConditionTypesChanged in {ts.TotalMilliseconds}ms");
                 return types2;
             }
             SVR_AniDB_Anime animeRec = GetAnime();
@@ -711,9 +711,9 @@ namespace Shoko.Server.Models
                 start = DateTime.Now;
                 if (animeRec.Contract == null)
                     RepoFactory.AniDB_Anime.Save(animeRec);
-                contract.AniDBAnime = (CL_AniDB_AnimeDetailed) animeRec.Contract.Clone();
+                contract.AniDBAnime = (CL_AniDB_AnimeDetailed)animeRec.Contract.Clone();
                 ts = DateTime.Now - start;
-                    logger.Trace($"While Updating SERIES {GetAnime()?.MainTitle ?? AniDB_ID.ToString()}, Got and Cloned AniDB_Anime Contract in {ts.TotalMilliseconds}ms");
+                logger.Trace($"While Updating SERIES {GetAnime()?.MainTitle ?? AniDB_ID.ToString()}, Got and Cloned AniDB_Anime Contract in {ts.TotalMilliseconds}ms");
                 contract.AniDBAnime.AniDBAnime.DefaultImagePoster = animeRec.GetDefaultPoster()?.ToClient();
                 if (contract.AniDBAnime.AniDBAnime.DefaultImagePoster == null)
                 {
@@ -753,7 +753,7 @@ namespace Shoko.Server.Models
             start = DateTime.Now;
             HashSet<GroupFilterConditionType> types = GetConditionTypesChanged(Contract, contract);
             ts = DateTime.Now - start;
-                logger.Trace($"While Updating SERIES {GetAnime()?.MainTitle ?? AniDB_ID.ToString()}, Got GroupFilterConditionTypesChanged in {ts.TotalMilliseconds}ms");
+            logger.Trace($"While Updating SERIES {GetAnime()?.MainTitle ?? AniDB_ID.ToString()}, Got GroupFilterConditionTypesChanged in {ts.TotalMilliseconds}ms");
             Contract = contract;
             return types;
         }
@@ -859,9 +859,9 @@ namespace Shoko.Server.Models
             //TODO This three should be moved to AnimeSeries_User in the future...
             if (oldcontract == null ||
                 ((oldcontract.AniDBAnime.UserVote != null) &&
-                 (oldcontract.AniDBAnime.UserVote.VoteType == (int) AniDBVoteType.Anime)) !=
+                 (oldcontract.AniDBAnime.UserVote.VoteType == (int)AniDBVoteType.Anime)) !=
                 ((newcontract.AniDBAnime.UserVote != null) &&
-                 (newcontract.AniDBAnime.UserVote.VoteType == (int) AniDBVoteType.Anime)))
+                 (newcontract.AniDBAnime.UserVote.VoteType == (int)AniDBVoteType.Anime)))
                 h.Add(GroupFilterConditionType.UserVoted);
             if (oldcontract == null ||
                 oldcontract.AniDBAnime.UserVote != null != (newcontract.AniDBAnime.UserVote != null))
@@ -996,7 +996,7 @@ namespace Shoko.Server.Models
                 {
                     get
                     {
-                        int maxcnt = this.Select(k => k.PartCount).Concat(new[] {0}).Max();
+                        int maxcnt = this.Select(k => k.PartCount).Concat(new[] { 0 }).Max();
                         int[] parts = new int[maxcnt + 1];
                         foreach (StatEpisode k in this)
                         {
@@ -1235,7 +1235,7 @@ namespace Shoko.Server.Models
         {
             var allseries = RepoFactory.AnimeSeries.GetAll();
             var results = new Dictionary<SVR_AnimeSeries, CrossRef_Anime_Staff>();
-            List<string> stringsToSearchFor = new List<string> ();
+            List<string> stringsToSearchFor = new List<string>();
             if (staffname.Contains(" "))
             {
                 stringsToSearchFor.AddRange(staffname.Split(' ').GetPermutations()
@@ -1269,13 +1269,13 @@ namespace Shoko.Server.Models
                         {
                             if (!Enum.TryParse(results[series].Role, out CharacterAppearanceType type1)) continue;
                             if (!Enum.TryParse(animeStaff.Item1.Role, out CharacterAppearanceType type2)) continue;
-                            int comparison = ((int) type1).CompareTo((int) type2);
+                            int comparison = ((int)type1).CompareTo((int)type2);
                             if (comparison == 1) results[series] = animeStaff.Item1;
                         }
                         goto label0;
                     }
                 // People hate goto, but this is a legit use for it.
-                label0: ;
+                label0:;
             }
             return results;
         }

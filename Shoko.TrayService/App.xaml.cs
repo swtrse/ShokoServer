@@ -74,11 +74,11 @@ namespace Shoko.TrayService
                 break;
             }
 
-            var arguments = new ProgramArguments {Instance = instance};
+            var arguments = new ProgramArguments { Instance = instance };
             if (!string.IsNullOrEmpty(arguments.Instance)) ServerSettings.DefaultInstance = arguments.Instance;
 
             ShokoServer.Instance.InitLogger();
-            
+
             ServerSettings.LoadSettings();
             ServerState.Instance.LoadSettings();
             if (!ShokoServer.Instance.StartUpServer()) return;
@@ -113,7 +113,7 @@ namespace Shoko.TrayService
             ShokoService.CancelAndWaitForQueues();
             Icon.Visibility = Visibility.Hidden;
         }
-        
+
         private void OpenUrl(string url)
         {
             try
@@ -142,7 +142,7 @@ namespace Shoko.TrayService
                 }
             }
         }
-        
+
         internal static string GetLocalIPv4(NetworkInterfaceType _type)
         {
             string output = "";

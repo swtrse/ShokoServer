@@ -47,7 +47,7 @@ namespace Shoko.Server.FileHelper.Subtitles
             {
                 return AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
                     .Where(x => typeof(ISubtitles).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
-                    .Select(type => (ISubtitles) Activator.CreateInstance(type)).ToList();
+                    .Select(type => (ISubtitles)Activator.CreateInstance(type)).ToList();
             }
             catch (Exception e)
             {

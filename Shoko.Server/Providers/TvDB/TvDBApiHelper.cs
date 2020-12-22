@@ -30,7 +30,7 @@ namespace Shoko.Server.Providers.TvDB
 
         static TvDBApiHelper()
         {
-            client=new TvDbClient();
+            client = new TvDbClient();
             client.BaseUrl = "https://api-beta.thetvdb.com";
         }
 
@@ -101,7 +101,8 @@ namespace Shoko.Server.Providers.TvDB
                         return await GetSeriesInfoOnlineAsync(seriesID, forceRefresh);
                     Analytics.PostEvent("TvDB", "Login Failed", "Tried to Get Series Without Login");
                     // suppress 404 and move on
-                } else if (exception.StatusCode == (int) HttpStatusCode.NotFound)
+                }
+                else if (exception.StatusCode == (int)HttpStatusCode.NotFound)
                 {
                     Analytics.PostEvent("TvDB", "404: GetSeriesInfo", $"{seriesID}");
                     return null;
@@ -157,7 +158,8 @@ namespace Shoko.Server.Providers.TvDB
                     if (!string.IsNullOrEmpty(client.Authentication.Token))
                         return await SearchSeriesAsync(criteria);
                     // suppress 404 and move on
-                } else if (exception.StatusCode == (int)HttpStatusCode.NotFound) return results;
+                }
+                else if (exception.StatusCode == (int)HttpStatusCode.NotFound) return results;
                 logger.Error(exception,
                     $"TvDB returned an error code: {exception.StatusCode}\n        {exception.Message}\n        when searching for {criteria}");
                 Analytics.PostException(exception);
@@ -285,7 +287,8 @@ namespace Shoko.Server.Providers.TvDB
                     if (!string.IsNullOrEmpty(client.Authentication.Token))
                         return await GetLanguagesAsync();
                     // suppress 404 and move on
-                } else if (exception.StatusCode == (int)HttpStatusCode.NotFound) return languages;
+                }
+                else if (exception.StatusCode == (int)HttpStatusCode.NotFound) return languages;
                 logger.Error(exception,
                     $"TvDB returned an error code: {exception.StatusCode}\n        {exception.Message}");
                 Analytics.PostException(exception);
@@ -332,7 +335,8 @@ namespace Shoko.Server.Providers.TvDB
                     if (!string.IsNullOrEmpty(client.Authentication.Token))
                         return await GetSeriesImagesCountsAsync(seriesID);
                     // suppress 404 and move on
-                } else if (exception.StatusCode == (int)HttpStatusCode.NotFound) return null;
+                }
+                else if (exception.StatusCode == (int)HttpStatusCode.NotFound) return null;
                 logger.Error(exception,
                     $"TvDB returned an error code: {exception.StatusCode}\n        {exception.Message}");
                 Analytics.PostException(exception);
@@ -643,15 +647,15 @@ namespace Shoko.Server.Providers.TvDB
 
                 for (int i = 2; i <= firstResponse.Links.Last; i++)
                 {
-                    logger.Trace("Adding Task: "+i);
+                    logger.Trace("Adding Task: " + i);
                     TvDBRateLimiter.Instance.EnsureRate();
                     tasks.Add(client.Series.GetEpisodesAsync(seriesID, i));
                 }
 
                 var results = await Task.WhenAll(tasks);
-                var lastresponse = results.Length==0 ? firstResponse : results.Last();
+                var lastresponse = results.Length == 0 ? firstResponse : results.Last();
                 logger.Trace("Last Page: First: " + (lastresponse?.Links?.First?.ToString() ?? "NULL") + "Next: " + (lastresponse?.Links?.Next?.ToString() ?? "NULL") + "Previous: " + (lastresponse?.Links?.Prev?.ToString() ?? "NULL") + "Last: " + (lastresponse?.Links?.Last?.ToString() ?? "NULL"));
-                logger.Trace("Last Count: "+(lastresponse?.Data.Length.ToString() ?? "NULL"));
+                logger.Trace("Last Count: " + (lastresponse?.Data.Length.ToString() ?? "NULL"));
                 apiEpisodes = firstResponse.Data.Concat(results.SelectMany(x => x.Data)).ToList();
             }
             catch (TvDbServerException exception)
@@ -664,7 +668,7 @@ namespace Shoko.Server.Providers.TvDB
                         return await GetEpisodesOnlineAsync(seriesID);
                     // suppress 404 and move on
                 }
-                else if (exception.StatusCode == (int) HttpStatusCode.NotFound)
+                else if (exception.StatusCode == (int)HttpStatusCode.NotFound)
                 {
                     Analytics.PostEvent("TvDB", "404: Get Episode List for Series", $"{seriesID}");
                     return apiEpisodes;
@@ -705,7 +709,7 @@ namespace Shoko.Server.Providers.TvDB
                     var ep = RepoFactory.TvDB_Episode.GetByTvDBID(item.Id) ?? new TvDB_Episode();
                     ep.Populate(item);
                     RepoFactory.TvDB_Episode.Save(ep);
-                    
+
                     if (downloadImages)
                         if (!string.IsNullOrEmpty(ep.Filename))
                         {
@@ -725,7 +729,7 @@ namespace Shoko.Server.Providers.TvDB
                 foreach (TvDB_Episode oldEp in allEps)
                     if (!existingEpIds.Contains(oldEp.Id))
                         RepoFactory.TvDB_Episode.Delete(oldEp.TvDB_EpisodeID);
-                
+
                 // Updating stats as it will not happen with the episodes
                 RepoFactory.CrossRef_AniDB_TvDB.GetByTvDBID(seriesID).Select(a => a.AniDBID).Distinct()
                     .ForEach(SVR_AniDB_Anime.UpdateStatsByAnimeID);

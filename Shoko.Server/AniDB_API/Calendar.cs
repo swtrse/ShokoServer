@@ -87,7 +87,7 @@ namespace AniDBAPI
             if (sDetails.Length <= 2) return;
 
             for (int i = 1; i < sDetails.Length - 1; i++)
-                // first item will be the status command, and last will be empty
+            // first item will be the status command, and last will be empty
             {
                 //BaseConfig.MyAnimeLog.Write("s: {0}", sDetails[i]);
 

@@ -17,9 +17,9 @@ namespace Shoko.Server.API.Authentication
             IsAdmin = 1;
             HideCategories = "";
             CanEditServerSettings = 1;
-            
+
         }
-        
+
         [NotMapped] string IIdentity.AuthenticationType => "API";
 
         [NotMapped] bool IIdentity.IsAuthenticated => true;

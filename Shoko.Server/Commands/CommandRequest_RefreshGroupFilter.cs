@@ -17,7 +17,7 @@ namespace Shoko.Server.Commands
         {
             GroupFilterID = groupFilterID;
 
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
             GenerateCommandID();
         }
 
@@ -31,7 +31,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.RefreshGroupFilter,
-            extraParams = new[] {GroupFilterID.ToString()}
+            extraParams = new[] { GroupFilterID.ToString() }
         };
 
         public override void ProcessCommand()
