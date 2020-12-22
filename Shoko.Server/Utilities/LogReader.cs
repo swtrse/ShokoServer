@@ -28,7 +28,7 @@ namespace Shoko.Server.Utilities
             try
             {
                 char c = Convert.ToChar(val);
-                _position += _encoding.GetByteCount(new[] {c});
+                _position += _encoding.GetByteCount(new[] { c });
             }
             catch
             {

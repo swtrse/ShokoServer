@@ -22,7 +22,7 @@ namespace Shoko.Server.Extensions
                 foreach (PropertyInfo pid in d.GetType().GetProperties())
                 {
                     if (pid.Name == pis.Name)
-                        pid.GetSetMethod().Invoke(d, new[] {pis.GetGetMethod().Invoke(s, null)});
+                        pid.GetSetMethod().Invoke(d, new[] { pis.GetGetMethod().Invoke(s, null) });
                 }
             }
         }

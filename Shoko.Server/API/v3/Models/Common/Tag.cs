@@ -2,7 +2,7 @@ namespace Shoko.Server.API.v3.Models.Common
 {
     public class Tag
     {
-        public Tag() {}
+        public Tag() { }
 
         public Tag(string name)
         {
@@ -18,7 +18,7 @@ namespace Shoko.Server.API.v3.Models.Common
         /// What does the tag mean/what's it for
         /// </summary>
         public string Description { get; set; }
-        
+
         /// <summary>
         /// How relevant is it to the series
         /// </summary>

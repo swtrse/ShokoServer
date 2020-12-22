@@ -23,21 +23,23 @@ namespace Shoko.Server.API.v3.Controllers
             {
                 SVR_Scan s = new SVR_Scan
                 {
-                    Status = scan.Status, ImportFolders = scan.ImportFolders, CreationTIme = DateTime.Now
+                    Status = scan.Status,
+                    ImportFolders = scan.ImportFolders,
+                    CreationTIme = DateTime.Now
                 };
                 RepoFactory.Scan.Save(s);
                 scan = s;
             }
             List<ScanFile> files = scan.GetImportFolderList()
                 .SelectMany(a => RepoFactory.VideoLocalPlace.GetByImportFolder(a))
-                .Select(p => new {p, v = p.VideoLocal})
+                .Select(p => new { p, v = p.VideoLocal })
                 .Select(t => new ScanFile
                 {
                     Hash = t.v.ED2KHash,
                     FileSize = t.v.FileSize,
                     FullName = t.p.FullServerPath,
                     ScanID = scan.ScanID,
-                    Status = (int) ScanFileStatus.Waiting,
+                    Status = (int)ScanFileStatus.Waiting,
                     ImportFolderID = t.p.ImportFolderID,
                     VideoLocal_Place_ID = t.p.VideoLocal_Place_ID
                 }).ToList();
@@ -48,7 +50,7 @@ namespace Shoko.Server.API.v3.Controllers
         [HttpGet("{id}/Start")]
         public ActionResult StartScan(int id)
         {
-            
+
             return Ok();
         }
     }

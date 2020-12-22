@@ -269,7 +269,7 @@ namespace Shoko.Server.Server
             AniDB_ClientPort = ServerSettings.Instance.AniDb.ClientPort.ToString();
 
             if (Utils.IsRunningOnLinuxOrMac()) return;
-            
+
             if (autostartMethod == AutostartMethod.Registry)
             {
                 try

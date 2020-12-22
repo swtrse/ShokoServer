@@ -10,7 +10,7 @@ namespace AniDBAPI.Commands
     public class AniDBHTTPCommand_GetMyList : AniDBHTTPCommand, IAniDBHTTPCommand
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
-        
+
         private List<Raw_AniDB_MyListFile> myListItems = new List<Raw_AniDB_MyListFile>();
 
         public List<Raw_AniDB_MyListFile> MyListItems

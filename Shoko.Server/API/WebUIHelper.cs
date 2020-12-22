@@ -39,7 +39,7 @@ namespace Shoko.Server.API
             }
 
             //check if tag was parsed correctly as it makes the url
-            if (string.IsNullOrWhiteSpace(url)) throw new Exception("204 not found"); 
+            if (string.IsNullOrWhiteSpace(url)) throw new Exception("204 not found");
             WebUIUpdate(url, channel, tagName);
         }
 
@@ -139,7 +139,7 @@ namespace Shoko.Server.API
                 throw new Exception($"Unable to extract WebUI: {e}");
             }
         }
-        
+
         /// <summary>
         /// Find version that match requirements
         /// </summary>
@@ -193,7 +193,7 @@ namespace Shoko.Server.API
                     if (obj.prerelease != "False") continue;
                     foreach (dynamic file in obj.assets)
                     {
-                        if ((string) file.name == "latest.zip")
+                        if ((string)file.name == "latest.zip")
                         {
                             return obj.tag_name;
                         }
@@ -204,7 +204,7 @@ namespace Shoko.Server.API
                     if (obj.prerelease != "True") continue;
                     foreach (dynamic file in obj.assets)
                     {
-                        if ((string) file.name == "latest.zip")
+                        if ((string)file.name == "latest.zip")
                         {
                             return obj.tag_name;
                         }

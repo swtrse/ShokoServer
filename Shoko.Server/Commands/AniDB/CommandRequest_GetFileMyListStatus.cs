@@ -30,7 +30,7 @@ namespace Shoko.Server.Commands
         {
             AniFileID = aniFileID;
             FileName = fileName;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

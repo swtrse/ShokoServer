@@ -437,7 +437,7 @@ namespace Shoko.Server.API.v2.Modules
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
                 if (obj.GetType() != GetType()) return false;
-                return Equals((AniEpSummary) obj);
+                return Equals((AniEpSummary)obj);
             }
 
             public override int GetHashCode()
@@ -468,7 +468,7 @@ namespace Shoko.Server.API.v2.Modules
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
                 if (obj.GetType() != GetType()) return false;
-                return Equals((TvDBEpSummary) obj);
+                return Equals((TvDBEpSummary)obj);
             }
 
             public override int GetHashCode()
@@ -516,11 +516,11 @@ namespace Shoko.Server.API.v2.Modules
                             var AniDB = RepoFactory.AniDB_Episode.GetByEpisodeID(a.AniDBEpisodeID);
                             var TvDB = RepoFactory.TvDB_Episode.GetByTvDBID(a.TvDBEpisodeID);
                             return (AniDB: new AniEpSummary
-                                {
-                                    AniDBEpisodeType = AniDB.EpisodeType,
-                                    AniDBEpisodeNumber = AniDB.EpisodeNumber,
-                                    AniDBEpisodeName = AniDB.GetEnglishTitle()
-                                },
+                            {
+                                AniDBEpisodeType = AniDB.EpisodeType,
+                                AniDBEpisodeNumber = AniDB.EpisodeNumber,
+                                AniDBEpisodeName = AniDB.GetEnglishTitle()
+                            },
                                 TvDB: TvDB == null ? null : new TvDBEpSummary
                                 {
                                     TvDBSeason = TvDB.SeasonNumber,

@@ -84,7 +84,7 @@ namespace Shoko.Server
                     CloudProviders.Add(p);
                 }
             }
-            
+
             // TODO Hook into AniDBConnectionHandler
             //AniDBConnectionHandler.Instance.AniDBStateUpdate += OnAniDBStateUpdate;
         }
@@ -219,7 +219,7 @@ namespace Shoko.Server
             try
             {
                 AdminMessagesAvailable = false;
-                if (!ServerSettings.Instance.WebCache.Enabled) return; 
+                if (!ServerSettings.Instance.WebCache.Enabled) return;
                 List<Azure_AdminMessage> msgs = AzureWebAPI.Get_AdminMessages();
                 if (msgs == null || msgs.Count == 0)
                 {
@@ -357,9 +357,9 @@ namespace Shoko.Server
             get => banOrigin;
             set => this.SetField(() => banOrigin, value);
         }
-        
+
         private bool _isUDPBanned { get; set; }
-        
+
         private bool IsUDPBanned
         {
             get => _isUDPBanned;
@@ -386,7 +386,7 @@ namespace Shoko.Server
 
         private DateTime UDPBanTime { get; set; }
         private DateTime HTTPBanTime { get; set; }
-        
+
         private bool isBanned = false;
 
         public bool IsBanned

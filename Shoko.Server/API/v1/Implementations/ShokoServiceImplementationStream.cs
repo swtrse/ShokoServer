@@ -31,25 +31,25 @@ namespace Shoko.Server
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         [HttpGet("{videolocalid}/{userId?}/{autowatch?}/{fakename?}")]
-        [ProducesResponseType(typeof(FileStreamResult),200), ProducesResponseType(typeof(FileStreamResult),206), ProducesResponseType(404)]
+        [ProducesResponseType(typeof(FileStreamResult), 200), ProducesResponseType(typeof(FileStreamResult), 206), ProducesResponseType(404)]
         public object StreamVideo(int videolocalid, int? userId, bool? autowatch, string fakename)
         {
             InfoResult r = ResolveVideoLocal(videolocalid, userId, autowatch);
             if (r.Status != HttpStatusCode.OK && r.Status != HttpStatusCode.PartialContent)
             {
-                return StatusCode((int) r.Status, r.StatusDescription);
+                return StatusCode((int)r.Status, r.StatusDescription);
             }
             return StreamFromIFile(r, autowatch);
         }
 
         [HttpGet("Filename/{base64filename}/{userId?}/{autowatch?}/{fakename?}")]
-        [ProducesResponseType(typeof(FileStreamResult),200), ProducesResponseType(typeof(FileStreamResult),206), ProducesResponseType(404)]
+        [ProducesResponseType(typeof(FileStreamResult), 200), ProducesResponseType(typeof(FileStreamResult), 206), ProducesResponseType(404)]
         public object StreamVideoFromFilename(string base64filename, int? userId, bool? autowatch, string fakename)
         {
             InfoResult r = ResolveFilename(base64filename, userId, autowatch);
             if (r.Status != HttpStatusCode.OK && r.Status != HttpStatusCode.PartialContent)
             {
-                return StatusCode((int) r.Status, r.StatusDescription);
+                return StatusCode((int)r.Status, r.StatusDescription);
             }
             return StreamFromIFile(r, autowatch);
         }
@@ -57,15 +57,15 @@ namespace Shoko.Server
         private object StreamFromIFile(InfoResult r, bool? autowatch)
         {
             try
-            { 
+            {
                 string rangevalue = Request.Headers["Range"].FirstOrDefault() ??
                                     Request.Headers["range"].FirstOrDefault();
 
-  
+
                 FileSystemResult<Stream> fr = r.File.OpenRead();
                 if (fr == null || !fr.IsOk)
                 {
-                    return StatusCode((int) HttpStatusCode.BadRequest,
+                    return StatusCode((int)HttpStatusCode.BadRequest,
                         "Unable to open file '" + r.File.FullName + "': " + fr?.Error);
                 }
                 Stream org = fr.Result;
@@ -120,7 +120,7 @@ namespace Shoko.Server
                 var outstream = new SubStream(org, start, end - start + 1);
                 if (r.User != null && autowatch.HasValue && autowatch.Value && r.VideoLocal != null)
                 {
-                    outstream.CrossPosition = (long) (totalsize * WatchedThreshold);
+                    outstream.CrossPosition = (long)(totalsize * WatchedThreshold);
                     outstream.CrossPositionCrossed +=
                         a =>
                         {
@@ -144,7 +144,7 @@ namespace Shoko.Server
         {
             InfoResult r = ResolveVideoLocal(videolocalid, userId, autowatch);
             if (r.Status != HttpStatusCode.OK && r.Status != HttpStatusCode.PartialContent)
-                return StatusCode((int) r.Status, r.StatusDescription);
+                return StatusCode((int)r.Status, r.StatusDescription);
             Response.Headers.Add("Server", SERVER_VERSION);
             Response.Headers.Add("Accept-Ranges", "bytes");
             Response.Headers.Add("Content-Range", "bytes 0-" + (r.File.Size - 1) + "/" + r.File.Size);
@@ -159,7 +159,7 @@ namespace Shoko.Server
         {
             InfoResult r = ResolveFilename(base64filename, userId, autowatch);
             if (r.Status != HttpStatusCode.OK && r.Status != HttpStatusCode.PartialContent)
-                return StatusCode((int) r.Status, r.StatusDescription);
+                return StatusCode((int)r.Status, r.StatusDescription);
             Response.Headers.Add("Server", SERVER_VERSION);
             Response.Headers.Add("Accept-Ranges", "bytes");
             Response.Headers.Add("Content-Range", "bytes 0-" + (r.File.Size - 1) + "/" + r.File.Size);

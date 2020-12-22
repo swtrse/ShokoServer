@@ -121,7 +121,7 @@ namespace Shoko.Server.Repositories.Cached
 
         public void CleanUpEmptyDirectoryFilters()
         {
-            List<SVR_GroupFilter> toremove = GetAll().Where(a => (a.FilterType & (int) GroupFilterType.Directory) != 0)
+            List<SVR_GroupFilter> toremove = GetAll().Where(a => (a.FilterType & (int)GroupFilterType.Directory) != 0)
                 .Where(gf => gf.GroupsIdsVersion == SVR_GroupFilter.GROUPFILTER_VERSION &&
                              gf.SeriesIdsVersion == SVR_GroupFilter.SERIEFILTER_VERSION && gf.GroupsIds.Count == 0 &&
                              string.IsNullOrEmpty(gf.GroupsIdsString) && gf.SeriesIds.Count == 0 &&
@@ -143,10 +143,10 @@ namespace Shoko.Server.Repositories.Cached
             SVR_GroupFilter cwatching =
                 lockedGFs.FirstOrDefault(
                     a =>
-                        a.FilterType == (int) GroupFilterType.ContinueWatching);
-            if (cwatching != null && cwatching.FilterType != (int) GroupFilterType.ContinueWatching)
+                        a.FilterType == (int)GroupFilterType.ContinueWatching);
+            if (cwatching != null && cwatching.FilterType != (int)GroupFilterType.ContinueWatching)
             {
-                cwatching.FilterType = (int) GroupFilterType.ContinueWatching;
+                cwatching.FilterType = (int)GroupFilterType.ContinueWatching;
                 Save(cwatching);
             }
             else if (cwatching == null)
@@ -158,22 +158,22 @@ namespace Shoko.Server.Repositories.Cached
                     SortingCriteria = "4;2", // by last watched episode desc
                     ApplyToSeries = 0,
                     BaseCondition = 1, // all
-                    FilterType = (int) GroupFilterType.ContinueWatching,
+                    FilterType = (int)GroupFilterType.ContinueWatching,
                     InvisibleInClients = 0,
                     Conditions = new List<GroupFilterCondition>()
                 };
                 GroupFilterCondition gfc = new GroupFilterCondition
                 {
-                    ConditionType = (int) GroupFilterConditionType.HasWatchedEpisodes,
-                    ConditionOperator = (int) GroupFilterOperator.Include,
+                    ConditionType = (int)GroupFilterConditionType.HasWatchedEpisodes,
+                    ConditionOperator = (int)GroupFilterOperator.Include,
                     ConditionParameter = string.Empty,
                     GroupFilterID = gf.GroupFilterID
                 };
                 gf.Conditions.Add(gfc);
                 gfc = new GroupFilterCondition
                 {
-                    ConditionType = (int) GroupFilterConditionType.HasUnwatchedEpisodes,
-                    ConditionOperator = (int) GroupFilterOperator.Include,
+                    ConditionType = (int)GroupFilterConditionType.HasUnwatchedEpisodes,
+                    ConditionOperator = (int)GroupFilterOperator.Include,
                     ConditionParameter = string.Empty,
                     GroupFilterID = gf.GroupFilterID
                 };
@@ -183,7 +183,7 @@ namespace Shoko.Server.Repositories.Cached
             }
 
             //Create All filter
-            SVR_GroupFilter allfilter = lockedGFs.FirstOrDefault(a => a.FilterType == (int) GroupFilterType.All);
+            SVR_GroupFilter allfilter = lockedGFs.FirstOrDefault(a => a.FilterType == (int)GroupFilterType.All);
             if (allfilter == null)
             {
                 SVR_GroupFilter gf = new SVR_GroupFilter
@@ -191,7 +191,7 @@ namespace Shoko.Server.Repositories.Cached
                     GroupFilterName = Resources.Filter_All,
                     Locked = 1,
                     InvisibleInClients = 0,
-                    FilterType = (int) GroupFilterType.All,
+                    FilterType = (int)GroupFilterType.All,
                     BaseCondition = 1,
                     SortingCriteria = "5;1"
                 };
@@ -201,14 +201,14 @@ namespace Shoko.Server.Repositories.Cached
 
             SVR_GroupFilter tagsdirec =
                 lockedGFs.FirstOrDefault(
-                    a => a.FilterType == (int) (GroupFilterType.Directory | GroupFilterType.Tag));
+                    a => a.FilterType == (int)(GroupFilterType.Directory | GroupFilterType.Tag));
             if (tagsdirec == null)
             {
                 tagsdirec = new SVR_GroupFilter
                 {
                     GroupFilterName = Resources.Filter_Tags,
                     InvisibleInClients = 0,
-                    FilterType = (int) (GroupFilterType.Directory | GroupFilterType.Tag),
+                    FilterType = (int)(GroupFilterType.Directory | GroupFilterType.Tag),
                     BaseCondition = 1,
                     Locked = 1,
                     SortingCriteria = "13;1"
@@ -218,14 +218,14 @@ namespace Shoko.Server.Repositories.Cached
 
             SVR_GroupFilter yearsdirec =
                 lockedGFs.FirstOrDefault(
-                    a => a.FilterType == (int) (GroupFilterType.Directory | GroupFilterType.Year));
+                    a => a.FilterType == (int)(GroupFilterType.Directory | GroupFilterType.Year));
             if (yearsdirec == null)
             {
                 yearsdirec = new SVR_GroupFilter
                 {
                     GroupFilterName = Resources.Filter_Years,
                     InvisibleInClients = 0,
-                    FilterType = (int) (GroupFilterType.Directory | GroupFilterType.Year),
+                    FilterType = (int)(GroupFilterType.Directory | GroupFilterType.Year),
                     BaseCondition = 1,
                     Locked = 1,
                     SortingCriteria = "13;1"
@@ -235,14 +235,14 @@ namespace Shoko.Server.Repositories.Cached
 
             SVR_GroupFilter seasonsdirec =
                 lockedGFs.FirstOrDefault(
-                    a => a.FilterType == (int) (GroupFilterType.Directory | GroupFilterType.Season));
+                    a => a.FilterType == (int)(GroupFilterType.Directory | GroupFilterType.Season));
             if (seasonsdirec == null)
             {
                 seasonsdirec = new SVR_GroupFilter
                 {
                     GroupFilterName = Resources.Filter_Seasons,
                     InvisibleInClients = 0,
-                    FilterType = (int) (GroupFilterType.Directory | GroupFilterType.Season),
+                    FilterType = (int)(GroupFilterType.Directory | GroupFilterType.Season),
                     BaseCondition = 1,
                     Locked = 1,
                     SortingCriteria = "13;1"
@@ -262,7 +262,7 @@ namespace Shoko.Server.Repositories.Cached
 
 
             SVR_GroupFilter tagsdirec = lockedGFs.FirstOrDefault(
-                a => a.FilterType == (int) (GroupFilterType.Directory | GroupFilterType.Tag));
+                a => a.FilterType == (int)(GroupFilterType.Directory | GroupFilterType.Tag));
             if (tagsdirec != null)
             {
                 HashSet<string> alltags;
@@ -275,7 +275,7 @@ namespace Shoko.Server.Repositories.Cached
                         StringComparer.InvariantCultureIgnoreCase);
                 HashSet<string> existingTags =
                     new HashSet<string>(
-                        lockedGFs.Where(a => a.FilterType == (int) GroupFilterType.Tag)
+                        lockedGFs.Where(a => a.FilterType == (int)GroupFilterType.Tag)
                             .Select(a => a.Conditions.FirstOrDefault()?.ConditionParameter),
                         StringComparer.InvariantCultureIgnoreCase);
                 alltags.ExceptWith(existingTags);
@@ -301,12 +301,12 @@ namespace Shoko.Server.Repositories.Cached
                         BaseCondition = 1,
                         Locked = 1,
                         SortingCriteria = "5;1",
-                        FilterType = (int) GroupFilterType.Tag
+                        FilterType = (int)GroupFilterType.Tag
                     };
                     GroupFilterCondition gfc = new GroupFilterCondition
                     {
-                        ConditionType = (int) GroupFilterConditionType.Tag,
-                        ConditionOperator = (int) GroupFilterOperator.In,
+                        ConditionType = (int)GroupFilterConditionType.Tag,
+                        ConditionOperator = (int)GroupFilterOperator.In,
                         ConditionParameter = s,
                         GroupFilterID = yf.GroupFilterID
                     };
@@ -317,7 +317,7 @@ namespace Shoko.Server.Repositories.Cached
             }
 
             SVR_GroupFilter yearsdirec = lockedGFs.FirstOrDefault(
-                a => a.FilterType == (int) (GroupFilterType.Directory | GroupFilterType.Year));
+                a => a.FilterType == (int)(GroupFilterType.Directory | GroupFilterType.Year));
             if (yearsdirec != null)
             {
                 HashSet<string> allyears;
@@ -346,7 +346,7 @@ namespace Shoko.Server.Repositories.Cached
 
                 HashSet<string> notin =
                     new HashSet<string>(
-                        lockedGFs.Where(a => a.FilterType == (int) GroupFilterType.Year)
+                        lockedGFs.Where(a => a.FilterType == (int)GroupFilterType.Year)
                             .Select(a => a.Conditions.FirstOrDefault()?.ConditionParameter),
                         StringComparer.InvariantCultureIgnoreCase);
                 allyears.ExceptWith(notin);
@@ -368,13 +368,13 @@ namespace Shoko.Server.Repositories.Cached
                         BaseCondition = 1,
                         Locked = 1,
                         SortingCriteria = "5;1",
-                        FilterType = (int) GroupFilterType.Year,
+                        FilterType = (int)GroupFilterType.Year,
                         ApplyToSeries = 1
                     };
                     GroupFilterCondition gfc = new GroupFilterCondition
                     {
-                        ConditionType = (int) GroupFilterConditionType.Year,
-                        ConditionOperator = (int) GroupFilterOperator.Include,
+                        ConditionType = (int)GroupFilterConditionType.Year,
+                        ConditionOperator = (int)GroupFilterOperator.Include,
                         ConditionParameter = s,
                         GroupFilterID = yf.GroupFilterID
                     };
@@ -385,7 +385,7 @@ namespace Shoko.Server.Repositories.Cached
             }
 
             SVR_GroupFilter seasonsdirectory = lockedGFs.FirstOrDefault(
-                a => a.FilterType == (int) (GroupFilterType.Directory | GroupFilterType.Season));
+                a => a.FilterType == (int)(GroupFilterType.Directory | GroupFilterType.Season));
             if (seasonsdirectory != null)
             {
                 SortedSet<string> allseasons;
@@ -409,7 +409,7 @@ namespace Shoko.Server.Repositories.Cached
 
                 HashSet<string> notin =
                     new HashSet<string>(
-                        lockedGFs.Where(a => a.FilterType == (int) GroupFilterType.Season)
+                        lockedGFs.Where(a => a.FilterType == (int)GroupFilterType.Season)
                             .Select(a => a.Conditions.FirstOrDefault()?.ConditionParameter),
                         StringComparer.InvariantCultureIgnoreCase);
                 allseasons.ExceptWith(notin);
@@ -431,13 +431,13 @@ namespace Shoko.Server.Repositories.Cached
                         BaseCondition = 1,
                         Locked = 1,
                         SortingCriteria = "5;1",
-                        FilterType = (int) GroupFilterType.Season,
+                        FilterType = (int)GroupFilterType.Season,
                         ApplyToSeries = 1
                     };
                     GroupFilterCondition gfc = new GroupFilterCondition
                     {
-                        ConditionType = (int) GroupFilterConditionType.Season,
-                        ConditionOperator = (int) GroupFilterOperator.In,
+                        ConditionType = (int)GroupFilterConditionType.Season,
+                        ConditionOperator = (int)GroupFilterOperator.In,
                         ConditionParameter = season,
                         GroupFilterID = yf.GroupFilterID
                     };
@@ -547,14 +547,14 @@ namespace Shoko.Server.Repositories.Cached
                 throw new ArgumentNullException(nameof(session));
 
             SVR_GroupFilter tagsdirec = GetAll(session).FirstOrDefault(
-                a => a.FilterType == (int) (GroupFilterType.Directory | GroupFilterType.Tag));
+                a => a.FilterType == (int)(GroupFilterType.Directory | GroupFilterType.Tag));
 
             DropAllTagFilters(session);
 
             // user -> tag -> series
             ConcurrentDictionary<int, ConcurrentDictionary<string, HashSet<int>>> somethingDictionary =
                 new ConcurrentDictionary<int, ConcurrentDictionary<string, HashSet<int>>>();
-            List<SVR_JMMUser> users = new List<SVR_JMMUser> {null};
+            List<SVR_JMMUser> users = new List<SVR_JMMUser> { null };
             users.AddRange(RepoFactory.JMMUser.GetAll());
             var tags = RepoFactory.AniDB_Tag.GetAll().ToLookup(a => a?.TagName?.ToLowerInvariant());
 
@@ -567,7 +567,7 @@ namespace Shoko.Server.Repositories.Cached
                     var seriesTags = series.GetAnime()?.GetAllTags();
                     foreach (var user in users)
                     {
-                        
+
                         if (user?.GetHideCategories().FindInEnumerable(seriesTags) ?? false)
                             continue;
 
@@ -581,23 +581,24 @@ namespace Shoko.Server.Repositories.Cached
                             else
                             {
                                 somethingDictionary[user?.JMMUserID ?? 0].AddOrUpdate(tag.Key,
-                                    new HashSet<int> {series.AnimeSeriesID}, (oldTag, oldIDs) =>
-                                    {
-                                        lock (oldIDs) oldIDs.Add(series.AnimeSeriesID);
-                                        return oldIDs;
-                                    });
+                                    new HashSet<int> { series.AnimeSeriesID }, (oldTag, oldIDs) =>
+                                      {
+                                          lock (oldIDs) oldIDs.Add(series.AnimeSeriesID);
+                                          return oldIDs;
+                                      });
                             }
                         }
                         else
                         {
-                            somethingDictionary.AddOrUpdate(user?.JMMUserID ?? 0, id => {
+                            somethingDictionary.AddOrUpdate(user?.JMMUserID ?? 0, id =>
+                            {
                                 var newdict = new ConcurrentDictionary<string, HashSet<int>>();
-                                    newdict.AddOrUpdate(tag.Key, new HashSet<int> {series.AnimeSeriesID},
-                                        (oldTag, oldIDs) =>
-                                        {
-                                            lock (oldIDs) oldIDs.Add(series.AnimeSeriesID);
-                                            return oldIDs;
-                                        });
+                                newdict.AddOrUpdate(tag.Key, new HashSet<int> { series.AnimeSeriesID },
+                                    (oldTag, oldIDs) =>
+                                    {
+                                        lock (oldIDs) oldIDs.Add(series.AnimeSeriesID);
+                                        return oldIDs;
+                                    });
                                 return newdict;
                             },
                             (i, value) =>
@@ -610,11 +611,11 @@ namespace Shoko.Server.Repositories.Cached
                                 else
                                 {
                                     value.AddOrUpdate(tag.Key,
-                                        new HashSet<int> {series.AnimeSeriesID}, (oldTag, oldIDs) =>
-                                        {
-                                            lock (oldIDs) oldIDs.Add(series.AnimeSeriesID);
-                                            return oldIDs;
-                                        });
+                                        new HashSet<int> { series.AnimeSeriesID }, (oldTag, oldIDs) =>
+                                          {
+                                              lock (oldIDs) oldIDs.Add(series.AnimeSeriesID);
+                                              return oldIDs;
+                                          });
                                 }
 
                                 return value;
@@ -644,7 +645,7 @@ namespace Shoko.Server.Repositories.Cached
                 using (ITransaction trans = session.BeginTransaction())
                 {
                     session.CreateQuery("DELETE FROM " + nameof(SVR_GroupFilter) + " WHERE FilterType = " +
-                                        (int) GroupFilterType.Tag + ";")
+                                        (int)GroupFilterType.Tag + ";")
                         .ExecuteUpdate();
                     trans.Commit();
                 }
@@ -675,7 +676,7 @@ namespace Shoko.Server.Repositories.Cached
                     BaseCondition = 1,
                     Locked = 1,
                     SortingCriteria = "5;1",
-                    FilterType = (int) GroupFilterType.Tag,
+                    FilterType = (int)GroupFilterType.Tag,
                 };
                 yf.SeriesIds[0] = lookup[0][s.ToLowerInvariant()].ToHashSet();
                 yf.GroupsIds[0] = yf.SeriesIds[0]
@@ -701,8 +702,8 @@ namespace Shoko.Server.Repositories.Cached
 
                 GroupFilterCondition gfc = new GroupFilterCondition
                 {
-                    ConditionType = (int) GroupFilterConditionType.Tag,
-                    ConditionOperator = (int) GroupFilterOperator.In,
+                    ConditionType = (int)GroupFilterConditionType.Tag,
+                    ConditionOperator = (int)GroupFilterOperator.In,
                     ConditionParameter = s,
                     GroupFilterID = yf.GroupFilterID
                 };
@@ -743,7 +744,7 @@ namespace Shoko.Server.Repositories.Cached
             lock (Cache)
             {
                 HashSet<int> filters = new HashSet<int>(Cache.Values
-                    .Where(a => a.FilterType == (int) GroupFilterType.All)
+                    .Where(a => a.FilterType == (int)GroupFilterType.All)
                     .Select(a => a.GroupFilterID));
                 foreach (GroupFilterConditionType t in types)
                     filters.UnionWith(Types.FindInverse(t));

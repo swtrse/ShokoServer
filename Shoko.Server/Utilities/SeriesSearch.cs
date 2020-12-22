@@ -84,21 +84,21 @@ namespace Shoko.Server.Utilities
             SearchResult<List<SVR_AnimeSeries>> dist = null;
 
             foreach (SVR_AnimeSeries item in grouping)
-            foreach (string title in item.GetAllTitles())
-            {
-                if (string.IsNullOrEmpty(title)) continue;
-                int result = title.IndexOf(query, StringComparison.OrdinalIgnoreCase);
-                if (result == -1) continue;
-                SearchResult<List<SVR_AnimeSeries>> searchGrouping = new SearchResult<List<SVR_AnimeSeries>>
+                foreach (string title in item.GetAllTitles())
                 {
-                    Distance = 0,
-                    Index = result,
-                    ExactMatch = true,
-                    Match = title,
-                    Result = grouping.OrderBy(a => a.AirDate).ToList()
-                };
-                if (result < (dist?.Index ?? int.MaxValue)) dist = searchGrouping;
-            }
+                    if (string.IsNullOrEmpty(title)) continue;
+                    int result = title.IndexOf(query, StringComparison.OrdinalIgnoreCase);
+                    if (result == -1) continue;
+                    SearchResult<List<SVR_AnimeSeries>> searchGrouping = new SearchResult<List<SVR_AnimeSeries>>
+                    {
+                        Distance = 0,
+                        Index = result,
+                        ExactMatch = true,
+                        Match = title,
+                        Result = grouping.OrderBy(a => a.AirDate).ToList()
+                    };
+                    if (result < (dist?.Index ?? int.MaxValue)) dist = searchGrouping;
+                }
 
             return dist;
         }
@@ -113,7 +113,7 @@ namespace Shoko.Server.Utilities
                 foreach (string title in titles)
                 {
                     if (string.IsNullOrEmpty(title)) continue;
-                    int k = Math.Max(Math.Min((int) (title.Length / 6D), (int) (query.Length / 6D)), 1);
+                    int k = Math.Max(Math.Min((int)(title.Length / 6D), (int)(query.Length / 6D)), 1);
                     if (query.Length <= 4 || title.Length <= 4) k = 0;
 
                     Misc.SearchInfo<T> result =
@@ -132,7 +132,7 @@ namespace Shoko.Server.Utilities
 
                 return dist;
             }).Where(a => a != null && a.Index != -1).ToList().OrderBy(a => a.Index).ThenBy(a => a.Distance).ToList();
-            
+
             return results;
         }
 
@@ -153,10 +153,10 @@ namespace Shoko.Server.Utilities
             SVR_JMMUser user = RepoFactory.JMMUser.GetByID(userID);
             if (user == null) throw new Exception("User not found");
 
-            ParallelQuery<SVR_AnimeSeries> allSeries = 
+            ParallelQuery<SVR_AnimeSeries> allSeries =
                 RepoFactory.AnimeSeries.GetAll().AsParallel().Where(a =>
-                a?.GetAnime() != null && (a.GetAnime().GetAllTags().Count==0 || !a.GetAnime().GetAllTags().FindInEnumerable(user.GetHideCategories())));
-            
+                a?.GetAnime() != null && (a.GetAnime().GetAllTags().Count == 0 || !a.GetAnime().GetAllTags().FindInEnumerable(user.GetHideCategories())));
+
             ParallelQuery<AniDB_Tag> allTags = RepoFactory.AniDB_Tag.GetAll().AsParallel()
                 .Where(a =>
                 {
@@ -229,7 +229,7 @@ namespace Shoko.Server.Utilities
                 return RepoFactory.CrossRef_CustomTag.GetByCustomTagID(tag.CustomTagID)
                     .Select(xref =>
                     {
-                        if (xref.CrossRefType != (int) CustomTagCrossRefType.Anime) return null;
+                        if (xref.CrossRefType != (int)CustomTagCrossRefType.Anime) return null;
                         var anime = RepoFactory.AnimeSeries.GetByAnimeID(xref.CrossRefID);
                         // Because we are searching tags, then getting series from it, we need to make sure it's allowed
                         // for example, porn could have the drugs tag, even though it's not a "porn tag"
@@ -268,7 +268,7 @@ namespace Shoko.Server.Utilities
             }).Take(limit));
             return series;
         }
-        
+
         private static List<SearchResult<SVR_AnimeSeries>> SearchTagsFuzzy(string query, int limit, SVR_JMMUser user, ParallelQuery<AniDB_Tag> allTags)
         {
             List<SearchResult<SVR_AnimeSeries>> series = new List<SearchResult<SVR_AnimeSeries>>();
@@ -284,7 +284,7 @@ namespace Shoko.Server.Utilities
                 return RepoFactory.CrossRef_CustomTag.GetByCustomTagID(tag.Result.CustomTagID)
                     .Select(xref =>
                     {
-                        if (xref.CrossRefType != (int) CustomTagCrossRefType.Anime) return null;
+                        if (xref.CrossRefType != (int)CustomTagCrossRefType.Anime) return null;
                         SVR_AnimeSeries anime = RepoFactory.AnimeSeries.GetByAnimeID(xref.CrossRefID);
                         // Because we are searching tags, then getting series from it, we need to make sure it's allowed
                         // for example, porn could have the drugs tag, even though it's not a "porn tag"
@@ -351,13 +351,13 @@ namespace Shoko.Server.Utilities
             // ToList() after the Parallel compatible operations are done to prevent an OutOfMemoryException on the ParallelEnumerable
             return allSeries.GroupBy(a => a.AnimeGroupID).Select(a => CheckTitlesFuzzy(a, query)).Where(a => a != null).ToList()
                 .OrderBy(a => a.Index).ThenBy(a => a.Distance).SelectMany(a => a.Result.Select(b => new SearchResult<SVR_AnimeSeries>
-            {
-                Distance = a.Distance,
-                Index = a.Index,
-                ExactMatch = a.ExactMatch,
-                Match = a.Match,
-                Result = b
-            })).Take(limit).ToList();
+                {
+                    Distance = a.Distance,
+                    Index = a.Index,
+                    ExactMatch = a.ExactMatch,
+                    Match = a.Match,
+                    Result = b
+                })).Take(limit).ToList();
         }
 
         public class SearchResult<T>
@@ -366,7 +366,7 @@ namespace Shoko.Server.Utilities
             public double Distance { get; set; }
             public int Index { get; set; }
             public string Match { get; set; }
-            
+
             public T Result { get; set; }
         }
     }

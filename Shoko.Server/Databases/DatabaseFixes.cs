@@ -124,7 +124,7 @@ namespace Shoko.Server.Databases
                     if (gf.GroupFilterName.Equals(Constants.GroupFilterName.ContinueWatching,
                         StringComparison.InvariantCultureIgnoreCase))
                     {
-                        gf.FilterType = (int) GroupFilterType.ContinueWatching;
+                        gf.FilterType = (int)GroupFilterType.ContinueWatching;
                         RepoFactory.GroupFilter.Save(gf);
                     }
         }
@@ -159,12 +159,12 @@ namespace Shoko.Server.Databases
                     .AddScalar("TvDBStartEpisodeNumber", NHibernateUtil.Int32)
                     .List<object[]>().Select(a => new CrossRef_AniDB_TvDBV2
                     {
-                        AnimeID = (int) a[0],
-                        AniDBStartEpisodeType = (int) a[1],
-                        AniDBStartEpisodeNumber = (int) a[2],
-                        TvDBID = (int) a[3],
-                        TvDBSeasonNumber = (int) a[4],
-                        TvDBStartEpisodeNumber = (int) a[5]
+                        AnimeID = (int)a[0],
+                        AniDBStartEpisodeType = (int)a[1],
+                        AniDBStartEpisodeNumber = (int)a[2],
+                        TvDBID = (int)a[3],
+                        TvDBSeasonNumber = (int)a[4],
+                        TvDBStartEpisodeNumber = (int)a[5]
                     }).ToLookup(a => a.AnimeID);
 
                 // Split them by series so that we can escape on error more easily
@@ -193,12 +193,12 @@ namespace Shoko.Server.Databases
                     .AddScalar("TvDBStartEpisodeNumber", NHibernateUtil.Int32)
                     .List<object[]>().Select(a => new CrossRef_AniDB_TvDBV2
                     {
-                        AnimeID = (int) a[0],
-                        AniDBStartEpisodeType = (int) a[1],
-                        AniDBStartEpisodeNumber = (int) a[2],
-                        TvDBID = (int) a[3],
-                        TvDBSeasonNumber = (int) a[4],
-                        TvDBStartEpisodeNumber = (int) a[5]
+                        AnimeID = (int)a[0],
+                        AniDBStartEpisodeType = (int)a[1],
+                        AniDBStartEpisodeNumber = (int)a[2],
+                        TvDBID = (int)a[3],
+                        TvDBSeasonNumber = (int)a[4],
+                        TvDBStartEpisodeNumber = (int)a[5]
                     }).ToLookup(a => a.AnimeID);
 
                 // Split them by series so that we can escape on error more easily
@@ -224,10 +224,10 @@ namespace Shoko.Server.Databases
                     .AddScalar("CrossRefSource", NHibernateUtil.Int32)
                     .List<object[]>().Select(a => new CrossRef_AniDB_TvDB
                     {
-                        AniDBID = (int) a[0],
-                        TvDBID = (int) a[1],
-                        CrossRefSource = (CrossRefSource) a[2]
-                    }).DistinctBy(a => new[] {a.AniDBID, a.TvDBID}).ToList();
+                        AniDBID = (int)a[0],
+                        TvDBID = (int)a[1],
+                        CrossRefSource = (CrossRefSource)a[2]
+                    }).DistinctBy(a => new[] { a.AniDBID, a.TvDBID }).ToList();
                 foreach (var link in links)
                 {
                     var exists =
@@ -381,35 +381,35 @@ namespace Shoko.Server.Databases
             string creatorBasePath = ImageUtils.GetBaseAniDBCreatorImagesPath() + Path.DirectorySeparatorChar;
 
             var charstosave = allcharacters.Select(character => new AnimeCharacter
-                {
-                    Name = character.CharName?.Replace("`", "'"),
-                    AniDBID = character.CharID,
-                    Description = character.CharDescription?.Replace("`", "'"),
-                    ImagePath = character.GetPosterPath()?.Replace(charBasePath, "")
-                }).ToList();
+            {
+                Name = character.CharName?.Replace("`", "'"),
+                AniDBID = character.CharID,
+                Description = character.CharDescription?.Replace("`", "'"),
+                ImagePath = character.GetPosterPath()?.Replace(charBasePath, "")
+            }).ToList();
             RepoFactory.AnimeCharacter.Save(charstosave);
 
             var stafftosave = allstaff.Select(a => new AnimeStaff
-                {
-                    Name = a.SeiyuuName?.Replace("`", "'"),
-                    AniDBID = a.SeiyuuID,
-                    ImagePath = a.GetPosterPath()?.Replace(creatorBasePath, "")
-                }).ToList();
+            {
+                Name = a.SeiyuuName?.Replace("`", "'"),
+                AniDBID = a.SeiyuuID,
+                ImagePath = a.GetPosterPath()?.Replace(creatorBasePath, "")
+            }).ToList();
             RepoFactory.AnimeStaff.Save(stafftosave);
 
             // This is not accurate. There was a mistake in DB design
             var xrefstosave = (from xref in allcharacterstaff
-                let animes = allanimecharacters[xref.CharID].ToList()
-                from anime in animes
-                select new CrossRef_Anime_Staff
-                {
-                    AniDB_AnimeID = anime.AnimeID,
-                    Language = "Japanese",
-                    RoleType = (int) StaffRoleType.Seiyuu,
-                    Role = anime.CharType,
-                    RoleID = RepoFactory.AnimeCharacter.GetByAniDBID(xref.CharID).CharacterID,
-                    StaffID = RepoFactory.AnimeStaff.GetByAniDBID(xref.SeiyuuID).StaffID,
-                }).ToList();
+                               let animes = allanimecharacters[xref.CharID].ToList()
+                               from anime in animes
+                               select new CrossRef_Anime_Staff
+                               {
+                                   AniDB_AnimeID = anime.AnimeID,
+                                   Language = "Japanese",
+                                   RoleType = (int)StaffRoleType.Seiyuu,
+                                   Role = anime.CharType,
+                                   RoleID = RepoFactory.AnimeCharacter.GetByAniDBID(xref.CharID).CharacterID,
+                                   StaffID = RepoFactory.AnimeStaff.GetByAniDBID(xref.SeiyuuID).StaffID,
+                               }).ToList();
             RepoFactory.CrossRef_Anime_Staff.Save(xrefstosave);
         }
 
@@ -463,7 +463,7 @@ namespace Shoko.Server.Databases
             using (var session = DatabaseFactory.SessionFactory.OpenSession())
             {
                 var result = session.CreateSQLQuery("SELECT COUNT(VideoLocalID) FROM VideoLocal").UniqueResult();
-                long vlCount = result is int ? (int) result : result is long ? (long) result : 0;
+                long vlCount = result is int ? (int)result : result is long ? (long)result : 0;
                 if (vlCount == 0) return;
             }
 
@@ -557,14 +557,14 @@ namespace Shoko.Server.Databases
         public static void FixDuplicateTagFiltersAndUpdateSeasons()
         {
             var filters = RepoFactory.GroupFilter.GetAll();
-            var seasons = filters.Where(a => a.FilterType == (int) GroupFilterType.Season).ToList();
-            var tags = filters.Where(a => a.FilterType == (int) GroupFilterType.Tag).ToList();
+            var seasons = filters.Where(a => a.FilterType == (int)GroupFilterType.Season).ToList();
+            var tags = filters.Where(a => a.FilterType == (int)GroupFilterType.Tag).ToList();
 
             var tagsGrouping = tags.GroupBy(a => a.GroupFilterName).SelectMany(a => a.Skip(1)).ToList();
 
             tagsGrouping.ForEach(RepoFactory.GroupFilter.Delete);
 
-            tags = filters.Where(a => a.FilterType == (int) GroupFilterType.Tag).ToList();
+            tags = filters.Where(a => a.FilterType == (int)GroupFilterType.Tag).ToList();
 
             foreach (var filter in tags.Where(a => a.GroupConditions.Contains("`")))
             {
@@ -587,7 +587,7 @@ namespace Shoko.Server.Databases
                 if (filters.Count == 0) return;
                 foreach (SVR_GroupFilter gf in filters)
                 {
-                    if (gf.FilterType != (int) GroupFilterType.Year) continue;
+                    if (gf.FilterType != (int)GroupFilterType.Year) continue;
                     gf.CalculateGroupsAndSeries();
                     RepoFactory.GroupFilter.Save(gf);
                 }
@@ -674,19 +674,19 @@ namespace Shoko.Server.Databases
             {
                 foreach (SVR_GroupFilter gf in RepoFactory.GroupFilter.GetAll())
                 {
-                    if (gf.FilterType != (int) GroupFilterType.Tag) continue;
+                    if (gf.FilterType != (int)GroupFilterType.Tag) continue;
                     foreach (GroupFilterCondition gfc in gf.Conditions)
                     {
-                        if (gfc.ConditionType != (int) GroupFilterConditionType.Tag) continue;
-                        if (gfc.ConditionOperator == (int) GroupFilterOperator.Include)
+                        if (gfc.ConditionType != (int)GroupFilterConditionType.Tag) continue;
+                        if (gfc.ConditionOperator == (int)GroupFilterOperator.Include)
                         {
-                            gfc.ConditionOperator = (int) GroupFilterOperator.In;
+                            gfc.ConditionOperator = (int)GroupFilterOperator.In;
                             RepoFactory.GroupFilterCondition.Save(gfc);
                             continue;
                         }
-                        if (gfc.ConditionOperator == (int) GroupFilterOperator.Exclude)
+                        if (gfc.ConditionOperator == (int)GroupFilterOperator.Exclude)
                         {
-                            gfc.ConditionOperator = (int) GroupFilterOperator.NotIn;
+                            gfc.ConditionOperator = (int)GroupFilterOperator.NotIn;
                             RepoFactory.GroupFilterCondition.Save(gfc);
                         }
                     }
@@ -708,7 +708,7 @@ namespace Shoko.Server.Databases
                 if (filters.Count == 0) return;
                 foreach (SVR_GroupFilter gf in filters)
                 {
-                    if (gf.FilterType != (int) GroupFilterType.Tag) continue;
+                    if (gf.FilterType != (int)GroupFilterType.Tag) continue;
                     gf.ApplyToSeries = 1;
                     gf.CalculateGroupsAndSeries();
                     RepoFactory.GroupFilter.Save(gf);
@@ -729,7 +729,7 @@ namespace Shoko.Server.Databases
                 if (filters.Count == 0) return;
                 foreach (SVR_GroupFilter gf in filters)
                 {
-                    if (gf.FilterType != (int) GroupFilterType.Year) continue;
+                    if (gf.FilterType != (int)GroupFilterType.Year) continue;
                     gf.ApplyToSeries = 1;
                     gf.CalculateGroupsAndSeries();
                     RepoFactory.GroupFilter.Save(gf);

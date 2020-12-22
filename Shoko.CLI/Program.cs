@@ -28,7 +28,7 @@ namespace Shoko.CLI
                 break;
             }
 
-            var arguments = new ProgramArguments {Instance = instance};
+            var arguments = new ProgramArguments { Instance = instance };
             return CreateBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
@@ -54,7 +54,7 @@ namespace Shoko.CLI
             builder.ConfigureAppConfiguration((hostingContext, config) =>
             {
                 var env = hostingContext.HostingEnvironment;
-                
+
                 var reloadOnChange = hostingContext.Configuration.GetValue("hostBuilder:reloadConfigOnChange", defaultValue: true);
 
                 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: reloadOnChange)

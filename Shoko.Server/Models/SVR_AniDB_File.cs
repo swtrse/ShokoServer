@@ -421,7 +421,7 @@ namespace Shoko.Server.Models
                     CrossRef_File_Episode cross = new CrossRef_File_Episode
                     {
                         Hash = Hash,
-                        CrossRefSource = (int) CrossRefSource.AniDB,
+                        CrossRefSource = (int)CrossRefSource.AniDB,
                         AnimeID = AnimeID,
                         EpisodeID = epid,
                         Percentage = eppp,
@@ -497,7 +497,7 @@ namespace Shoko.Server.Models
                 case "french": return TitleLanguage.French;
                 case "german": return TitleLanguage.German;
                 case "greek (ancient)":
-                case "greek": 
+                case "greek":
                     return TitleLanguage.Greek;
                 case "hebrew": return TitleLanguage.Hebrew;
                 case "hungarian": return TitleLanguage.Hungarian;
@@ -508,7 +508,7 @@ namespace Shoko.Server.Models
                 case "latin": return TitleLanguage.Latin;
                 case "italian": return TitleLanguage.Italian;
                 case "korean": return TitleLanguage.Korean;
-                case "icelandic": 
+                case "icelandic":
                 case "norwegian": return TitleLanguage.Norwegian;
                 case "polish": return TitleLanguage.Polish;
                 case "portuguese": return TitleLanguage.Portuguese;
@@ -539,36 +539,36 @@ namespace Shoko.Server.Models
                     return TitleLanguage.Spanish;
                 default:
                     return TitleLanguage.Unknown;
-                // TODO these, a proper language class, idk I'm bored an this is tedious
-                /*
-                 croatian	hr	both	20	0
-                esperanto	eo	both	24	0
-                filipino	tl	both	26	0
-                filipino (tagalog)	tl	both	27	0
-                galician	gl	both	30	0
-                georgian	ka	both	31	0
-                haitian creole	ht	both	35	0
-                hindi	hi	both	37	0
-                icelandic	is	both	39	0
-                17	korean	ko	both	44	0
-                87	korean (transcription)	x-kot	written	45	0
-                69	latin	la	both	46	0
-                67	latvian	lv	both	47	0
-                35	lithuanian	lt	both	48	0
-                94	mongolian	mn	both	50	0
-                91	persian	fa	both	53	0
-                serbian	sr	both	59	0
-                slovak	sk	both	61	0
-                telugu	te	both	69	0
-                urdu	ur	written	74	0
-                */
+                    // TODO these, a proper language class, idk I'm bored an this is tedious
+                    /*
+                     croatian	hr	both	20	0
+                    esperanto	eo	both	24	0
+                    filipino	tl	both	26	0
+                    filipino (tagalog)	tl	both	27	0
+                    galician	gl	both	30	0
+                    georgian	ka	both	31	0
+                    haitian creole	ht	both	35	0
+                    hindi	hi	both	37	0
+                    icelandic	is	both	39	0
+                    17	korean	ko	both	44	0
+                    87	korean (transcription)	x-kot	written	45	0
+                    69	latin	la	both	46	0
+                    67	latvian	lv	both	47	0
+                    35	lithuanian	lt	both	48	0
+                    94	mongolian	mn	both	50	0
+                    91	persian	fa	both	53	0
+                    serbian	sr	both	59	0
+                    slovak	sk	both	61	0
+                    telugu	te	both	69	0
+                    urdu	ur	written	74	0
+                    */
             }
         }
 
         int IAniDBFile.AniDBFileID => FileID;
 
         IReleaseGroup IAniDBFile.ReleaseGroup => new AniDB_ReleaseGroup
-            {GroupName = Anime_GroupName, GroupNameShort = Anime_GroupNameShort};
+        { GroupName = Anime_GroupName, GroupNameShort = Anime_GroupNameShort };
 
         string IAniDBFile.Source => File_Source;
         string IAniDBFile.Description => File_Description;

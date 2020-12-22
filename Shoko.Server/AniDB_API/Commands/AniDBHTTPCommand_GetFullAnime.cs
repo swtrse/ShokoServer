@@ -120,11 +120,11 @@ namespace AniDBAPI.Commands
             {
                 logger.Trace("Trying to load Anime HTTP info from cache file...");
                 docAnime = APIUtils.LoadAnimeHTTPFromFile(animeID);
-                
+
 
                 if (docAnime == null && !CacheOnly)
                 {
-                    logger.Trace("No Anime HTTP info found in cache file for " + animeID +", loading from HTTP API");
+                    logger.Trace("No Anime HTTP info found in cache file for " + animeID + ", loading from HTTP API");
                     docAnime = AniDBHTTPHelper.GetAnimeXMLFromAPI(animeID);
                 }
             }

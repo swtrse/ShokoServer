@@ -142,11 +142,11 @@ namespace Shoko.Server.Repositories.Cached
                 {
                     var aniep = a.AniDB_Episode;
                     if (aniep?.GetFutureDated() != false) return false;
-                    if (aniep.EpisodeType != (int) EpisodeType.Episode &&
-                        aniep.EpisodeType != (int) EpisodeType.Special)
+                    if (aniep.EpisodeType != (int)EpisodeType.Episode &&
+                        aniep.EpisodeType != (int)EpisodeType.Special)
                         return false;
                     if (!includeSpecials &&
-                        aniep.EpisodeType == (int) EpisodeType.Special)
+                        aniep.EpisodeType == (int)EpisodeType.Special)
                         return false;
                     return a.GetVideoLocals().Count == 0;
                 })

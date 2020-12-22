@@ -204,7 +204,7 @@ namespace AniDBAPI
                 FileVersion = 1;
             else
             {
-                AniDBFileFlags eFlags = (AniDBFileFlags) state;
+                AniDBFileFlags eFlags = (AniDBFileFlags)state;
                 if (eFlags.HasFlag(AniDBFileFlags.FILE_ISV2)) FileVersion = 2;
                 if (eFlags.HasFlag(AniDBFileFlags.FILE_ISV3)) FileVersion = 3;
                 if (eFlags.HasFlag(AniDBFileFlags.FILE_ISV4)) FileVersion = 4;

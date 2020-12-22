@@ -15,7 +15,7 @@ namespace Shoko.Server.API
     {
         public static string ConstructImageLinkFromTypeAndId(HttpContext ctx, int type, int id, bool short_url = true)
         {
-            var imgType = (ImageEntityType) type;
+            var imgType = (ImageEntityType)type;
             return ProperURL(ctx,
                 $"/api/v3/image/{Image.GetSourceFromType(imgType)}/{Image.GetSimpleTypeFromImageType(imgType)}/{id}",
                 short_url);

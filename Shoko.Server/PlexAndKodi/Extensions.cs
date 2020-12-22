@@ -20,60 +20,60 @@ namespace Shoko.Server.PlexAndKodi
         public static string ConstructUnsortUrl(this IProvider prov, int userid)
         {
             return prov.ServerUrl(prov.ServicePort,
-                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int) JMMType.GroupUnsort + "/0");
+                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int)JMMType.GroupUnsort + "/0");
         }
 
         public static string ConstructGroupIdUrl(this IProvider prov, int userid, int gid)
         {
             return prov.ServerUrl(prov.ServicePort,
-                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int) JMMType.Group + "/" + gid );
+                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int)JMMType.Group + "/" + gid);
         }
 
         public static string ConstructSerieIdUrl(this IProvider prov, int userid, string sid)
         {
             return prov.ServerUrl(prov.ServicePort,
-                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int) JMMType.Serie + "/" + sid);
+                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int)JMMType.Serie + "/" + sid);
         }
 
         public static string ContructVideoUrl(this IProvider prov, int userid, int vid, JMMType type)
         {
             return prov.ServerUrl(prov.ServicePort,
-                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int) type + "/" + vid );
+                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int)type + "/" + vid);
         }
 
         public static string ConstructFilterIdUrl(this IProvider prov, int userid, int gfid)
         {
             return prov.ServerUrl(prov.ServicePort,
-                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int) JMMType.GroupFilter + "/" + gfid );
+                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int)JMMType.GroupFilter + "/" + gfid);
         }
 
         public static string ConstructFakeIosThumb(this IProvider prov, int userid, string thumburl, string arturl)
         {
             string r = Helper.Base64EncodeUrl(thumburl + "|" + arturl);
             return prov.ServerUrl(prov.ServicePort,
-                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int) JMMType.FakeIosThumb + "/" + r );
-/*
+                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int)JMMType.FakeIosThumb + "/" + r);
+            /*
 
-            try
-            {
+                        try
+                        {
 
-                if (API.Module.apiv1.Legacy.request.Url.ToString().Contains("/api/"))
-                {
-                    return Helper.ServerUrl(prov.ServicePort, "/api/Metadata/" + (int)JMMType.FakeIosThumb + "/" + r + "/0");
-                }
-                else
-                {
-                    return Helper.ServerUrl(prov.ServicePort, prov.ServiceAddress + "/Metadata/" + userid + "/" + (int)JMMType.FakeIosThumb + "/" + r + "/0");
-                }
-            }
-            catch { return Helper.ServerUrl(prov.ServicePort, prov.ServiceAddress + "/Metadata/" + userid + "/" + (int)JMMType.FakeIosThumb + "/" + r + "/0"); }
-            */
+                            if (API.Module.apiv1.Legacy.request.Url.ToString().Contains("/api/"))
+                            {
+                                return Helper.ServerUrl(prov.ServicePort, "/api/Metadata/" + (int)JMMType.FakeIosThumb + "/" + r + "/0");
+                            }
+                            else
+                            {
+                                return Helper.ServerUrl(prov.ServicePort, prov.ServiceAddress + "/Metadata/" + userid + "/" + (int)JMMType.FakeIosThumb + "/" + r + "/0");
+                            }
+                        }
+                        catch { return Helper.ServerUrl(prov.ServicePort, prov.ServiceAddress + "/Metadata/" + userid + "/" + (int)JMMType.FakeIosThumb + "/" + r + "/0"); }
+                        */
         }
 
         public static string ConstructFiltersUrl(this IProvider prov, int userid)
         {
             return prov.ServerUrl(prov.ServicePort,
-                prov.ServiceAddress + "/Filters/" + userid );
+                prov.ServiceAddress + "/Filters/" + userid);
         }
 
         public static string ConstructSearchUrl(this IProvider prov, string userid, int limit, string query,
@@ -94,27 +94,27 @@ namespace Shoko.Server.PlexAndKodi
         public static string ConstructPlaylistUrl(this IProvider prov, int userid)
         {
             return prov.ServerUrl(prov.ServicePort,
-                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int) JMMType.Playlist + "/0");
+                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int)JMMType.Playlist + "/0");
         }
 
         public static string ConstructPlaylistIdUrl(this IProvider prov, int userid, int pid)
         {
             return prov.ServerUrl(prov.ServicePort,
-                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int) JMMType.Playlist + "/" + pid);
+                prov.ServiceAddress + "/Metadata/" + userid + "/" + (int)JMMType.Playlist + "/" + pid);
         }
 
         public static string GenPoster(this ImageDetails im, IProvider prov, string fallbackimage = "plex_404V.png")
         {
             if ((im == null) || (im.ImageID == 0))
                 return prov.ConstructSupportImageLink(fallbackimage);
-            return prov.ConstructThumbLink((int) im.ImageType, im.ImageID);
+            return prov.ConstructThumbLink((int)im.ImageType, im.ImageID);
         }
 
         public static string GenArt(this ImageDetails im, IProvider prov)
         {
             if (im == null)
                 return null;
-            return prov.ConstructImageLink((int) im.ImageType, im.ImageID);
+            return prov.ConstructImageLink((int)im.ImageType, im.ImageID);
         }
 
         public static string GenPoster(this Metro_Anime_Episode im, IProvider prov,
@@ -137,7 +137,7 @@ namespace Shoko.Server.PlexAndKodi
         {
             if ((ep == null) || (ep.TvDB_EpisodeID == 0))
                 return prov.ConstructSupportImageLink("plex_404.png");
-            return prov.ConstructThumbLink((int) ImageEntityType.TvDB_Episode, ep.TvDB_EpisodeID);
+            return prov.ConstructThumbLink((int)ImageEntityType.TvDB_Episode, ep.TvDB_EpisodeID);
         }
 
         public static string GenArt(this CL_AniDB_Anime_DefaultImage im, IProvider prov)
@@ -167,12 +167,12 @@ namespace Shoko.Server.PlexAndKodi
 
         public static string ToUnixTime(this DateTime v)
         {
-            return ((long) v.Subtract(new DateTime(1970, 1, 1)).TotalSeconds).ToString(CultureInfo.InvariantCulture);
+            return ((long)v.Subtract(new DateTime(1970, 1, 1)).TotalSeconds).ToString(CultureInfo.InvariantCulture);
         }
 
         public static void GenerateKey(this Video v, IProvider prov, int userid)
         {
-            switch ((AnimeTypes) Enum.Parse(typeof(AnimeTypes),
+            switch ((AnimeTypes)Enum.Parse(typeof(AnimeTypes),
                 v.AnimeType, true))
             {
                 case AnimeTypes.AnimeGroup:

@@ -16,7 +16,7 @@ namespace Shoko.Server.Commands
         {
             AnimeID = animeID;
 
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
             GenerateCommandID();
         }
 
@@ -30,7 +30,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.Refresh,
-            extraParams = new[] {AnimeID.ToString()}
+            extraParams = new[] { AnimeID.ToString() }
         };
 
         public override void ProcessCommand()

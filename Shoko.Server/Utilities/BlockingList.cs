@@ -75,14 +75,14 @@ namespace Shoko.Server.Utilities
 
             _maxCap = capacity;
             _list = new List<T>(_maxCap);
-            _syncRoot = ((ICollection) _list).SyncRoot;
+            _syncRoot = ((ICollection)_list).SyncRoot;
         }
 
         public BlockingList()
         {
             _maxCap = int.MaxValue;
             _list = new List<T>();
-            _syncRoot = ((ICollection) _list).SyncRoot;
+            _syncRoot = ((ICollection)_list).SyncRoot;
         }
 
 
@@ -95,7 +95,8 @@ namespace Shoko.Server.Utilities
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             T item;
-            do {
+            do
+            {
                 item = GetNextItem();
                 if (null != item)
                     yield return item;
@@ -105,7 +106,7 @@ namespace Shoko.Server.Utilities
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable<T>) this).GetEnumerator();
+            return ((IEnumerable<T>)this).GetEnumerator();
         }
     }
 }

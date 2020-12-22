@@ -271,7 +271,7 @@ namespace Shoko.Server.Utilities
             {
                 List<NamingLanguage> lans = new List<NamingLanguage>();
 
-                string[] slans = ServerSettings.Instance.EpisodeLanguagePreference?.Split(',') ?? new string[] {};
+                string[] slans = ServerSettings.Instance.EpisodeLanguagePreference?.Split(',') ?? new string[] { };
 
                 foreach (string lan in slans)
                 {

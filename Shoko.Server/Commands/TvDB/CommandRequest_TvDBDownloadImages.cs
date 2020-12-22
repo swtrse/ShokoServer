@@ -20,7 +20,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.DownloadTvDBImages,
-            extraParams = new[] {TvDBSeriesID.ToString()}
+            extraParams = new[] { TvDBSeriesID.ToString() }
         };
 
 
@@ -33,7 +33,7 @@ namespace Shoko.Server.Commands
         {
             TvDBSeriesID = tvDBSeriesID;
             ForceRefresh = forced;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

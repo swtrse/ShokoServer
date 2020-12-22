@@ -25,7 +25,7 @@ namespace Shoko.Server.FileHelper
             if (obj == null || Utils.IsRunningOnLinuxOrMac())
                 obj = new MD4Managed();
 
-            return (MD4) obj;
+            return (MD4)obj;
         }
     }
 
@@ -82,12 +82,12 @@ namespace Shoko.Server.FileHelper
         protected override void HashCore(byte[] array, int ibStart, int cbSize)
         {
             /* Compute number of bytes mod 64 */
-            int index = (int) ((count[0] >> 3) & 0x3F);
+            int index = (int)((count[0] >> 3) & 0x3F);
             /* Update number of bits */
-            count[0] += (uint) (cbSize << 3);
+            count[0] += (uint)(cbSize << 3);
             if (count[0] < cbSize << 3)
                 count[1]++;
-            count[1] += (uint) (cbSize >> 29);
+            count[1] += (uint)(cbSize >> 29);
 
             int partLen = 64 - index;
             int i = 0;
@@ -120,7 +120,7 @@ namespace Shoko.Server.FileHelper
 
             /* Pad out to 56 mod 64. */
             uint index = (count[0] >> 3) & 0x3f;
-            int padLen = (int) (index < 56 ? 56 - index : 120 - index);
+            int padLen = (int)(index < 56 ? 56 - index : 120 - index);
             HashCore(Padding(padLen), 0, padLen);
 
             /* Append length (before padding) */
@@ -197,10 +197,10 @@ namespace Shoko.Server.FileHelper
         {
             for (int i = 0, j = 0; j < output.Length; i++, j += 4)
             {
-                output[j] = (byte) input[i];
-                output[j + 1] = (byte) (input[i] >> 8);
-                output[j + 2] = (byte) (input[i] >> 16);
-                output[j + 3] = (byte) (input[i] >> 24);
+                output[j] = (byte)input[i];
+                output[j + 1] = (byte)(input[i] >> 8);
+                output[j + 2] = (byte)(input[i] >> 16);
+                output[j + 3] = (byte)(input[i] >> 24);
             }
         }
 
@@ -208,7 +208,7 @@ namespace Shoko.Server.FileHelper
         {
             for (int i = 0, j = index; i < output.Length; i++, j += 4)
             {
-                output[i] = (uint) (input[j] | (input[j + 1] << 8) | (input[j + 2] << 16) | (input[j + 3] << 24));
+                output[i] = (uint)(input[j] | (input[j + 1] << 8) | (input[j + 2] << 16) | (input[j + 3] << 24));
             }
         }
 

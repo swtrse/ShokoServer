@@ -60,7 +60,7 @@ namespace AniDBAPI.Commands
             commandID = "MarkingFileDisk File: " + lid;
 
             commandText = "MYLISTADD lid=" + lid;
-            commandText += "&state=" + (int) AniDBFile_State.Disk;
+            commandText += "&state=" + (int)AniDBFile_State.Disk;
             commandText += "&edit=1";
         }
     }

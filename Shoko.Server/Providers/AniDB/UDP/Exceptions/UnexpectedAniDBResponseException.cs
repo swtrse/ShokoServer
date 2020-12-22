@@ -11,7 +11,7 @@ namespace Shoko.Server.Providers.AniDB.UDP.Exceptions
 
         public UnexpectedAniDBResponseException()
         {
-            
+
         }
 
         public UnexpectedAniDBResponseException(AniDBUDPReturnCode code, string response) : base(
@@ -20,7 +20,7 @@ namespace Shoko.Server.Providers.AniDB.UDP.Exceptions
             Response = response;
             ReturnCode = code;
         }
-        
+
         public UnexpectedAniDBResponseException(string message, AniDBUDPReturnCode code, string response) : base(
             $"Unexpected AniDB Response: {message} -- {code} | {response}")
         {

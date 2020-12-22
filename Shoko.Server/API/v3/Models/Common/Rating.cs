@@ -12,24 +12,24 @@ namespace Shoko.Server.API.v3.Models.Common
         /// </summary>
         [Required]
         public decimal Value { get; set; }
-        
+
         /// <summary>
         /// out of what? Assuming int, as the max should be
         /// </summary>
         [Required]
         public int MaxValue { get; set; }
-        
+
         /// <summary>
         /// AniDB, etc
         /// </summary>
         [Required]
         public string Source { get; set; }
-        
+
         /// <summary>
         /// number of votes
         /// </summary>
         public int Votes { get; set; }
-        
+
         /// <summary>
         /// for temporary vs permanent, or any other situations that may arise later
         /// </summary>

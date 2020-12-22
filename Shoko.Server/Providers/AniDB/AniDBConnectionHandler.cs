@@ -196,7 +196,7 @@ namespace Shoko.Server.Providers.AniDB
             set
             {
                 _waitingOnResponse = value;
-                WaitingOnResponseTime = value ? DateTime.Now : (DateTime?) null;
+                WaitingOnResponseTime = value ? DateTime.Now : (DateTime?)null;
                 AniDBStateUpdate?.Invoke(this, new AniDBStateUpdate
                 {
                     UpdateType = AniDBUpdateType.WaitingOnResponse,
@@ -254,7 +254,7 @@ namespace Shoko.Server.Providers.AniDB
             if (!BindToLocalPort()) IsNetworkAvailable = false;
             if (!BindToRemotePort()) IsNetworkAvailable = false;
 
-            _logoutTimer = new Timer {Interval = 5000, Enabled = true, AutoReset = true};
+            _logoutTimer = new Timer { Interval = 5000, Enabled = true, AutoReset = true };
             _logoutTimer.Elapsed += LogoutTimer_Elapsed;
 
             Logger.Info("starting logout timer...");
@@ -262,14 +262,16 @@ namespace Shoko.Server.Providers.AniDB
 
             _httpBanResetTimer = new Timer
             {
-                AutoReset = false, Interval = TimeSpan.FromHours(HTTPBanTimerResetLength).TotalMilliseconds
+                AutoReset = false,
+                Interval = TimeSpan.FromHours(HTTPBanTimerResetLength).TotalMilliseconds
             };
             _httpBanResetTimer.Elapsed += HTTPBanResetTimerElapsed;
 
 
             _udpBanResetTimer = new Timer
             {
-                AutoReset = false, Interval = TimeSpan.FromHours(UDPBanTimerResetLength).TotalMilliseconds
+                AutoReset = false,
+                Interval = TimeSpan.FromHours(UDPBanTimerResetLength).TotalMilliseconds
             };
             _udpBanResetTimer.Elapsed += UDPBanResetTimerElapsed;
         }
@@ -413,7 +415,9 @@ namespace Shoko.Server.Providers.AniDB
             {
                 RequestLogin login = new RequestLogin
                 {
-                    Username = userName, Password = password, UseUnicode = true
+                    Username = userName,
+                    Password = password,
+                    UseUnicode = true
                 };
                 // Never give Execute a null SessionID, except here
                 response = login.Execute(this);
@@ -464,7 +468,7 @@ namespace Shoko.Server.Providers.AniDB
 
             // Check Ban State
             // Ideally, this will never happen, as we stop the queue and attempt a graceful rollback of the command
-            if (IsUdpBanned) throw new UnexpectedAniDBResponseException {ReturnCode = AniDBUDPReturnCode.BANNED};
+            if (IsUdpBanned) throw new UnexpectedAniDBResponseException { ReturnCode = AniDBUDPReturnCode.BANNED };
             // TODO Low Priority: We need to handle Login Attempt Decay, so that we can try again if it's not just a bad user/pass
             // It wasn't handled before, and it's not caused serious problems
             if (IsInvalidSession) throw new NotLoggedInException();
@@ -519,7 +523,7 @@ namespace Shoko.Server.Providers.AniDB
                     inf.SetInput(input);
                     inf.Inflate(buff);
                     byReceivedAdd = buff;
-                    received = (int) inf.TotalOut;
+                    received = (int)inf.TotalOut;
                 }
             }
             catch (SocketException sex)
@@ -551,7 +555,7 @@ namespace Shoko.Server.Providers.AniDB
             // parts[0] => 200 FILE
             // parts[1] => Response
             // parts[2] => empty, since we ended with a newline
-            if (decodedParts.Length < 2) throw new UnexpectedAniDBResponseException {Response = decodedString};
+            if (decodedParts.Length < 2) throw new UnexpectedAniDBResponseException { Response = decodedString };
 
             if (truncated)
             {
@@ -572,13 +576,13 @@ namespace Shoko.Server.Providers.AniDB
             // If we don't have 2 parts of the first line, then it's not in the expected
             // 200 FILE
             // Format
-            if (firstLineParts.Length != 2) throw new UnexpectedAniDBResponseException {Response = decodedString};
+            if (firstLineParts.Length != 2) throw new UnexpectedAniDBResponseException { Response = decodedString };
 
             // Can't parse the code
             if (!int.TryParse(firstLineParts[0], out int code))
-                throw new UnexpectedAniDBResponseException {Response = decodedString};
+                throw new UnexpectedAniDBResponseException { Response = decodedString };
 
-            AniDBUDPReturnCode status = (AniDBUDPReturnCode) code;
+            AniDBUDPReturnCode status = (AniDBUDPReturnCode)code;
 
             // if we get banned pause the command processor for a while
             // so we don't make the ban worse
@@ -605,18 +609,18 @@ namespace Shoko.Server.Providers.AniDB
                 case AniDBUDPReturnCode.ANIDB_OUT_OF_SERVICE:
                 case AniDBUDPReturnCode.SERVER_BUSY:
                 case AniDBUDPReturnCode.TIMEOUT_DELAY_AND_RESUBMIT:
-                {
-                    var errorMessage = $"{(int) status} {status}";
+                    {
+                        var errorMessage = $"{(int)status} {status}";
 
-                    Logger.Trace("FORCING Logout because of invalid session");
-                    ExtendBanTimer(300, errorMessage);
-                    break;
-                }
+                        Logger.Trace("FORCING Logout because of invalid session");
+                        ExtendBanTimer(300, errorMessage);
+                        break;
+                    }
             }
 
-            return new UDPBaseResponse<string> {Code = status, Response = decodedParts[1].Trim()};
+            return new UDPBaseResponse<string> { Code = status, Response = decodedParts[1].Trim() };
         }
-        
+
         public static void ForceReconnection()
         {
             try
@@ -668,11 +672,11 @@ namespace Shoko.Server.Providers.AniDB
 
         public static byte[] GetBOM(Encoding enc)
         {
-            if (enc.Equals(Encoding.UTF7)) return new byte[] {0x2b, 0x2f, 0x76};
-            if (enc.Equals(Encoding.UTF8)) return new byte[] {0xef, 0xbb, 0xbf};
-            if (enc.Equals(Encoding.Unicode)) return new byte[] {0xff, 0xfe};
-            if (enc.Equals(Encoding.BigEndianUnicode)) return new byte[] {0xfe, 0xff};
-            if (enc.Equals(Encoding.UTF32)) return new byte[] {0x0, 0x0, 0xfe, 0xff};
+            if (enc.Equals(Encoding.UTF7)) return new byte[] { 0x2b, 0x2f, 0x76 };
+            if (enc.Equals(Encoding.UTF8)) return new byte[] { 0xef, 0xbb, 0xbf };
+            if (enc.Equals(Encoding.Unicode)) return new byte[] { 0xff, 0xfe };
+            if (enc.Equals(Encoding.BigEndianUnicode)) return new byte[] { 0xfe, 0xff };
+            if (enc.Equals(Encoding.UTF32)) return new byte[] { 0x0, 0x0, 0xfe, 0xff };
             return new byte[0];
         }
 

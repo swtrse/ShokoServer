@@ -11,7 +11,7 @@ namespace Shoko.Plugin.Abstractions.DataModels
         /// The Absolute Path of the file being moved or renamed.
         /// </summary>
         string FilePath { get; }
-        
+
         /// <summary>
         /// The size, in bytes, of the file.
         /// </summary>

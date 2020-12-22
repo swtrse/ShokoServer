@@ -19,7 +19,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.UpdateTraktData,
-            extraParams = new[] {TraktID}
+            extraParams = new[] { TraktID }
         };
 
         public CommandRequest_TraktUpdateInfo()
@@ -29,7 +29,7 @@ namespace Shoko.Server.Commands
         public CommandRequest_TraktUpdateInfo(string traktID)
         {
             TraktID = traktID;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

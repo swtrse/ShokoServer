@@ -32,7 +32,7 @@ namespace AniDBAPI
 
             bool result = int.TryParse(AniDBHTTPHelper.TryGetAttribute(node, "type"), out int typeInt);
             if (!result) return;
-            Type = (AniDB_ResourceLinkType) typeInt;
+            Type = (AniDB_ResourceLinkType)typeInt;
         }
     }
 }

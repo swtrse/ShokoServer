@@ -33,7 +33,7 @@ namespace Shoko.Server.Repositories.Direct
             {
                 var gfcs = session
                     .CreateCriteria(typeof(GroupFilterCondition))
-                    .Add(Restrictions.Eq("ConditionType", (int) ctype))
+                    .Add(Restrictions.Eq("ConditionType", (int)ctype))
                     .List<GroupFilterCondition>();
 
                 return new List<GroupFilterCondition>(gfcs);

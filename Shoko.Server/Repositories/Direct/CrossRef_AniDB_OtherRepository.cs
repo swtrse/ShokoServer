@@ -61,7 +61,7 @@ namespace Shoko.Server.Repositories.Direct
             CrossRef_AniDB_Other cr = session
                 .CreateCriteria(typeof(CrossRef_AniDB_Other))
                 .Add(Restrictions.Eq("AnimeID", animeID))
-                .Add(Restrictions.Eq("CrossRefType", (int) xrefType))
+                .Add(Restrictions.Eq("CrossRefType", (int)xrefType))
                 .UniqueResult<CrossRef_AniDB_Other>();
             return cr;
         }
@@ -72,7 +72,7 @@ namespace Shoko.Server.Repositories.Direct
             {
                 var xrefs = session
                     .CreateCriteria(typeof(CrossRef_AniDB_Other))
-                    .Add(Restrictions.Eq("CrossRefType", (int) xrefType))
+                    .Add(Restrictions.Eq("CrossRefType", (int)xrefType))
                     .List<CrossRef_AniDB_Other>();
 
                 return new List<CrossRef_AniDB_Other>(xrefs);

@@ -69,7 +69,7 @@ namespace Shoko.Server.Repositories.Cached
                     .AddEntity("tvdbBanner", typeof(TvDB_ImageWideBanner))
                     .SetParameterList("animeIds", animeIds)
                     .List<object[]>()
-                    .ToLookup(r => (int) r[0], r => (TvDB_ImageWideBanner) r[1]);
+                    .ToLookup(r => (int)r[0], r => (TvDB_ImageWideBanner)r[1]);
 
                 return bannersByAnime;
             }

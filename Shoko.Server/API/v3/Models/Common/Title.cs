@@ -14,7 +14,7 @@ namespace Shoko.Server.API.v3.Models.Common
         /// </summary>
         [Required]
         public string Name { get; set; }
-            
+
         /// <summary>
         /// convert to AniDB style (x-jat is the special one, but most are standard 3-digit short names)
         /// </summary>
@@ -25,7 +25,7 @@ namespace Shoko.Server.API.v3.Models.Common
         /// AniDB type
         /// </summary>
         public string Type { get; set; }
-            
+
         /// <summary>
         /// AniDB, TvDB, AniList, etc
         /// </summary>

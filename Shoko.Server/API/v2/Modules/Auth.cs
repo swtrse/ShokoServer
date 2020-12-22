@@ -13,7 +13,7 @@ namespace Shoko.Server.API.v2.Modules
     public class Auth : BaseController
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
-        
+
         /// <summary>
         /// Get an authentication token for the user.
         /// </summary>

@@ -42,19 +42,19 @@ namespace Shoko.Server
                 contract.HashQueueCount = ShokoService.CmdProcessorHasher.QueueCount;
                 contract.HashQueueState =
                     ShokoService.CmdProcessorHasher.QueueState.formatMessage(); //Deprecated since 3.6.0.0
-                contract.HashQueueStateId = (int) ShokoService.CmdProcessorHasher.QueueState.queueState;
+                contract.HashQueueStateId = (int)ShokoService.CmdProcessorHasher.QueueState.queueState;
                 contract.HashQueueStateParams = ShokoService.CmdProcessorHasher.QueueState.extraParams;
 
                 contract.GeneralQueueCount = ShokoService.CmdProcessorGeneral.QueueCount;
                 contract.GeneralQueueState =
                     ShokoService.CmdProcessorGeneral.QueueState.formatMessage(); //Deprecated since 3.6.0.0
-                contract.GeneralQueueStateId = (int) ShokoService.CmdProcessorGeneral.QueueState.queueState;
+                contract.GeneralQueueStateId = (int)ShokoService.CmdProcessorGeneral.QueueState.queueState;
                 contract.GeneralQueueStateParams = ShokoService.CmdProcessorGeneral.QueueState.extraParams;
 
                 contract.ImagesQueueCount = ShokoService.CmdProcessorImages.QueueCount;
                 contract.ImagesQueueState =
                     ShokoService.CmdProcessorImages.QueueState.formatMessage(); //Deprecated since 3.6.0.0
-                contract.ImagesQueueStateId = (int) ShokoService.CmdProcessorImages.QueueState.queueState;
+                contract.ImagesQueueStateId = (int)ShokoService.CmdProcessorImages.QueueState.queueState;
                 contract.ImagesQueueStateParams = ShokoService.CmdProcessorImages.QueueState.extraParams;
 
                 contract.IsBanned = ShokoService.AnidbProcessor.IsHttpBanned || ShokoService.AnidbProcessor.IsUdpBanned;
@@ -247,10 +247,10 @@ namespace Shoko.Server
             List<Metro_Anime_Summary> retAnime = new List<Metro_Anime_Summary>();
             try
             {
-                { 
+                {
                     SVR_JMMUser user = RepoFactory.JMMUser.GetByID(jmmuserID);
                     if (user == null) return retAnime;
-                    
+
                     var results = RepoFactory.VideoLocal.GetMostRecentlyAdded(maxRecords, jmmuserID)
                         .SelectMany(a => a.GetAnimeEpisodes()).GroupBy(a => a.AnimeSeriesID)
                         .Select(a => (a.Key, a.Max(b => b.DateTimeUpdated)));
@@ -292,7 +292,7 @@ namespace Shoko.Server
                                 summ.UnwatchedEpisodeCount = 0;
 
                             ImageDetails imgDet = anidb_anime.GetDefaultPosterDetailsNoBlanks();
-                            summ.ImageType = (int) imgDet.ImageType;
+                            summ.ImageType = (int)imgDet.ImageType;
                             summ.ImageID = imgDet.ImageID;
 
                             retAnime.Add(summ);
@@ -371,7 +371,7 @@ namespace Shoko.Server
                                 summ.UnwatchedEpisodeCount = 0;
 
                             ImageDetails imgDet = anidb_anime.GetDefaultPosterDetailsNoBlanks();
-                            summ.ImageType = (int) imgDet.ImageType;
+                            summ.ImageType = (int)imgDet.ImageType;
                             summ.ImageID = imgDet.ImageID;
 
                             retAnime.Add(summ);
@@ -414,7 +414,7 @@ namespace Shoko.Server
                     // if it already exists we can leave
                     foreach (SVR_GroupFilter gfTemp in lockedGFs)
                     {
-                        if (gfTemp.FilterType == (int) GroupFilterType.ContinueWatching)
+                        if (gfTemp.FilterType == (int)GroupFilterType.ContinueWatching)
                         {
                             gf = gfTemp;
                             break;
@@ -463,7 +463,7 @@ namespace Shoko.Server
                                 summ.UnwatchedEpisodeCount = 0;
 
                             ImageDetails imgDet = anidb_anime.GetDefaultPosterDetailsNoBlanks();
-                            summ.ImageType = (int) imgDet.ImageType;
+                            summ.ImageType = (int)imgDet.ImageType;
                             summ.ImageID = imgDet.ImageID;
 
                             retAnime.Add(summ);
@@ -527,7 +527,7 @@ namespace Shoko.Server
                     summ.PosterName = anidb_anime.GetDefaultPosterPathNoBlanks();
 
                     ImageDetails imgDet = anidb_anime.GetDefaultPosterDetailsNoBlanks();
-                    summ.ImageType = (int) imgDet.ImageType;
+                    summ.ImageType = (int)imgDet.ImageType;
                     summ.ImageID = imgDet.ImageID;
 
                     retAnime.Add(summ);
@@ -579,7 +579,7 @@ namespace Shoko.Server
                     summ.PosterName = anidb_anime.GetDefaultPosterPathNoBlanks();
 
                     ImageDetails imgDet = anidb_anime.GetDefaultPosterDetailsNoBlanks();
-                    summ.ImageType = (int) imgDet.ImageType;
+                    summ.ImageType = (int)imgDet.ImageType;
                     summ.ImageID = imgDet.ImageID;
 
                     retAnime.Add(summ);
@@ -622,13 +622,13 @@ namespace Shoko.Server
                 ret.EndYear = anime.EndYear;
 
                 ImageDetails imgDet = anime.GetDefaultPosterDetailsNoBlanks();
-                ret.PosterImageType = (int) imgDet.ImageType;
+                ret.PosterImageType = (int)imgDet.ImageType;
                 ret.PosterImageID = imgDet.ImageID;
 
                 ImageDetails imgDetFan = anime.GetDefaultFanartDetailsNoBlanks();
                 if (imgDetFan != null)
                 {
-                    ret.FanartImageType = (int) imgDetFan.ImageType;
+                    ret.FanartImageType = (int)imgDetFan.ImageType;
                     ret.FanartImageID = imgDetFan.ImageID;
                 }
                 else
@@ -693,8 +693,8 @@ namespace Shoko.Server
                         if (dictAniEps.ContainsKey(ep.AniDB_EpisodeID))
                         {
                             AniDB_Episode anidbep = dictAniEps[ep.AniDB_EpisodeID];
-                            if (anidbep.EpisodeType == (int) EpisodeType.Episode ||
-                                anidbep.EpisodeType == (int) EpisodeType.Special)
+                            if (anidbep.EpisodeType == (int)EpisodeType.Episode ||
+                                anidbep.EpisodeType == (int)EpisodeType.Special)
                             {
                                 SVR_AnimeEpisode_User userRecord = null;
                                 if (dictEpUsers.ContainsKey(ep.AnimeEpisodeID))
@@ -797,7 +797,7 @@ namespace Shoko.Server
                     PosterName = anime.GetDefaultPosterPathNoBlanks()
                 };
                 ImageDetails imgDet = anime.GetDefaultPosterDetailsNoBlanks();
-                summ.ImageType = (int) imgDet.ImageType;
+                summ.ImageType = (int)imgDet.ImageType;
                 summ.ImageID = imgDet.ImageID;
 
                 if (ser != null)
@@ -844,7 +844,7 @@ namespace Shoko.Server
                 contract.EpisodeName = tvep.EpisodeName;
                 contract.EpisodeOverview = tvep.Overview;
                 contract.ImageID = tvep.Id;
-                contract.ImageType = (int) ImageEntityType.TvDB_Episode;
+                contract.ImageType = (int)ImageEntityType.TvDB_Episode;
                 return;
             }
 
@@ -855,7 +855,7 @@ namespace Shoko.Server
                 contract.EpisodeName = tvep.EpisodeName;
                 contract.EpisodeOverview = tvep.Overview;
                 contract.ImageID = tvep.Id;
-                contract.ImageType = (int) ImageEntityType.TvDB_Episode;
+                contract.ImageType = (int)ImageEntityType.TvDB_Episode;
             }
         }
 
@@ -910,7 +910,7 @@ namespace Shoko.Server
 
                     if (cnt == maxRecords) break;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -952,7 +952,7 @@ namespace Shoko.Server
                     comment.CommentDate = sht.CreatedAtDate;
 
                     //shout.ImageURL = sht.user.avatar;
-                    comment.CommentType = (int) WhatPeopleAreSayingType.TraktComment;
+                    comment.CommentType = (int)WhatPeopleAreSayingType.TraktComment;
                     comment.Source = "Trakt";
 
                     cnt++;
@@ -961,7 +961,7 @@ namespace Shoko.Server
                     if (cnt == maxRecords) break;
                 }
                 comments = comments.OrderBy(a => a.CommentDate).ToList();
-                
+
             }
             catch (Exception ex)
             {
@@ -991,17 +991,17 @@ namespace Shoko.Server
 
                         ImageURL = string.Empty
                     };
-                    AniDBRecommendationType recType = (AniDBRecommendationType) rec.RecommendationType;
+                    AniDBRecommendationType recType = (AniDBRecommendationType)rec.RecommendationType;
                     switch (recType)
                     {
                         case AniDBRecommendationType.ForFans:
-                            shout.CommentType = (int) WhatPeopleAreSayingType.AniDBForFans;
+                            shout.CommentType = (int)WhatPeopleAreSayingType.AniDBForFans;
                             break;
                         case AniDBRecommendationType.MustSee:
-                            shout.CommentType = (int) WhatPeopleAreSayingType.AniDBMustSee;
+                            shout.CommentType = (int)WhatPeopleAreSayingType.AniDBMustSee;
                             break;
                         case AniDBRecommendationType.Recommended:
-                            shout.CommentType = (int) WhatPeopleAreSayingType.AniDBRecommendation;
+                            shout.CommentType = (int)WhatPeopleAreSayingType.AniDBRecommendation;
                             break;
                     }
 
@@ -1068,7 +1068,7 @@ namespace Shoko.Server
                         RelationshipType = link.RelationType
                     };
                     ImageDetails imgDet = animeLink.GetDefaultPosterDetailsNoBlanks();
-                    summ.ImageType = (int) imgDet.ImageType;
+                    summ.ImageType = (int)imgDet.ImageType;
                     summ.ImageID = imgDet.ImageID;
 
                     if (ser != null)
@@ -1113,7 +1113,7 @@ namespace Shoko.Server
                         RelationshipType = "Recommendation"
                     };
                     ImageDetails imgDet = animeLink.GetDefaultPosterDetailsNoBlanks();
-                    summ.ImageType = (int) imgDet.ImageType;
+                    summ.ImageType = (int)imgDet.ImageType;
                     summ.ImageID = imgDet.ImageID;
 
                     if (ser != null)
@@ -1142,8 +1142,8 @@ namespace Shoko.Server
             try
             {
                 SVR_AnimeEpisode ep = RepoFactory.AnimeEpisode.GetByID(episodeID);
-                return ep != null 
-                    ? ep.GetVideoDetailedContracts(userID) 
+                return ep != null
+                    ? ep.GetVideoDetailedContracts(userID)
                     : new List<CL_VideoDetailed>();
             }
             catch (Exception ex)

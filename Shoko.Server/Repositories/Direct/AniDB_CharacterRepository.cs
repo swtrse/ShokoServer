@@ -67,8 +67,8 @@ namespace Shoko.Server.Repositories.Direct
                 .AddScalar("CharType", NHibernateUtil.String)
                 .SetParameterList("animeIds", animeIds)
                 .List<object[]>()
-                .Select(r => new AnimeCharacterAndSeiyuu((int) r[0], (AniDB_Character) r[1], (AniDB_Seiyuu) r[2],
-                    (string) r[3]))
+                .Select(r => new AnimeCharacterAndSeiyuu((int)r[0], (AniDB_Character)r[1], (AniDB_Seiyuu)r[2],
+                    (string)r[3]))
                 .ToLookup(ac => ac.AnimeID);
 
             return animeChars;

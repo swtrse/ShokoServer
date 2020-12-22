@@ -45,7 +45,7 @@ namespace Shoko.Server.Models
         /// <summary>
         /// Duration in ms. (MediaInfo model has it in seconds
         /// </summary>
-        public long Duration => (long) (Media?.GeneralStream?.Duration * 1000 ?? 0);
+        public long Duration => (long)(Media?.GeneralStream?.Duration * 1000 ?? 0);
 
         public string VideoResolution => Media?.VideoStream == null ? "0x0" : $"{Media.VideoStream.Width}x{Media.VideoStream.Height}";
 
@@ -64,7 +64,7 @@ namespace Shoko.Server.Models
                 if (MediaVersion == MEDIA_VERSION && (_media?.GeneralStream?.Duration ?? 0) == 0 && MediaBlob != null &&
                     MediaBlob.Length > 0 && MediaSize > 0)
                     _media = CompressionHelper.DeserializeObject<MediaContainer>(MediaBlob, MediaSize,
-                        new JsonConverter[] {new StreamJsonConverter()});
+                        new JsonConverter[] { new StreamJsonConverter() });
                 return _media;
             }
             set
@@ -411,7 +411,7 @@ namespace Shoko.Server.Models
                 HashSource = HashSource,
                 IsIgnored = IsIgnored,
                 IsVariation = IsVariation,
-                Duration = (long) (Media?.GeneralStream.Duration ?? 0),
+                Duration = (long)(Media?.GeneralStream.Duration ?? 0),
                 MD5 = MD5,
                 SHA1 = SHA1,
                 VideoLocalID = VideoLocalID,

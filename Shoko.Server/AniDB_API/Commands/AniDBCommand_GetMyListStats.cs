@@ -47,10 +47,10 @@ namespace AniDBAPI.Commands
             switch (sMsgType)
             {
                 case "222":
-                {
-                    myListStats = new Raw_AniDB_MyListStats(socketResponse);
-                    return AniDBUDPResponseCode.GotMyListStats;
-                }
+                    {
+                        myListStats = new Raw_AniDB_MyListStats(socketResponse);
+                        return AniDBUDPResponseCode.GotMyListStats;
+                    }
                 case "501": return AniDBUDPResponseCode.LoginRequired;
             }
 

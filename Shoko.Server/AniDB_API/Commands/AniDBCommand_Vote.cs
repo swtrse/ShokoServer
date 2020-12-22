@@ -98,7 +98,7 @@ namespace AniDBAPI.Commands
                     return AniDBUDPResponseCode.VoteFound;
                 case "262": return AniDBUDPResponseCode.VoteUpdated;
                 case "263": return AniDBUDPResponseCode.VoteRevoked;
-                    
+
                 case "360": return AniDBUDPResponseCode.NoSuchVote;
                 case "361": return AniDBUDPResponseCode.InvalidVoteType;
                 case "362": return AniDBUDPResponseCode.InvalidVoteValue;
@@ -132,9 +132,9 @@ namespace AniDBAPI.Commands
             entityID = entityid;
             episodeNumber = -1;
             if (votevalue > 0)
-                voteValue = (int) (votevalue * 100);
+                voteValue = (int)(votevalue * 100);
             else
-                voteValue = (int) votevalue;
+                voteValue = (int)votevalue;
             voteType = votetype;
             episodeType = EpisodeType.Episode;
 
@@ -178,9 +178,9 @@ namespace AniDBAPI.Commands
             entityID = entityid;
             episodeNumber = epno;
             if (votevalue > 0)
-                voteValue = (int) (votevalue * 100);
+                voteValue = (int)(votevalue * 100);
             else
-                voteValue = (int) votevalue;
+                voteValue = (int)votevalue;
             voteType = AniDBVoteType.Episode;
             episodeType = epType;
 

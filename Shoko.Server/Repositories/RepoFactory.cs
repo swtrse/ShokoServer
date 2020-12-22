@@ -59,7 +59,7 @@ namespace Shoko.Server.Repositories
         public static ScanRepository Scan { get; } = new ScanRepository();
         public static ScanFileRepository ScanFile { get; } = new ScanFileRepository();
         public static AdhocRepository Adhoc { get; } = new AdhocRepository();
-        
+
         //Cached Ones
         // DECLARE THESE IN ORDER OF DEPENDENCY
         public static JMMUserRepository JMMUser { get; } = new JMMUserRepository();

@@ -100,7 +100,7 @@ namespace Shoko.Server.API.v2.Modules
                 return APIStatus.NotFound();
             name = Path.GetFileNameWithoutExtension(name);
             ResourceManager man = Resources.ResourceManager;
-            byte[] dta = (byte[]) man.GetObject(name);
+            byte[] dta = (byte[])man.GetObject(name);
             if ((dta == null) || (dta.Length == 0))
                 return APIStatus.NotFound();
             MemoryStream ms = new MemoryStream(dta);
@@ -123,7 +123,7 @@ namespace Shoko.Server.API.v2.Modules
 
             name = Path.GetFileNameWithoutExtension(name);
             ResourceManager man = Resources.ResourceManager;
-            byte[] dta = (byte[]) man.GetObject(name);
+            byte[] dta = (byte[])man.GetObject(name);
             if ((dta == null) || (dta.Length == 0))
                 return APIStatus.NotFound();
             MemoryStream ms = new MemoryStream(dta);
@@ -141,7 +141,7 @@ namespace Shoko.Server.API.v2.Modules
         /// <returns>string</returns>
         internal string GetImagePath(int type, int id)
         {
-            ImageEntityType imageType = (ImageEntityType) type;
+            ImageEntityType imageType = (ImageEntityType)type;
             string path;
 
             switch (imageType)
@@ -363,7 +363,7 @@ namespace Shoko.Server.API.v2.Modules
 
         private string GetRandomImagePath(int type)
         {
-            ImageEntityType imageType = (ImageEntityType) type;
+            ImageEntityType imageType = (ImageEntityType)type;
             string path;
 
             switch (imageType)
@@ -534,7 +534,7 @@ namespace Shoko.Server.API.v2.Modules
                     var character = RepoFactory.AniDB_Anime.GetAll()
                         .Where(a => a != null && !a.GetAllTags().Contains("18 restricted"))
                         .SelectMany(a => RepoFactory.CrossRef_Anime_Staff.GetByAnimeID(a.AnimeID))
-                        .Where(a => a.RoleType == (int) StaffRoleType.Seiyuu && a.RoleID.HasValue)
+                        .Where(a => a.RoleType == (int)StaffRoleType.Seiyuu && a.RoleID.HasValue)
                         .Select(a => RepoFactory.AnimeCharacter.GetByID(a.RoleID.Value)).GetRandomElement();
                     if (character == null)
                         return null;
@@ -629,8 +629,8 @@ namespace Shoko.Server.API.v2.Modules
                     calcheight = nheight;
             } while (nheight > im.Height + 0.5F);
 
-            int newwidth = (int) Math.Round(calcwidth);
-            int newheight = (int) Math.Round(calcheight);
+            int newwidth = (int)Math.Round(calcwidth);
+            int newheight = (int)Math.Round(calcheight);
             int x = 0;
             int y = 0;
             if (newwidth < im.Width)

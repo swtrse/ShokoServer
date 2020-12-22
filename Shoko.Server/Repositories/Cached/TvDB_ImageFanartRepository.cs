@@ -60,7 +60,7 @@ namespace Shoko.Server.Repositories.Cached
                     .AddEntity("tvdbFanart", typeof(TvDB_ImageFanart))
                     .SetParameterList("animeIds", animeIds)
                     .List<object[]>()
-                    .ToLookup(r => (int) r[0], r => (TvDB_ImageFanart) r[1]);
+                    .ToLookup(r => (int)r[0], r => (TvDB_ImageFanart)r[1]);
 
                 return fanartByAnime;
             }

@@ -20,7 +20,7 @@ namespace Shoko.Server.API.v3.Controllers
     [Authorize]
     public class ActionController : BaseController
     {
-        
+
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         #region Common Actions
@@ -34,7 +34,7 @@ namespace Shoko.Server.API.v3.Controllers
             ShokoServer.RunImport();
             return Ok();
         }
-        
+
         /// <summary>
         /// This was for web cache hash syncing, and will be for perceptual hashing maybe eventually.
         /// </summary>
@@ -69,7 +69,7 @@ namespace Shoko.Server.API.v3.Controllers
 
             return Ok();
         }
-        
+
         /// <summary>
         /// Remove Entries in the Shoko Database for Files that are no longer accessible
         /// </summary>
@@ -102,7 +102,7 @@ namespace Shoko.Server.API.v3.Controllers
             ShokoServer.Instance.DownloadAllImages();
             return Ok();
         }
-        
+
         /// <summary>
         /// Updates All MovieDB Info
         /// </summary>
@@ -137,10 +137,10 @@ namespace Shoko.Server.API.v3.Controllers
             new CommandRequest_ValidateAllImages().Save();
             return Ok();
         }
-        #endregion        
-        
+        #endregion
+
         #region Admin Actions
-        
+
         /// <summary>
         /// Gets files whose data does not match AniDB
         /// </summary>
@@ -152,7 +152,7 @@ namespace Shoko.Server.API.v3.Controllers
                 .ToDictionary(a => a, a => a.GetAniDBFile());
             Task.Factory.StartNew(() =>
             {
-                var list = allvids.Keys.Select(vid => new {vid, anidb = allvids[vid]})
+                var list = allvids.Keys.Select(vid => new { vid, anidb = allvids[vid] })
                     .Where(_tuple => _tuple.anidb != null)
                     .Where(_tuple => _tuple.anidb.IsDeprecated != 1)
                     .Where(_tuple => _tuple.vid.Media?.MenuStreams.Any() != (_tuple.anidb.IsChaptered == 1))
@@ -171,7 +171,7 @@ namespace Shoko.Server.API.v3.Controllers
 
             return Ok();
         }
-        
+
         /// <summary>
         /// This Downloads XML data from AniDB where there is none. This should only happen:
         /// A. If someone deleted or corrupted them.
@@ -218,7 +218,7 @@ namespace Shoko.Server.API.v3.Controllers
             }
             return APIStatus.OK();
         }
-        
+
         /// <summary>
         /// Regenerate All Episode Matchings for TvDB. Generally, don't do this unless there was an error that was fixed.
         /// In those cases, you'd be told to.
@@ -241,7 +241,7 @@ namespace Shoko.Server.API.v3.Controllers
 
             return APIStatus.OK();
         }
-        
+
         /// <summary>
         /// BEWARE this is a dangerous command!
         /// It syncs all of the states in Shoko's library to AniDB.
@@ -254,7 +254,7 @@ namespace Shoko.Server.API.v3.Controllers
             ShokoServer.SyncMyList();
             return Ok();
         }
-        
+
         /// <summary>
         /// Update All AniDB Series Info
         /// </summary>
@@ -276,7 +276,7 @@ namespace Shoko.Server.API.v3.Controllers
             ShokoServer.RefreshAllMediaInfo();
             return Ok();
         }
-        
+
         /// <summary>
         /// Queues commands to Update All Series Stats and Force a Recalculation of All Group Filters
         /// </summary>

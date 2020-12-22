@@ -6,6 +6,6 @@ namespace Shoko.Plugin.Abstractions
     /// </summary>
     public interface IPluginSettings
     {
-        
+
     }
 }

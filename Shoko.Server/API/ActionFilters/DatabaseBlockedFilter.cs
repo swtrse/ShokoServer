@@ -17,7 +17,7 @@ namespace Shoko.Server.API.ActionFilters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            
+
         }
     }
 }

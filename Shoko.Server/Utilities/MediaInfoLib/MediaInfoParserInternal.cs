@@ -120,7 +120,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
                 s.Language = lan;
             int brate = BiggerFromList(m.Get(StreamKind.Video, num, "BitRate"));
             if (brate != 0)
-                s.Bitrate = (int) Math.Round(brate / 1000F);
+                s.Bitrate = (int)Math.Round(brate / 1000F);
             string stype = m.Get(StreamKind.Video, num, "ScanType");
             if (!string.IsNullOrEmpty(stype))
                 s.ScanType = stype.ToLower();
@@ -168,7 +168,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
             string cabac = m.Get(StreamKind.Video, num, "Format_Settings_CABAC");
             if (!string.IsNullOrEmpty(cabac))
             {
-                s.Cabac = (byte) (cabac.ToLower(CultureInfo.InvariantCulture) == "yes" ? 1 : 0);
+                s.Cabac = (byte)(cabac.ToLower(CultureInfo.InvariantCulture) == "yes" ? 1 : 0);
             }
 
             if (s.Codec == "h264")
@@ -210,7 +210,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
             string qpel = m.Get(StreamKind.Video, num, "Format_Settings_QPel");
             if (!string.IsNullOrEmpty(qpel))
             {
-                s.QPel = (byte) (qpel.ToLower(CultureInfo.InvariantCulture) == "yes" ? 1 : 0);
+                s.QPel = (byte)(qpel.ToLower(CultureInfo.InvariantCulture) == "yes" ? 1 : 0);
             }
 
             string gmc = m.Get(StreamKind.Video, num, "Format_Settings_GMC");
@@ -252,7 +252,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
                 {
                     float width = s.Width;
                     width *= s.PA;
-                    s.PixelAspectRatio = (int) Math.Round(width) + ":" + s.Width;
+                    s.PixelAspectRatio = (int)Math.Round(width) + ":" + s.Width;
                 }
             }
 
@@ -287,7 +287,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
 
             int brate = BiggerFromList(m.Get(StreamKind.Audio, num, "BitRate"));
             if (brate != 0)
-                s.Bitrate = (int) Math.Round(brate / 1000F);
+                s.Bitrate = (int)Math.Round(brate / 1000F);
 
             byte bitdepth = m.GetByte(StreamKind.Audio, num, "BitDepth");
             if (bitdepth != 0)
@@ -327,10 +327,10 @@ namespace Shoko.Server.Utilities.MediaInfoLib
                 s.SamplingRate = pa;
             int channels = BiggerFromList(m.Get(StreamKind.Audio, num, "Channel(s)"));
             if (channels != 0)
-                s.Channels = (byte) channels;
+                s.Channels = (byte)channels;
             int channelso = BiggerFromList(m.Get(StreamKind.Audio, num, "Channel(s)_Original"));
             if (channelso != 0)
-                s.Channels = (byte) channelso;
+                s.Channels = (byte)channelso;
 
             string bitRateMode = m.Get(StreamKind.Audio, num, "BitRate_Mode");
             if (!string.IsNullOrEmpty(bitRateMode))
@@ -460,7 +460,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
                 p.Size = _mInstance.GetLong(StreamKind.General, 0, "FileSize");
 
                 int brate = _mInstance.GetInt(StreamKind.General, 0, "BitRate");
-                if (brate != 0) m.Bitrate = (int) Math.Round(brate / 1000F);
+                if (brate != 0) m.Bitrate = (int)Math.Round(brate / 1000F);
 
                 int chaptercount = _mInstance.GetInt(StreamKind.General, 0, "MenuCount");
                 m.Chaptered = chaptercount > 0;
@@ -501,7 +501,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
                                 if (s.FrameRate != 0)
                                 {
                                     float fr = System.Convert.ToSingle(s.FrameRate, CultureInfo.InvariantCulture);
-                                    string frs = ((int) Math.Round(fr)).ToString(CultureInfo.InvariantCulture);
+                                    string frs = ((int)Math.Round(fr)).ToString(CultureInfo.InvariantCulture);
                                     if (!string.IsNullOrEmpty(s.ScanType))
                                     {
                                         if (s.ScanType.ToLower().Contains("int"))
@@ -632,7 +632,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
                     }
                 }
 
-                m.Parts = new List<Part> {p};
+                m.Parts = new List<Part> { p };
                 bool over = false;
                 if (m.Container == "mkv")
                 {
@@ -653,7 +653,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
                     {
                         foreach (Stream s in streams)
                         {
-                            s.idx = (byte) (s.idx - val);
+                            s.idx = (byte)(s.idx - val);
                             s.Index = s.idx;
                         }
                     }
@@ -869,7 +869,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
             // not precise, but we are rounding and calculating distance anyway
             const double sixteenNine = 1.777778;
             const double fourThirds = 1.333333;
-            double ratio = (double) width / height;
+            double ratio = (double)width / height;
 
             if (Math.Sqrt((ratio - sixteenNine) * (ratio - sixteenNine)) <
                 Math.Sqrt((ratio - fourThirds) * (ratio - fourThirds)))

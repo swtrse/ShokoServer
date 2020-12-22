@@ -5,7 +5,7 @@ namespace Shoko.Server.Settings
 {
     public class ImportSettings
     {
-        
+
         public List<string> VideoExtensions { get; set; } = new List<string> { "MKV", "AVI", "MP4", "MOV", "OGM", "WMV", "MPG", "MPEG", "MK3D", "M4V" };
 
         public List<string> Exclude { get; set; } = new List<string> { @"[\\\/]\$RECYCLE\.BIN[\\\/]", @"[\\\/]\.Recycle\.Bin[\\\/]", @"[\\\/]\.Trash-\d+[\\\/]" };
@@ -33,7 +33,7 @@ namespace Shoko.Server.Settings
         public int FileLockWaitTimeMS { get; set; } = 4000;
 
         public int AggressiveFileLockWaitTimeSeconds { get; set; } = 8;
-        
+
         public bool RenameThenMove { get; set; }
 
         public string MediaInfoPath { get; set; }

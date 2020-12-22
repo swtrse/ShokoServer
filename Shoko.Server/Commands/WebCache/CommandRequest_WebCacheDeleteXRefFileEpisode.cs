@@ -19,7 +19,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.WebCacheDeleteXRefFileEpisode,
-            extraParams = new[] {Hash, EpisodeID.ToString()}
+            extraParams = new[] { Hash, EpisodeID.ToString() }
         };
 
         public CommandRequest_WebCacheDeleteXRefFileEpisode()
@@ -30,7 +30,7 @@ namespace Shoko.Server.Commands
         {
             Hash = hash;
             EpisodeID = aniDBEpisodeID;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

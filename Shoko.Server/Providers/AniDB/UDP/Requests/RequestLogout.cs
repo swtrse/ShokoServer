@@ -10,7 +10,7 @@ namespace Shoko.Server.Providers.AniDB.UDP.Requests
         protected override string BaseCommand => "LOGOUT";
         protected override UDPBaseResponse<Void> ParseResponse(AniDBUDPReturnCode code, string receivedData)
         {
-            return new UDPBaseResponse<Void> {Code = code};
+            return new UDPBaseResponse<Void> { Code = code };
         }
 
         protected override void PreExecute(string sessionID)

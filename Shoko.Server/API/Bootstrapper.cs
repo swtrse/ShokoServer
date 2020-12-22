@@ -156,7 +156,7 @@ namespace Shoko.Server.API
             pipelines.BeforeRequest += BeforeProcessing;
             pipelines.AfterRequest += AfterProcessing;
 
-            #region CORS Enable
+#region CORS Enable
 
             pipelines.AfterRequest.AddItemToEndOfPipeline((ctx) =>
             {
@@ -165,9 +165,9 @@ namespace Shoko.Server.API
                     .WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type, apikey");
             });
 
-            #endregion
+#endregion
 
-            #region Gzip compression
+#region Gzip compression
             pipelines.AfterRequest.AddItemToEndOfPipeline(ctx =>
             {
                 if (ctx.Request.Headers.AcceptEncoding.Any(x => x.Contains("gzip"))) return;
@@ -185,7 +185,7 @@ namespace Shoko.Server.API
                     }
                 };
             });
-            #endregion
+#endregion
 
         }
 

@@ -20,7 +20,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.ReadingMedia,
-            extraParams = new[] {VideoLocalID.ToString()}
+            extraParams = new[] { VideoLocalID.ToString() }
         };
 
         public CommandRequest_ReadMediaInfo()
@@ -30,7 +30,7 @@ namespace Shoko.Server.Commands
         public CommandRequest_ReadMediaInfo(int vidID)
         {
             VideoLocalID = vidID;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

@@ -49,7 +49,7 @@ namespace Shoko.Server.Repositories.Cached
                 return Cache.Values.Where(a => a.CloudID.HasValue && a.CloudID.Value == cloudid).ToList();
             }
         }
-        
+
         public SVR_ImportFolder SaveImportFolder(ImportFolder folder)
         {
             SVR_ImportFolder ns;
@@ -94,7 +94,7 @@ namespace Shoko.Server.Repositories.Cached
             ns.CloudID = folder.CloudID;
 
             Save(ns);
-            
+
             Utils.MainThreadDispatch(() => { ServerInfo.Instance.RefreshImportFolders(); });
             ShokoServer.StopWatchingFiles();
             ShokoServer.StartWatchingFiles();

@@ -104,8 +104,8 @@ namespace Shoko.Server
                 }
             } while (nheight > im.Height + 0.5F);
 
-            int newwidth = (int) Math.Round(calcwidth);
-            int newheight = (int) Math.Round(calcheight);
+            int newwidth = (int)Math.Round(calcwidth);
+            int newheight = (int)Math.Round(calcheight);
             int x = 0;
             int y = 0;
             if (newwidth < im.Width)
@@ -129,13 +129,13 @@ namespace Shoko.Server
         {
             if (string.IsNullOrEmpty(name))
                 return NotFound();
-            
+
             name = Path.GetFileNameWithoutExtension(name);
             ResourceManager man = Resources.ResourceManager;
-            byte[] dta = (byte[]) man.GetObject(name);
+            byte[] dta = (byte[])man.GetObject(name);
             if ((dta == null) || (dta.Length == 0))
                 return NotFound();
-            
+
             //Little hack
             MemoryStream ms = new MemoryStream(dta);
             ms.Seek(0, SeekOrigin.Begin);
@@ -144,7 +144,7 @@ namespace Shoko.Server
                 Response.ContentType = "image/png";
                 return ms;
             }
-            
+
             Image im = Image.FromStream(ms);
             float w = im.Width;
             float h = im.Height;
@@ -173,9 +173,9 @@ namespace Shoko.Server
                 else
                     nw = w;
             }
-            nw = (float) Math.Round(nw);
-            nh = (float) Math.Round(nh);
-            Image im2 = new Bitmap((int) nw, (int) nh, PixelFormat.Format32bppArgb);
+            nw = (float)Math.Round(nw);
+            nh = (float)Math.Round(nh);
+            Image im2 = new Bitmap((int)nw, (int)nh, PixelFormat.Format32bppArgb);
             using (Graphics g = Graphics.FromImage(im2))
             {
                 g.InterpolationMode = nw >= im.Width
@@ -185,7 +185,7 @@ namespace Shoko.Server
                 g.SmoothingMode = SmoothingMode.HighQuality;
                 g.Clear(Color.Transparent);
                 Rectangle src = new Rectangle(0, 0, im.Width, im.Height);
-                Rectangle dst = new Rectangle((int) ((nw - w) / 2), (int) ((nh - h) / 2), im.Width, im.Height);
+                Rectangle dst = new Rectangle((int)((nw - w) / 2), (int)((nh - h) / 2), im.Width, im.Height);
                 g.DrawImage(im, dst, src, GraphicsUnit.Pixel);
             }
             MemoryStream ms2 = new MemoryStream();
@@ -212,7 +212,7 @@ namespace Shoko.Server
         [HttpGet("Path/{imageId}/{imageType}/{thumnbnailOnly?}")]
         public string GetImagePath(int imageId, int imageType, bool? thumnbnailOnly)
         {
-            ImageEntityType it = (ImageEntityType) imageType;
+            ImageEntityType it = (ImageEntityType)imageType;
 
             switch (it)
             {
@@ -301,7 +301,7 @@ namespace Shoko.Server
                     {
                         return fanart.GetFullImagePath();
                     }
-                        
+
                     logger.Trace("Could not find TvDB_FanArt image: {0}", fanart.GetFullImagePath());
                     return string.Empty;
 

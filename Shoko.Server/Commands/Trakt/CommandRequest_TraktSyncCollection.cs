@@ -19,7 +19,7 @@ namespace Shoko.Server.Commands
 
         public override CommandRequestPriority DefaultPriority => CommandRequestPriority.Priority8;
 
-        public override QueueStateStruct PrettyDescription => new QueueStateStruct {queueState = QueueStateEnum.SyncTrakt, extraParams = new string[0]};
+        public override QueueStateStruct PrettyDescription => new QueueStateStruct { queueState = QueueStateEnum.SyncTrakt, extraParams = new string[0] };
 
         public CommandRequest_TraktSyncCollection()
         {
@@ -27,7 +27,7 @@ namespace Shoko.Server.Commands
 
         public CommandRequest_TraktSyncCollection(bool forced)
         {
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
             ForceRefresh = forced;
 
             GenerateCommandID();
@@ -42,7 +42,7 @@ namespace Shoko.Server.Commands
                 if (!ServerSettings.Instance.TraktTv.Enabled || string.IsNullOrEmpty(ServerSettings.Instance.TraktTv.AuthToken)) return;
 
                 ScheduledUpdate sched =
-                    RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.TraktSync);
+                    RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.TraktSync);
                 if (sched == null)
                 {
                     sched = new ScheduledUpdate

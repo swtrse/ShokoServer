@@ -95,7 +95,7 @@ namespace Shoko.Server.Repositories.Cached
                     lock (grp)
                     {
                         if (grp.AnimeGroupID == 0)
-                            //We are creating one, and we need the AnimeGroupID before Update the contracts
+                        //We are creating one, and we need the AnimeGroupID before Update the contracts
                         {
                             grp.Contract = null;
                             using (var transaction = session.BeginTransaction())

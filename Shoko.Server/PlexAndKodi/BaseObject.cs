@@ -94,7 +94,7 @@ namespace Shoko.Server.PlexAndKodi
                     return false;
                 }
             }
-            
+
             string nsize = prov.RequestHeader("X-Plex-Container-Size");
             if (nsize != null)
             {

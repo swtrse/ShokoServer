@@ -25,7 +25,7 @@ namespace Shoko.Server.API.v3.Models.Shoko
         /// IDs such as the group ID, default series, parent group, etc.
         /// </summary>
         public GroupIDs IDs { get; set; }
-        
+
         /// <summary>
         /// Marked as true when you rename a group to something custom. Different from using a default Series's name
         /// </summary>
@@ -33,7 +33,7 @@ namespace Shoko.Server.API.v3.Models.Shoko
 
         #region Constructors and Helper Methods
 
-        public Group() {}
+        public Group() { }
 
         public Group(HttpContext ctx, SVR_AnimeGroup grp)
         {
@@ -41,7 +41,7 @@ namespace Shoko.Server.API.v3.Models.Shoko
             var allSeries = grp.GetAllSeries(skipSorting: true);
             List<SVR_AnimeEpisode> ael = allSeries.SelectMany(a => a.GetAnimeEpisodes()).ToList();
 
-            IDs = new GroupIDs {ID = grp.AnimeGroupID};
+            IDs = new GroupIDs { ID = grp.AnimeGroupID };
             if (grp.DefaultAnimeSeriesID != null) IDs.DefaultSeries = grp.DefaultAnimeSeriesID.Value;
 
             Name = grp.GroupName;
@@ -72,7 +72,7 @@ namespace Shoko.Server.API.v3.Models.Shoko
             /// The ID of the Default Series, if it has one.
             /// </summary>
             public int DefaultSeries { get; set; }
-            
+
             /// <summary>
             /// Parent Group, if it has one
             /// </summary>
@@ -91,11 +91,11 @@ namespace Shoko.Server.API.v3.Models.Shoko
                     existingModel.GroupName = existingModel.SortName = Name;
                     existingModel.DateTimeUpdated = DateTime.Now;
                     if (IDs.DefaultSeries != 0) existingModel.DefaultAnimeSeriesID = IDs.DefaultSeries;
-                    if (IDs.ParentGroup != 0) existingModel.AnimeGroupParentID = IDs.ParentGroup;    
+                    if (IDs.ParentGroup != 0) existingModel.AnimeGroupParentID = IDs.ParentGroup;
 
                     return existingModel;
                 }
-                
+
                 SVR_AnimeGroup group = new SVR_AnimeGroup();
                 group.GroupName = group.SortName = Name;
                 group.DateTimeCreated = group.DateTimeUpdated = DateTime.Now;

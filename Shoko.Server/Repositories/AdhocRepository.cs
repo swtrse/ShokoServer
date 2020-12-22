@@ -215,7 +215,7 @@ namespace Shoko.Server.Repositories
                 .AddScalar("AnimeGroupID", NHibernateUtil.Int32)
                 .AddScalar("File_Source", NHibernateUtil.String)
                 .List<object[]>()
-                .ToLookup(r => (int) r[0], r => (string) r[1]);
+                .ToLookup(r => (int)r[0], r => (string)r[1]);
 
             return results;
         }

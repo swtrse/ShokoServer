@@ -19,11 +19,11 @@ namespace Shoko.Server.Repositories.Cached
             {
                 switch (cr.VoteType)
                 {
-                    case (int) AniDBVoteType.Anime:
-                    case (int) AniDBVoteType.AnimeTemp:
+                    case (int)AniDBVoteType.Anime:
+                    case (int)AniDBVoteType.AnimeTemp:
                         SVR_AniDB_Anime.UpdateStatsByAnimeID(cr.EntityID);
                         break;
-                    case (int) AniDBVoteType.Episode:
+                    case (int)AniDBVoteType.Episode:
                         SVR_AnimeEpisode ep = RepoFactory.AnimeEpisode.GetByID(cr.EntityID);
                         RepoFactory.AnimeEpisode.Save(ep);
                         break;
@@ -33,11 +33,11 @@ namespace Shoko.Server.Repositories.Cached
             {
                 switch (cr.VoteType)
                 {
-                    case (int) AniDBVoteType.Anime:
-                    case (int) AniDBVoteType.AnimeTemp:
+                    case (int)AniDBVoteType.Anime:
+                    case (int)AniDBVoteType.AnimeTemp:
                         SVR_AniDB_Anime.UpdateStatsByAnimeID(cr.EntityID);
                         break;
-                    case (int) AniDBVoteType.Episode:
+                    case (int)AniDBVoteType.Episode:
                         SVR_AnimeEpisode ep = RepoFactory.AnimeEpisode.GetByID(cr.EntityID);
                         RepoFactory.AnimeEpisode.Save(ep);
                         break;
@@ -49,7 +49,7 @@ namespace Shoko.Server.Repositories.Cached
         {
             lock (Cache)
             {
-                List<AniDB_Vote> cr = EntityIDs.GetMultiple(entID)?.Where(a => a.VoteType == (int) voteType).ToList();
+                List<AniDB_Vote> cr = EntityIDs.GetMultiple(entID)?.Where(a => a.VoteType == (int)voteType).ToList();
 
                 if (cr == null) return null;
                 if (cr.Count <= 1) return cr.FirstOrDefault();

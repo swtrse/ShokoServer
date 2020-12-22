@@ -86,7 +86,7 @@ namespace Shoko.Server.Databases
                     logger.Info("Waiting for database connection...");
                     Thread.Sleep(1000);
                 }
-                
+
                 if (!Instance.DatabaseAlreadyExists())
                 {
                     Instance.CreateDatabase();

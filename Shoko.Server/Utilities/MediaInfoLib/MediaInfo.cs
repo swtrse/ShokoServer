@@ -97,7 +97,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
                 string strOutput = pProcess.StandardOutput.ReadToEnd().Trim();
                 //Wait for process to finish
                 pProcess.WaitForExit();
-                
+
                 if (pProcess.ExitCode != 0 || !strOutput.StartsWith("{"))
                 {
                     // We have an error
@@ -106,14 +106,14 @@ namespace Shoko.Server.Utilities.MediaInfoLib
 
                     if (string.IsNullOrWhiteSpace(strOutput) || strOutput.EqualsInvariantIgnoreCase("null"))
                         strOutput = "No message";
-                    
+
                     logger.Error($"MediaInfo threw an error on {filename}: {strOutput}");
                     return null;
                 }
-                
+
                 // assuming json, as it starts with {
                 Media m = JsonConvert.DeserializeObject<Media>(strOutput,
-                    new JsonSerializerSettings {Culture = CultureInfo.InvariantCulture});
+                    new JsonSerializerSettings { Culture = CultureInfo.InvariantCulture });
                 return m;
             }
             catch (Exception e)
@@ -163,7 +163,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
             return appPath;
 
         }
-        
+
         private static Tuple<string, string> GetFilenameAndArgsForOS(string file)
         {
             // Windows: avdumpDestination --Auth=....
@@ -177,11 +177,11 @@ namespace Shoko.Server.Utilities.MediaInfoLib
             if (Utils.IsRunningOnMono())
             {
                 executable = "mono";
-                #if DEBUG
+#if DEBUG
                 args = $"--debug {WrapperPath} {args}";
-                #else
+#else
                 args = $"{WrapperPath} {args}";
-                #endif
+#endif
             }
 
             if (Utils.IsRunningOnLinuxOrMac())
@@ -208,7 +208,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
             {
                 m = mediaTask.Result;
             }
-            
+
             return m;
         }
     }

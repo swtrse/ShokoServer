@@ -27,7 +27,7 @@ namespace Shoko.Server.API.SignalR
             if (Target != null)
                 Target.LogEventHandler -= OnLog;
         }
-        
+
         public async void OnLog(LogEvent e)
         {
             await Hub.Clients.All.SendAsync(Target.LogMethodName, e);

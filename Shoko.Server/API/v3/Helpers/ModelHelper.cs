@@ -40,47 +40,47 @@ namespace Shoko.Server.API.v3.Helpers
                 switch (ep.EpisodeTypeEnum)
                 {
                     case EpisodeType.Episode:
-                    {
-                        eps++;
-                        if (local) localEps++;
-                        if (watched) watchedEps++;
-                        break;
-                    }
+                        {
+                            eps++;
+                            if (local) localEps++;
+                            if (watched) watchedEps++;
+                            break;
+                        }
                     case EpisodeType.Credits:
-                    {
-                        credits++;
-                        if (local) localCredits++;
-                        if (watched) watchedCredits++;
-                        break;
-                    }
+                        {
+                            credits++;
+                            if (local) localCredits++;
+                            if (watched) watchedCredits++;
+                            break;
+                        }
                     case EpisodeType.Special:
-                    {
-                        specials++;
-                        if (local) localSpecials++;
-                        if (watched) watchedSpecials++;
-                        break;
-                    }
+                        {
+                            specials++;
+                            if (local) localSpecials++;
+                            if (watched) watchedSpecials++;
+                            break;
+                        }
                     case EpisodeType.Trailer:
-                    {
-                        trailers++;
-                        if (local) localTrailers++;
-                        if (watched) watchedTrailers++;
-                        break;
-                    }
+                        {
+                            trailers++;
+                            if (local) localTrailers++;
+                            if (watched) watchedTrailers++;
+                            break;
+                        }
                     case EpisodeType.Parody:
-                    {
-                        parodies++;
-                        if (local) localParodies++;
-                        if (watched) watchedParodies++;
-                        break;
-                    }
+                        {
+                            parodies++;
+                            if (local) localParodies++;
+                            if (watched) watchedParodies++;
+                            break;
+                        }
                     case EpisodeType.Other:
-                    {
-                        others++;
-                        if (local) localOthers++;
-                        if (watched) watchedOthers++;
-                        break;
-                    }
+                        {
+                            others++;
+                            if (local) localOthers++;
+                            if (watched) watchedOthers++;
+                            break;
+                        }
                 }
             }
 

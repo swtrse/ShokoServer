@@ -68,7 +68,7 @@ namespace Shoko.Server.Commands
                 }
 
                 ICommandRequest icr = CommandHelper.GetCommand(crdb);
-                
+
                 if (icr == null)
                 {
                     Logger.Trace("No implementation found for command: {0}-{1}", crdb.CommandType, crdb.CommandID);

@@ -54,31 +54,31 @@ namespace Shoko.Server.API.SignalR
         {
             await StateChangedAsync("QueueStateChanged", "GeneralQueueState",
                 new QueueStateSignalRModel
-                    {State = e.QueueState.queueState, Description = e.QueueState.formatMessage()});
+                { State = e.QueueState.queueState, Description = e.QueueState.formatMessage() });
         }
 
         private async void OnHasherQueueStateChangedEvent(QueueStateEventArgs e)
         {
             await StateChangedAsync("QueueStateChanged", "HasherQueueState", new QueueStateSignalRModel
-                {State = e.QueueState.queueState, Description = e.QueueState.formatMessage()});
+            { State = e.QueueState.queueState, Description = e.QueueState.formatMessage() });
         }
 
         private async void OnImageQueueStateChangedEvent(QueueStateEventArgs e)
         {
             await StateChangedAsync("QueueStateChanged", "ImageQueueState", new QueueStateSignalRModel
-                {State = e.QueueState.queueState, Description = e.QueueState.formatMessage()});
+            { State = e.QueueState.queueState, Description = e.QueueState.formatMessage() });
         }
 
         private async void OnGeneralQueueCountChangedEvent(QueueCountEventArgs ev)
         {
             await StateChangedAsync("QueueCountChanged", "GeneralQueueCount", ev.QueueCount);
         }
-        
+
         private async void OnHasherQueueCountChangedEvent(QueueCountEventArgs ev)
         {
             await StateChangedAsync("QueueCountChanged", "HasherQueueCount", ev.QueueCount);
         }
-        
+
         private async void OnImageQueueCountChangedEvent(QueueCountEventArgs ev)
         {
             await StateChangedAsync("QueueCountChanged", "ImageQueueCount", ev.QueueCount);

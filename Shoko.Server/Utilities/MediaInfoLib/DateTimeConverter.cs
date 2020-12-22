@@ -9,7 +9,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
     public class DateTimeConverter : IsoDateTimeConverter
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
-        
+
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (!(reader.Value is string existingString)) return existingValue;
@@ -18,7 +18,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
                 existingString = existingString.Replace("UTC", "");
                 existingString = existingString.Replace("T", " ");
                 existingString = existingString.Replace("Z", "");
-                string[] strings = existingString.Split(new[] {" / "}, StringSplitOptions.RemoveEmptyEntries);
+                string[] strings = existingString.Split(new[] { " / " }, StringSplitOptions.RemoveEmptyEntries);
                 if (strings.Length == 1)
                 {
                     return string.IsNullOrEmpty(DateTimeFormat)
@@ -29,7 +29,7 @@ namespace Shoko.Server.Utilities.MediaInfoLib
                 if (strings.Length > 1)
                 {
                     // Return Min when we can't match a pattern, in the hopes that one matches.
-                    if(string.IsNullOrEmpty(DateTimeFormat))
+                    if (string.IsNullOrEmpty(DateTimeFormat))
                     {
                         DateTime result = strings.Max(a =>
                             DateTime.TryParse(a.Trim(), Culture, DateTimeStyles, out DateTime date)

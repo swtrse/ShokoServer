@@ -69,10 +69,10 @@ namespace Shoko.Server.Plex
                     return _mediaDevice;
                 _mediaDevice = GetPlexServers().FirstOrDefault(s => s.ClientIdentifier == ServerSettings.Instance.Plex.Server);
                 if (_mediaDevice != null)
-               {
-                   _lastMediaCacheTime = DateTime.Now;
-                   return _mediaDevice;
-               } 
+                {
+                    _lastMediaCacheTime = DateTime.Now;
+                    return _mediaDevice;
+                }
                 if (!ServerSettings.Instance.Plex.Server.Contains(':')) return null;
 
 
@@ -106,7 +106,7 @@ namespace Shoko.Server.Plex
                             {
                                 if (state.ShouldExitCurrentIteration) return;
                                 var (result, _) = RequestAsync($"{connection.Uri}/library/sections", HttpMethod.Get,
-                                        new Dictionary<string, string> {{"X-Plex-Token", ServerCache.AccessToken}})
+                                        new Dictionary<string, string> { { "X-Plex-Token", ServerCache.AccessToken } })
                                     .Result;
 
                                 if (result != HttpStatusCode.OK)
@@ -329,7 +329,7 @@ namespace Shoko.Server.Plex
             HttpMethod method = null)
         {
             return await RequestAsync($"{ConnectionCache.Uri}{path}", method ?? HttpMethod.Get,
-                    new Dictionary<string, string> {{"X-Plex-Token", ServerCache.AccessToken}})
+                    new Dictionary<string, string> { { "X-Plex-Token", ServerCache.AccessToken } })
                 .ConfigureAwait(false);
         }
 

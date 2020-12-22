@@ -38,7 +38,7 @@ namespace Shoko.Server.AniDB_API
         private readonly object lockAniDBConnections = new object();
 
         private static readonly int HTTPBanTimerResetLength = 12;
-        
+
         private static readonly int UDPBanTimerResetLength = 12;
 
         private IPEndPoint localIpEndPoint;
@@ -61,17 +61,19 @@ namespace Shoko.Server.AniDB_API
         public DateTime? HttpBanTime { get; set; }
         public DateTime? UdpBanTime { get; set; }
 
-        public string ImageServerUrl {
-            get {
+        public string ImageServerUrl
+        {
+            get
+            {
                 if (string.IsNullOrWhiteSpace(curImageServerUrl))
                 {
                     if (!Login())
                     {
                         //Don't keep trying after a failed login set to constant
                         curImageServerUrl = Constants.URLS.AniDB_Images_Domain;
-                    } 
+                    }
                     else
-                    {                        
+                    {
                         if (string.IsNullOrWhiteSpace(curImageServerUrl))
                         {
                             //The API call did not return anything useful, don't try again.
@@ -130,7 +132,7 @@ namespace Shoko.Server.AniDB_API
                         ServerInfo.Instance.IsBanned = false;
                         ServerInfo.Instance.BanOrigin = string.Empty;
                         ServerInfo.Instance.BanReason = string.Empty;
-                  }
+                    }
                 }
             }
         }
@@ -283,16 +285,20 @@ namespace Shoko.Server.AniDB_API
             logoutTimer?.Stop();
             logoutTimer = null;
             if (soUdp == null) return;
-            try{
+            try
+            {
                 soUdp.Shutdown(SocketShutdown.Both);
-                if (soUdp.Connected) {
+                if (soUdp.Connected)
+                {
                     soUdp.Disconnect(false);
                 }
             }
-            catch (SocketException ex) {
+            catch (SocketException ex)
+            {
                 logger.Error($"Failed to Shutdown and Disconnect the connection to AniDB: {ex}");
             }
-            finally {
+            finally
+            {
                 logger.Info("CLOSING ANIDB CONNECTION...");
                 soUdp.Close();
                 logger.Info("CLOSED ANIDB CONNECTION");
@@ -511,14 +517,14 @@ namespace Shoko.Server.AniDB_API
                 SetWaitingOnResponse(false);
                 switch (ev)
                 {
-                        case AniDBUDPResponseCode.Banned_555:
-                            logger.Error("Recieved ban on trying to get MyList stats for file");
-                            return;
-                        // Ignore no info in MyList for file
-                        case AniDBUDPResponseCode.NoSuchMyListFile: return;
-                        case AniDBUDPResponseCode.LoginRequired:
-                            logger.Error("Not logged in to AniDB");
-                            return;
+                    case AniDBUDPResponseCode.Banned_555:
+                        logger.Error("Recieved ban on trying to get MyList stats for file");
+                        return;
+                    // Ignore no info in MyList for file
+                    case AniDBUDPResponseCode.NoSuchMyListFile: return;
+                    case AniDBUDPResponseCode.LoginRequired:
+                        logger.Error("Not logged in to AniDB");
+                        return;
                 }
                 if (cmdGetFileStatus.MyListFile?.WatchedDate == null) return;
                 var aniFile = RepoFactory.AniDB_File.GetByFileID(aniDBFileID);
@@ -976,7 +982,7 @@ namespace Shoko.Server.AniDB_API
                     EntityID = cmdVote.EntityID
                 };
 
-                thisVote.VoteType = (int) cmdVote.VoteType;
+                thisVote.VoteType = (int)cmdVote.VoteType;
                 thisVote.VoteValue = cmdVote.VoteValue;
                 RepoFactory.AniDB_Vote.Save(thisVote);
             }

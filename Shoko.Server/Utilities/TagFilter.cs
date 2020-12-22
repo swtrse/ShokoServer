@@ -51,7 +51,7 @@ namespace Shoko.Server
             "ungrouped",
             "unsorted"
         };
-        
+
         public static readonly HashSet<string> TagBlacklistGenre = new HashSet<string>
         {
             // tags that generally define what a series is about or the theme of it
@@ -85,12 +85,12 @@ namespace Shoko.Server
             "school life",
             "science fiction",
             "seinen",
-            "shoujo", 
+            "shoujo",
             "shounen",
             "soft science fiction",
-            "speculative fiction", 
+            "speculative fiction",
             "sports",
-            "steampunk", 
+            "steampunk",
             "strategy",
             "superhero",
             "survival",
@@ -381,17 +381,17 @@ namespace Shoko.Server
         [Flags]
         public enum Filter : long
         {
-            None          = 0,
+            None = 0,
             AnidbInternal = 1 << 0,
-            ArtStyle      = 1 << 1,
-            Source        = 1 << 2,
-            Misc          = 1 << 3,
-            Plot          = 1 << 4,
-            Setting       = 1 << 5,
-            Programming   = 1 << 6,
-            Genre         = 1 << 7,
+            ArtStyle = 1 << 1,
+            Source = 1 << 2,
+            Misc = 1 << 3,
+            Plot = 1 << 4,
+            Setting = 1 << 5,
+            Programming = 1 << 6,
+            Genre = 1 << 7,
             // This should always be last, if we get that many categories, then we should redesign this
-            Invert        = 1 << 31,
+            Invert = 1 << 31,
         }
 
         /// <summary>
@@ -433,7 +433,7 @@ namespace Shoko.Server
                 }
                 else
                 {
-                    T newT = (T) Activator.CreateInstance(typeof(T), a);
+                    T newT = (T)Activator.CreateInstance(typeof(T), a);
                     tags.Add(newT);
                 }
             });
@@ -479,7 +479,8 @@ namespace Shoko.Server
                         {
                             toRemove.Add("present");
                         }
-                    } else if (a.Equals("alternative past"))
+                    }
+                    else if (a.Equals("alternative past"))
                     {
                         lock (toRemove)
                         {
@@ -549,12 +550,12 @@ namespace Shoko.Server
                 if (TagBlacklistSetting.Contains(tag)) return inverted ^ true;
                 if (tag.EndsWith("period")) return inverted ^ true;
             }
-            
+
             if (flags.HasFlag(Filter.Programming))
             {
                 if (TagBlacklistProgramming.Contains(tag)) return inverted ^ true;
             }
-            
+
             if (flags.HasFlag(Filter.Genre))
             {
                 if (TagBlacklistGenre.Contains(tag)) return inverted ^ true;

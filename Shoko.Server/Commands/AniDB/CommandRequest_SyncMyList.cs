@@ -26,7 +26,7 @@ namespace Shoko.Server.Commands
 
         public override CommandRequestPriority DefaultPriority => CommandRequestPriority.Priority7;
 
-        public override QueueStateStruct PrettyDescription => new QueueStateStruct {queueState = QueueStateEnum.SyncMyList, extraParams = new string[0]};
+        public override QueueStateStruct PrettyDescription => new QueueStateStruct { queueState = QueueStateEnum.SyncMyList, extraParams = new string[0] };
 
         public CommandRequest_SyncMyList()
         {
@@ -35,7 +35,7 @@ namespace Shoko.Server.Commands
         public CommandRequest_SyncMyList(bool forced)
         {
             ForceRefresh = forced;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }
@@ -48,7 +48,7 @@ namespace Shoko.Server.Commands
             {
                 // we will always assume that an anime was downloaded via http first
                 ScheduledUpdate sched =
-                    RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.AniDBMyListSync);
+                    RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.AniDBMyListSync);
                 if (sched == null)
                 {
                     sched = new ScheduledUpdate
@@ -110,7 +110,7 @@ namespace Shoko.Server.Commands
                             }
 
                             // Update file state if deleted
-                            if (file.State != (int) ServerSettings.Instance.AniDb.MyList_StorageState)
+                            if (file.State != (int)ServerSettings.Instance.AniDb.MyList_StorageState)
                             {
                                 int seconds = Commons.Utils.AniDB.GetAniDBDateAsSeconds(file.WatchedDate);
                                 CommandRequest_UpdateMyListFileStatus cmdUpdateFile =
@@ -160,7 +160,7 @@ namespace Shoko.Server.Commands
                                 RepoFactory.CrossRef_File_Episode.GetByEpisodeID(myitem.EpisodeID);
                             foreach (CrossRef_File_Episode xref in xrefs)
                             {
-                                if (xref.CrossRefSource == (int) CrossRefSource.AniDB) continue;
+                                if (xref.CrossRefSource == (int)CrossRefSource.AniDB) continue;
                                 hash = xref.Hash;
                                 break;
                             }

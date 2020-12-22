@@ -24,10 +24,10 @@ namespace Shoko.Server.Server
 
         internal static string GetCurrentLogFile()
         {
-            var fileTarget = (FileTarget) LogManager.Configuration.FindTargetByName("file");
+            var fileTarget = (FileTarget)LogManager.Configuration.FindTargetByName("file");
             return fileTarget == null
                 ? string.Empty
-                : Path.GetFullPath(fileTarget.FileName.Render(new LogEventInfo {Level = LogLevel.Info}));
+                : Path.GetFullPath(fileTarget.FileName.Render(new LogEventInfo { Level = LogLevel.Info }));
         }
 
         private string GetDirectory()

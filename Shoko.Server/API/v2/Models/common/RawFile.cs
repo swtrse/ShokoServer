@@ -17,7 +17,7 @@ namespace Shoko.Server.API.v2.Models.common
     public class RawFile : BaseDirectory
     {
         private Logger logger = LogManager.GetCurrentClassLogger();
-        
+
         public override string type => "file";
 
         [DataMember(IsRequired = false, EmitDefaultValue = false)]
@@ -100,12 +100,12 @@ namespace Shoko.Server.API.v2.Models.common
             [DataMember(IsRequired = false, EmitDefaultValue = false)]
             public int ep_id { get; set; }
 
-            public RecentFile() {}
+            public RecentFile() { }
 
             public RecentFile(HttpContext ctx, SVR_VideoLocal vl, int level, int uid, AnimeEpisode e = null) : base(ctx,
                 vl, level, uid, e)
             {
-                
+
             }
         }
 
@@ -248,17 +248,17 @@ namespace Shoko.Server.API.v2.Models.common
 
             public void AddAudio(Stream dict)
             {
-                audios.Add(audios.Count + 1, (Stream) dict.Clone());
+                audios.Add(audios.Count + 1, (Stream)dict.Clone());
             }
 
             public void AddVideo(Stream dict)
             {
-                videos.Add(videos.Count + 1, (Stream) dict.Clone());
+                videos.Add(videos.Count + 1, (Stream)dict.Clone());
             }
 
             public void AddSubtitle(Stream dict)
             {
-                subtitles.Add(subtitles.Count + 1, (Stream) dict.Clone());
+                subtitles.Add(subtitles.Count + 1, (Stream)dict.Clone());
             }
 
             public void AddMenu(Dictionary<string, string> dict)

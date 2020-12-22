@@ -126,7 +126,7 @@ namespace Shoko.Server.Utilities
                 //Cleanup previous
                 try
                 {
-                    BatchFileStream.CleanUpDefaultPortsInNetSh(new[] {int.Parse(OldPort), int.Parse(OldFilePort)});
+                    BatchFileStream.CleanUpDefaultPortsInNetSh(new[] { int.Parse(OldPort), int.Parse(OldFilePort) });
                     BatchFileStream.WriteLine(
                         "netsh advfirewall firewall delete rule name=\"JMM Server - Client Port\"");
                     BatchFileStream.WriteLine("netsh advfirewall firewall delete rule name=\"JMM Server - File Port\"");
@@ -330,8 +330,8 @@ namespace Shoko.Server.Utilities
             public string Message { get; internal set; }
 
             public string Title { get; internal set; }
-            
-            public bool IsError { get; internal set; }=true;
+
+            public bool IsError { get; internal set; } = true;
         }
 
         public class CancelReasonEventArgs : CancelEventArgs
@@ -345,7 +345,7 @@ namespace Shoko.Server.Utilities
             public string Reason { get; }
             public string FormTitle { get; }
         }
-        
+
         public static event EventHandler<ErrorEventArgs> ErrorMessage;
         public static event EventHandler<CancelReasonEventArgs> YesNoRequired;
 
@@ -357,8 +357,8 @@ namespace Shoko.Server.Utilities
 
         public static void DoEvents()
         {
-  
-            OnEvents?.Invoke(null,null);
+
+            OnEvents?.Invoke(null, null);
         }
 
         public static void MainThreadDispatch(Action a)
@@ -380,7 +380,7 @@ namespace Shoko.Server.Utilities
         public static void ShowErrorMessage(Exception ex)
         {
             //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            ErrorMessage?.Invoke(null, new ErrorEventArgs {Message = ex.Message});
+            ErrorMessage?.Invoke(null, new ErrorEventArgs { Message = ex.Message });
             logger.Error(ex, ex.ToString());
         }
 
@@ -394,17 +394,17 @@ namespace Shoko.Server.Utilities
         public static void ShowErrorMessage(string title, string msg)
         {
             //MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            ErrorMessage?.Invoke(null, new ErrorEventArgs { Message = msg , Title=title });
+            ErrorMessage?.Invoke(null, new ErrorEventArgs { Message = msg, Title = title });
             logger.Error(msg);
         }
 
         public static void ShowMessage(string title, string msg)
         {
             //MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            ErrorMessage?.Invoke(null, new ErrorEventArgs { Message = msg, Title = title, IsError=false});
+            ErrorMessage?.Invoke(null, new ErrorEventArgs { Message = msg, Title = title, IsError = false });
             logger.Error(msg);
         }
-        
+
         public static string GetApplicationVersion(Assembly a)
         {
             return a.GetName().Version.ToString();
@@ -413,7 +413,7 @@ namespace Shoko.Server.Utilities
         public static string GetApplicationExtraVersion(Assembly a)
         {
             AssemblyInformationalVersionAttribute version =
-                (AssemblyInformationalVersionAttribute) a.GetCustomAttribute(
+                (AssemblyInformationalVersionAttribute)a.GetCustomAttribute(
                     typeof(AssemblyInformationalVersionAttribute));
             if (version == null)
             {
@@ -436,10 +436,10 @@ namespace Shoko.Server.Utilities
         {
             DateTime dt = DateTime.Now.ToUniversalTime();
             TimeSpan sp = dt.Subtract(new DateTime(1970, 1, 1, 0, 0, 0));
-            return (long) sp.TotalSeconds;
+            return (long)sp.TotalSeconds;
         }
 
-        private static string[] escapes = {"SOURCE", "TAKEN", "FROM", "HTTP", "ANN", "ANIMENFO", "ANIDB", "ANIMESUKI"};
+        private static string[] escapes = { "SOURCE", "TAKEN", "FROM", "HTTP", "ANN", "ANIMENFO", "ANIDB", "ANIMESUKI" };
 
         public static string ReparseDescription(string description)
         {
@@ -1033,7 +1033,7 @@ namespace Shoko.Server.Utilities
                 }
 
                 proc.Start();
-                ServerSettings.DoServerShutdown(new ServerSettings.ReasonedEventArgs());         
+                ServerSettings.DoServerShutdown(new ServerSettings.ReasonedEventArgs());
                 Environment.Exit(0);
             }
             catch (Exception ex)

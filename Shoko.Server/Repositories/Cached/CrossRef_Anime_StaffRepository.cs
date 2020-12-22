@@ -29,7 +29,7 @@ namespace Shoko.Server.Repositories.Cached
             AnimeIDs = new PocoIndex<int, CrossRef_Anime_Staff, int>(Cache, a => a.AniDB_AnimeID);
             StaffIDs = new PocoIndex<int, CrossRef_Anime_Staff, int>(Cache, a => a.StaffID);
             RoleIDs = new PocoIndex<int, CrossRef_Anime_Staff, int?>(Cache, a => a.RoleID);
-            RoleTypes = new PocoIndex<int, CrossRef_Anime_Staff, StaffRoleType>(Cache, a => (StaffRoleType) a.RoleType);
+            RoleTypes = new PocoIndex<int, CrossRef_Anime_Staff, StaffRoleType>(Cache, a => (StaffRoleType)a.RoleType);
         }
 
         public override void RegenerateDb()
@@ -90,7 +90,7 @@ namespace Shoko.Server.Repositories.Cached
         {
             lock (Cache)
             {
-                return AnimeIDs.GetMultiple(id).Where(xref => xref.RoleType == (int) type).ToList();
+                return AnimeIDs.GetMultiple(id).Where(xref => xref.RoleType == (int)type).ToList();
             }
         }
 
@@ -99,7 +99,7 @@ namespace Shoko.Server.Repositories.Cached
             lock (Cache)
             {
                 return AnimeIDs.GetMultiple(AnimeID).FirstOrDefault(a =>
-                    a.RoleID == RoleID && a.StaffID == StaffID && a.RoleType == (int) RoleType);
+                    a.RoleID == RoleID && a.StaffID == StaffID && a.RoleType == (int)RoleType);
             }
         }
     }

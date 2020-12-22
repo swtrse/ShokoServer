@@ -19,7 +19,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.WebCacheSendXRefFileEpisode,
-            extraParams = new[] {CrossRef_File_EpisodeID.ToString()}
+            extraParams = new[] { CrossRef_File_EpisodeID.ToString() }
         };
 
         public CommandRequest_WebCacheSendXRefFileEpisode()
@@ -29,7 +29,7 @@ namespace Shoko.Server.Commands
         public CommandRequest_WebCacheSendXRefFileEpisode(int crossRef_File_EpisodeID)
         {
             CrossRef_File_EpisodeID = crossRef_File_EpisodeID;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

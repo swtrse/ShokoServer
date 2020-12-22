@@ -430,7 +430,7 @@ namespace Shoko.Server.API.v2.Modules
                     name = para.query,
                     series = new List<Serie>()
                 };
-                search_group.series = Search(query, para.limit, para.limit_tag, (int) para.offset,
+                search_group.series = Search(query, para.limit, para.limit_tag, (int)para.offset,
                     para.tags, user.JMMUserID, para.nocast != 0, para.notag != 0, para.level, para.all != 0,
                     para.fuzzy != 0, para.allpics != 0, para.pic, para.tagfilter).Value.ToList();
                 search_group.size = search_group.series.Count();
@@ -469,7 +469,7 @@ namespace Shoko.Server.API.v2.Modules
                     name = para.query,
                     series = new List<Serie>()
                 };
-                search_group.series = (List<Serie>) (StartsWith(query, para.limit, user.JMMUserID, para.nocast != 0,
+                search_group.series = (List<Serie>)(StartsWith(query, para.limit, user.JMMUserID, para.nocast != 0,
                     para.notag != 0, para.level, para.all != 0, para.allpics != 0, para.pic, para.tagfilter));
                 search_group.size = search_group.series.Count();
                 search_filter.groups.Add(search_group);
@@ -489,7 +489,7 @@ namespace Shoko.Server.API.v2.Modules
         public ActionResult<Dictionary<string, string>> Ping()
         {
             // No need to check for user or anything. It won't get here if the user is invalid.
-            var x = new Dictionary<string, string> {["response"] = "pong"};
+            var x = new Dictionary<string, string> { ["response"] = "pong" };
 
             return x;
         }
@@ -505,7 +505,7 @@ namespace Shoko.Server.API.v2.Modules
         public ActionResult<Dictionary<string, QueueInfo>> GetQueue()
         {
             Dictionary<string, QueueInfo> queues = new Dictionary<string, QueueInfo>();
-            queues.Add("hasher",  GetHasherQueue().Value);
+            queues.Add("hasher", GetHasherQueue().Value);
             queues.Add("general", GetGeneralQueue().Value);
             queues.Add("images", GetImagesQueue().Value);
             return queues;
@@ -734,7 +734,7 @@ namespace Shoko.Server.API.v2.Modules
         {
             JMMUser user = HttpContext.GetUser();
 
-            return id == 0 
+            return id == 0
                 ? GetAllFiles(limit, level, user.JMMUserID)
                 : GetFileById(id, level, user.JMMUserID);
         }
@@ -750,7 +750,7 @@ namespace Shoko.Server.API.v2.Modules
 
             var allvids = RepoFactory.VideoLocal.GetAll().Where(vid => !vid.IsEmpty() && vid.Media != null)
                 .ToDictionary(a => a, a => a.GetAniDBFile());
-            return allvids.Keys.Select(vid => new {vid, anidb = allvids[vid]})
+            return allvids.Keys.Select(vid => new { vid, anidb = allvids[vid] })
                 .Where(_tuple => _tuple.anidb != null)
                 .Where(_tuple => _tuple.anidb.IsDeprecated != 1)
                 .Where(_tuple => _tuple.vid.Media?.MenuStreams.Any() != (_tuple.anidb.IsChaptered == 1))
@@ -769,7 +769,7 @@ namespace Shoko.Server.API.v2.Modules
             Logger logger = LogManager.GetCurrentClassLogger();
             Task.Factory.StartNew(() =>
             {
-                var list = allvids.Keys.Select(vid => new {vid, anidb = allvids[vid]})
+                var list = allvids.Keys.Select(vid => new { vid, anidb = allvids[vid] })
                     .Where(_tuple => _tuple.anidb != null)
                     .Where(_tuple => _tuple.anidb.IsDeprecated != 1)
                     .Where(_tuple => _tuple.vid.Media?.MenuStreams.Any() != (_tuple.anidb.IsChaptered == 1))
@@ -813,11 +813,11 @@ namespace Shoko.Server.API.v2.Modules
             JMMUser user = HttpContext.GetUser();
 
             int userID = user.JMMUserID;
-            Dictionary<int,Serie> results = new Dictionary<int, Serie>();
+            Dictionary<int, Serie> results = new Dictionary<int, Serie>();
             try
             {
                 List<SVR_AnimeEpisode> list = RepoFactory.AnimeEpisode.GetEpisodesWithMultipleFiles(true).ToList();
-                foreach(SVR_AnimeEpisode ep in list)
+                foreach (SVR_AnimeEpisode ep in list)
                 {
                     Serie serie = null;
                     SVR_AnimeSeries series = ep?.GetAnimeSeries();
@@ -1059,7 +1059,7 @@ namespace Shoko.Server.API.v2.Modules
                     ep.ToggleWatchedStatus(status, true, DateTime.Now, false, uid, true);
                     ep.GetAnimeSeries()?.UpdateStats(true, false, true);
                 }
-                
+
                 return Ok();
             }
             catch (Exception ex)
@@ -1085,7 +1085,7 @@ namespace Shoko.Server.API.v2.Modules
 
             if (para.id == 0)
             {
-                return GetAllEpisodes(user.JMMUserID, para.limit, (int) para.offset, para.level, para.all != 0, para.pic);
+                return GetAllEpisodes(user.JMMUserID, para.limit, (int)para.offset, para.level, para.all != 0, para.pic);
             }
             return GetEpisodeById(para.id, user.JMMUserID, para.level, para.pic);
         }
@@ -1119,7 +1119,7 @@ namespace Shoko.Server.API.v2.Modules
             if (string.IsNullOrEmpty(hash)) return BadRequest("missing 'hash'");
 
             List<SVR_AnimeEpisode> list_aep = RepoFactory.AnimeEpisode.GetByHash(hash);
-            
+
             switch (list_aep.Count)
             {
                 case 1:
@@ -1482,7 +1482,7 @@ namespace Shoko.Server.API.v2.Modules
         {
             if (para.id == 0)
             {
-                return GetAllSeries(para.nocast != 0, para.limit, (int) para.offset, para.notag != 0, para.level,
+                return GetAllSeries(para.nocast != 0, para.limit, (int)para.offset, para.notag != 0, para.level,
                     para.all != 0, para.allpics != 0, para.pic, para.tagfilter);
             }
             return GetSerieById(para.id, para.nocast != 0, para.notag != 0, para.level, para.all != 0, para.allpics != 0, para.pic, para.tagfilter);
@@ -1809,7 +1809,7 @@ namespace Shoko.Server.API.v2.Modules
             }
             if (!string.IsNullOrEmpty(para.query))
             {
-                return Search(HttpUtility.UrlDecode(para.query), para.limit, para.limit_tag, (int) para.offset, para.tags, user.JMMUserID,
+                return Search(HttpUtility.UrlDecode(para.query), para.limit, para.limit_tag, (int)para.offset, para.tags, user.JMMUserID,
                     para.nocast != 0, para.notag != 0, para.level, para.all != 0, para.fuzzy != 0, para.allpics != 0, para.pic, para.tagfilter);
             }
             return BadRequest("missing 'query'");
@@ -1831,7 +1831,7 @@ namespace Shoko.Server.API.v2.Modules
             }
             if (!string.IsNullOrEmpty(para.query))
             {
-                return Search(HttpUtility.UrlDecode(para.query), para.limit, para.limit_tag, (int) para.offset, 1, user.JMMUserID,
+                return Search(HttpUtility.UrlDecode(para.query), para.limit, para.limit_tag, (int)para.offset, 1, user.JMMUserID,
                     para.nocast != 0,
                     para.notag != 0, para.level, para.all != 0, para.fuzzy != 0, para.allpics != 0, para.pic, para.tagfilter);
             }
@@ -2001,7 +2001,7 @@ namespace Shoko.Server.API.v2.Modules
                             filesize = vl.FileSize,
                             name = series.GetSeriesName(),
                             size = 1,
-                            paths = new List<string> {path}
+                            paths = new List<string> { path }
                         };
                         output.Add(series.AnimeSeriesID, ser);
 
@@ -2065,7 +2065,7 @@ namespace Shoko.Server.API.v2.Modules
                         }
                     }
                 }
-                
+
                 if (allseries.Count >= limit)
                 {
                     break;
@@ -2347,8 +2347,8 @@ namespace Shoko.Server.API.v2.Modules
             SVR_AnimeSeries ser = RepoFactory.AnimeSeries.GetByID(id);
             if (ser == null) return BadRequest($"Series with id {id} was not found");
             int voteType = ser.Contract.AniDBAnime.AniDBAnime.GetFinishedAiring()
-                ? (int) AniDBVoteType.Anime
-                : (int) AniDBVoteType.AnimeTemp;
+                ? (int)AniDBVoteType.Anime
+                : (int)AniDBVoteType.AnimeTemp;
 
             AniDB_Vote thisVote =
                 RepoFactory.AniDB_Vote.GetByEntityAndType(id, AniDBVoteType.AnimeTemp) ??
@@ -2462,14 +2462,14 @@ namespace Shoko.Server.API.v2.Modules
             List<SVR_GroupFilter> allGfs = RepoFactory.GroupFilter.GetTopLevel()
                 .Where(a => a.InvisibleInClients == 0 &&
                             ((a.GroupsIds.ContainsKey(uid) && a.GroupsIds[uid].Count > 0) ||
-                             (a.FilterType & (int) GroupFilterType.Directory) == (int) GroupFilterType.Directory))
+                             (a.FilterType & (int)GroupFilterType.Directory) == (int)GroupFilterType.Directory))
                 .ToList();
             List<Filters> _filters = new List<Filters>();
 
             foreach (SVR_GroupFilter gf in allGfs)
             {
                 Filters filter;
-                if((gf.FilterType & (int) GroupFilterType.Directory) == 0)
+                if ((gf.FilterType & (int)GroupFilterType.Directory) == 0)
                     filter = Filter.GenerateFromGroupFilter(HttpContext, gf, uid, nocast, notag, level, all, allpic, pic, tagfilter);
                 else
                     filter = Filters.GenerateFromGroupFilter(HttpContext, gf, uid, nocast, notag, level, all, allpic, pic, tagfilter);
@@ -2491,7 +2491,7 @@ namespace Shoko.Server.API.v2.Modules
                     index = 0
                 });
                 filter.art.thumb.Add(
-                    new Art {url = APIV2Helper.ConstructSupportImageLink(HttpContext, "plex_unsort.png"), index = 0});
+                    new Art { url = APIV2Helper.ConstructSupportImageLink(HttpContext, "plex_unsort.png"), index = 0 });
                 filter.size = vids.Count;
                 filter.viewed = 0;
 
@@ -2518,7 +2518,7 @@ namespace Shoko.Server.API.v2.Modules
         {
             SVR_GroupFilter gf = RepoFactory.GroupFilter.GetByID(id);
 
-            if ((gf.FilterType & (int) GroupFilterType.Directory) != 0)
+            if ((gf.FilterType & (int)GroupFilterType.Directory) != 0)
             {
                 // if it's a directory, it IS a filter-inception;
                 Filters fgs = Filters.GenerateFromGroupFilter(HttpContext, gf, uid, nocast, notag, level, all, allpic, pic, tagfilter);
@@ -2557,7 +2557,7 @@ namespace Shoko.Server.API.v2.Modules
         /// </summary>
         /// <returns>APIStatus</returns>
         [HttpGet("group/watch")]
-        public  object MarkGroupAsWatched(int id)
+        public object MarkGroupAsWatched(int id)
         {
             JMMUser user = HttpContext.GetUser();
             return MarkWatchedStatusOnGroup(id, user.JMMUserID, true);
@@ -2590,7 +2590,7 @@ namespace Shoko.Server.API.v2.Modules
             }
             if (para.query != string.Empty)
             {
-                return SearchGroupName(para.query, para.limit, (int) para.offset, user.JMMUserID,
+                return SearchGroupName(para.query, para.limit, (int)para.offset, user.JMMUserID,
                     para.nocast != 0, para.notag != 0, para.level, para.all != 0, para.fuzzy != 0, para.allpics != 0,
                     para.pic, para.tagfilter);
             }
@@ -2811,15 +2811,15 @@ namespace Shoko.Server.API.v2.Modules
                 var role = new Role
                 {
                     character = character.Name,
-                    character_image = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) ImageEntityType.Character,
+                    character_image = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)ImageEntityType.Character,
                         xref.RoleID.Value),
                     character_description = cdescription,
                     staff = staff.Name,
-                    staff_image = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int) ImageEntityType.Staff,
+                    staff_image = APIHelper.ConstructImageLinkFromTypeAndId(ctx, (int)ImageEntityType.Staff,
                         xref.StaffID),
                     staff_description = sdescription,
                     role = xref.Role,
-                    type = ((StaffRoleType) xref.RoleType).ToString()
+                    type = ((StaffRoleType)xref.RoleType).ToString()
                 };
                 roles.Add(role);
             }
@@ -2834,7 +2834,7 @@ namespace Shoko.Server.API.v2.Modules
             if (!succeeded1 && !succeeded2) return 0;
             if (!succeeded1) return 1;
             if (!succeeded2) return -1;
-            int result = ((int) type1).CompareTo((int) type2);
+            int result = ((int)type1).CompareTo((int)type2);
             if (result != 0) return result;
             return string.Compare(role1.character, role2.character, StringComparison.Ordinal);
         }
@@ -2848,7 +2848,7 @@ namespace Shoko.Server.API.v2.Modules
             if (!succeeded1 && !succeeded2) return 0;
             if (!succeeded1) return 1;
             if (!succeeded2) return -1;
-            int result = ((int) type1).CompareTo((int) type2);
+            int result = ((int)type1).CompareTo((int)type2);
             if (result != 0) return result;
             return string.Compare(staff1.Key.GetSeriesName(), staff2.Key.GetSeriesName(),
                 StringComparison.InvariantCultureIgnoreCase);

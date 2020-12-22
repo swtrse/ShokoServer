@@ -17,17 +17,17 @@ namespace Shoko.Server.API.v3.Models.Shoko
         /// Pretty Self-explanatory. It's the Username of the user
         /// </summary>
         public string Username { get; set; }
-        
+
         /// <summary>
         /// Is the user an admin. Admins can perform all operations, including modification of users
         /// </summary>
         public bool IsAdmin { get; set; }
-        
+
         /// <summary>
         /// This is a list of services that the user is set to use. AniDB, Trakt, and Plex, for example
         /// </summary>
         public List<CommunitySites> CommunitySites { get; set; }
-        
+
         /// <summary>
         /// This is also called 'Hide Categories'. The current political atmosphere made me salty enough to call it what it is: a blacklist.
         /// Tags that are here are not visible to the user. Any series with any of these tags will not be shown in any context
@@ -60,7 +60,7 @@ namespace Shoko.Server.API.v3.Models.Shoko
 
         public User()
         {
-            
+
         }
 
         public User(SVR_JMMUser user)
@@ -74,7 +74,7 @@ namespace Shoko.Server.API.v3.Models.Shoko
             if (!string.IsNullOrEmpty(user.PlexToken)) CommunitySites.Add(global::Shoko.Models.Enums.CommunitySites.Plex);
             TagBlacklist = user.GetHideCategories().ToList();
         }
-        
+
         public SVR_JMMUser MergeServerModel(SVR_JMMUser existing)
         {
             var user = new SVR_JMMUser

@@ -56,25 +56,25 @@ namespace AniDBAPI.Commands
             switch (sMsgType)
             {
                 case "243":
-                {
-                    // remove the header info
-                    string[] sDetails = socketResponse.Substring(0).Split('\n');
-
-                    if (sDetails.Length > 1)
                     {
-                        // first item will be the status command so ignore
-                        // only concerned with the second line
+                        // remove the header info
+                        string[] sDetails = socketResponse.Substring(0).Split('\n');
 
-                        string[] flds = sDetails[1].Substring(0).Split('|');
-                        AniDBEntity = int.Parse(flds[0]);
-                        RecordCount = int.Parse(flds[1]);
-                        LastUpdateTime = flds[2];
-                        AnimeIDListRaw = flds[3].Trim();
-                        AnimeIDList = AnimeIDListRaw.Split(',').Select(int.Parse).ToList();
+                        if (sDetails.Length > 1)
+                        {
+                            // first item will be the status command so ignore
+                            // only concerned with the second line
+
+                            string[] flds = sDetails[1].Substring(0).Split('|');
+                            AniDBEntity = int.Parse(flds[0]);
+                            RecordCount = int.Parse(flds[1]);
+                            LastUpdateTime = flds[2];
+                            AnimeIDListRaw = flds[3].Trim();
+                            AnimeIDList = AnimeIDListRaw.Split(',').Select(int.Parse).ToList();
+                        }
+
+                        return AniDBUDPResponseCode.GotUpdated;
                     }
-
-                    return AniDBUDPResponseCode.GotUpdated;
-                }
                 case "343": return AniDBUDPResponseCode.NoUpdates;
                 case "501": return AniDBUDPResponseCode.LoginRequired;
             }

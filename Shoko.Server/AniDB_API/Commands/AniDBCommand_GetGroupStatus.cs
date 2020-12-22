@@ -55,12 +55,12 @@ namespace AniDBAPI.Commands
             switch (sMsgType)
             {
                 case "225":
-                {
-                    // 225 GROUPSTATUS
+                    {
+                        // 225 GROUPSTATUS
 
-                    grpStatus = new GroupStatusCollection(animeID, socketResponse);
-                    return AniDBUDPResponseCode.GotGroupStatus;
-                }
+                        grpStatus = new GroupStatusCollection(animeID, socketResponse);
+                        return AniDBUDPResponseCode.GotGroupStatus;
+                    }
                 case "330": return AniDBUDPResponseCode.NoSuchAnime;
                 case "325": // no such description
                     return AniDBUDPResponseCode.NoGroupsFound;

@@ -27,7 +27,8 @@ namespace Shoko.Server.Providers.AniDB.UDP.Requests
             string sessionID = receivedData.Substring(0, i - 1).Trim();
             return new UDPBaseResponse<ResponseLogin>
             {
-                Response = new ResponseLogin {SessionID = sessionID}, Code = code
+                Response = new ResponseLogin { SessionID = sessionID },
+                Code = code
             };
         }
 
@@ -35,7 +36,7 @@ namespace Shoko.Server.Providers.AniDB.UDP.Requests
         {
             // Override to prevent attaching our non-existent sessionID
         }
-        
+
         public override UDPBaseResponse<ResponseLogin> Execute(AniDBConnectionHandler handler)
         {
             Command = BaseCommand;

@@ -53,15 +53,15 @@ namespace AniDBAPI.Commands
             switch (sMsgType)
             {
                 case "220":
-                {
-                    // 220 FILE INFO
-                    // the first 9 characters should be "220 FILE "
-                    // the rest of the information should be the data list
+                    {
+                        // 220 FILE INFO
+                        // the first 9 characters should be "220 FILE "
+                        // the rest of the information should be the data list
 
-                    fileInfo = new Raw_AniDB_File(socketResponse);
-                    //episodeInfo = new Raw_AniDB_Episode(socketResponse, enEpisodeSourceType.File);
-                    return AniDBUDPResponseCode.GotFileInfo;
-                }
+                        fileInfo = new Raw_AniDB_File(socketResponse);
+                        //episodeInfo = new Raw_AniDB_Episode(socketResponse, enEpisodeSourceType.File);
+                        return AniDBUDPResponseCode.GotFileInfo;
+                    }
                 case "320": return AniDBUDPResponseCode.FileDoesNotExist;
                 case "501": return AniDBUDPResponseCode.LoginRequired;
             }

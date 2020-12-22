@@ -89,7 +89,7 @@ namespace Shoko.Server
                 SVR_AniDB_File aniFile = RepoFactory.AniDB_File.GetByHash(vl.Hash);
                 foreach (CrossRef_File_Episode xref in vl.EpisodeCrossRefs)
                 {
-                    if (xref.CrossRefSource != (int) CrossRefSource.AniDB) continue;
+                    if (xref.CrossRefSource != (int)CrossRefSource.AniDB) continue;
                     if (aniFile == null)
                     {
                         CommandRequest_ProcessFile cmd = new CommandRequest_ProcessFile(vl.VideoLocalID, false);
@@ -119,14 +119,14 @@ namespace Shoko.Server
 
         public static void SyncMedia()
         {
-            if (!ServerSettings.Instance.WebCache.Enabled) return; 
+            if (!ServerSettings.Instance.WebCache.Enabled) return;
             List<SVR_VideoLocal> allfiles = RepoFactory.VideoLocal.GetAll().ToList();
             AzureWebAPI.Send_Media(allfiles);
         }
 
         public static void SyncHashes()
         {
-            if (!ServerSettings.Instance.WebCache.Enabled) return; 
+            if (!ServerSettings.Instance.WebCache.Enabled) return;
             bool paused = ShokoService.CmdProcessorHasher.Paused;
             ShokoService.CmdProcessorHasher.Paused = true;
             using (var session = DatabaseFactory.SessionFactory.OpenSession())
@@ -145,7 +145,7 @@ namespace Shoko.Server
                     ShokoService.CmdProcessorHasher.QueueState = new QueueStateStruct
                     {
                         queueState = QueueStateEnum.CheckingFile,
-                        extraParams = new[] {v.FileName}
+                        extraParams = new[] { v.FileName }
                     };
                     SVR_AniDB_File file = RepoFactory.AniDB_File.GetByHash(v.ED2KHash);
                     if (file != null)
@@ -192,7 +192,7 @@ namespace Shoko.Server
                             ShokoService.CmdProcessorHasher.QueueState = new QueueStateStruct
                             {
                                 queueState = QueueStateEnum.HashingFile,
-                                extraParams = new[] {v.FileName}
+                                extraParams = new[] { v.FileName }
                             };
                             Hashes h = FileHashHelper.GetHashInfo(p.FullServerPath, true, ShokoServer.OnHashProgress,
                                 true,
@@ -203,7 +203,7 @@ namespace Shoko.Server
                             v.CRC32 = h.CRC32;
                             v.MD5 = h.MD5;
                             v.SHA1 = h.SHA1;
-                            v.HashSource = (int) HashSource.DirectHash;
+                            v.HashSource = (int)HashSource.DirectHash;
                             withfiles.Add(v);
                         }
                     }
@@ -259,7 +259,7 @@ namespace Shoko.Server
 
                 // Get Ignored Files and remove them from the scan listing
                 var ignoredFiles = RepoFactory.VideoLocal.GetIgnoredVideos().SelectMany(a => a.Places)
-                    .Select(a => a.FullServerPath).Where(a => !string.IsNullOrEmpty(a) ).ToList();
+                    .Select(a => a.FullServerPath).Where(a => !string.IsNullOrEmpty(a)).ToList();
                 fileList = fileList.Except(ignoredFiles, StringComparer.InvariantCultureIgnoreCase).ToList();
 
                 // get a list of all files in the share
@@ -273,7 +273,7 @@ namespace Shoko.Server
                             dictFilesExisting[fileName].RenameAndMoveAsRequired();
                     }
 
-                    if (ServerSettings.Instance.Import.Exclude.Any(s => Regex.IsMatch(fileName,s)))
+                    if (ServerSettings.Instance.Import.Exclude.Any(s => Regex.IsMatch(fileName, s)))
                     {
                         logger.Trace("Import exclusion, skipping --- {0}", fileName);
                         continue;
@@ -324,7 +324,7 @@ namespace Shoko.Server
             {
                 i++;
 
-                if (ServerSettings.Instance.Import.Exclude.Any(s => Regex.IsMatch(fileName,s)))
+                if (ServerSettings.Instance.Import.Exclude.Any(s => Regex.IsMatch(fileName, s)))
                 {
                     logger.Trace("Import exclusion, skipping --- {0}", fileName);
                     continue;
@@ -395,7 +395,7 @@ namespace Shoko.Server
             List<string> fileListNew = new List<string>();
             foreach (string fileName in fileList)
             {
-                if (ServerSettings.Instance.Import.Exclude.Any(s => Regex.IsMatch(fileName,s)))
+                if (ServerSettings.Instance.Import.Exclude.Any(s => Regex.IsMatch(fileName, s)))
                 {
                     logger.Trace("Import exclusion, skipping --- {0}", fileName);
                     continue;
@@ -446,11 +446,11 @@ namespace Shoko.Server
             foreach (string fileName in fileList)
             {
                 i++;
-                if (ServerSettings.Instance.Import.Exclude.Any(s => Regex.IsMatch(fileName,s)))
+                if (ServerSettings.Instance.Import.Exclude.Any(s => Regex.IsMatch(fileName, s)))
                 {
                     logger.Trace("Import exclusion, skipping --- {0}", fileName);
                     continue;
-                } 
+                }
 
                 filesFound++;
                 logger.Trace("Processing File {0}/{1} --- {2}", i, fileList.Count, fileName);
@@ -1080,7 +1080,7 @@ namespace Shoko.Server
         public static void CheckForDayFilters()
         {
             ScheduledUpdate sched =
-                RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.DayFiltersUpdate);
+                RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.DayFiltersUpdate);
             if (sched != null)
             {
                 if (DateTime.Now.Day == sched.LastUpdate.Day)
@@ -1126,7 +1126,7 @@ namespace Shoko.Server
 
             // update tvdb info every 12 hours
 
-            ScheduledUpdate sched = RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.TvDBInfo);
+            ScheduledUpdate sched = RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.TvDBInfo);
             if (sched != null)
             {
                 // if we have run this in the last 12 hours and are not forcing it, then exit
@@ -1180,7 +1180,7 @@ namespace Shoko.Server
 
 
             ScheduledUpdate sched =
-                RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.AniDBCalendar);
+                RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.AniDBCalendar);
             if (sched != null)
             {
                 // if we have run this in the last 12 hours and are not forcing it, then exit
@@ -1197,12 +1197,12 @@ namespace Shoko.Server
 
         public static void SendUserInfoUpdate(bool forceRefresh)
         {
-            if (!ServerSettings.Instance.WebCache.Enabled) return; 
+            if (!ServerSettings.Instance.WebCache.Enabled) return;
             // update the anonymous user info every 12 hours
             // we will always assume that an anime was downloaded via http first
 
             ScheduledUpdate sched =
-                RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.AzureUserInfo);
+                RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.AzureUserInfo);
             if (sched != null)
             {
                 // if we have run this in the last 6 hours and are not forcing it, then exit
@@ -1236,7 +1236,7 @@ namespace Shoko.Server
 
             // check for any updated anime info every 12 hours
 
-            ScheduledUpdate sched = RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.AniDBUpdates);
+            ScheduledUpdate sched = RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.AniDBUpdates);
             if (sched != null)
             {
                 // if we have run this in the last 12 hours and are not forcing it, then exit
@@ -1258,7 +1258,7 @@ namespace Shoko.Server
             int freqHours = Utils.GetScheduledHours(ServerSettings.Instance.AniDb.MyListStats_UpdateFrequency);
 
             ScheduledUpdate sched =
-                RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.AniDBMylistStats);
+                RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.AniDBMylistStats);
             if (sched != null)
             {
                 // if we have run this in the last 24 hours and are not forcing it, then exit
@@ -1282,7 +1282,7 @@ namespace Shoko.Server
             // update the calendar every 24 hours
 
             ScheduledUpdate sched =
-                RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.AniDBMyListSync);
+                RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.AniDBMyListSync);
             if (sched != null)
             {
                 // if we have run this in the last 24 hours and are not forcing it, then exit
@@ -1306,7 +1306,7 @@ namespace Shoko.Server
 
             // update the calendar every xxx hours
 
-            ScheduledUpdate sched = RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.TraktSync);
+            ScheduledUpdate sched = RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.TraktSync);
             if (sched != null)
             {
                 // if we have run this in the last xxx hours and are not forcing it, then exit
@@ -1332,7 +1332,7 @@ namespace Shoko.Server
             int freqHours = Utils.GetScheduledHours(ServerSettings.Instance.TraktTv.UpdateFrequency);
 
             // update the calendar every xxx hours
-            ScheduledUpdate sched = RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.TraktUpdate);
+            ScheduledUpdate sched = RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.TraktUpdate);
             if (sched != null)
             {
                 // if we have run this in the last xxx hours and are not forcing it, then exit
@@ -1357,7 +1357,7 @@ namespace Shoko.Server
                 int freqHours = 24; // we need to update this daily
 
                 ScheduledUpdate sched =
-                    RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.TraktToken);
+                    RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.TraktToken);
                 if (sched != null)
                 {
                     // if we have run this in the last xxx hours and are not forcing it, then exit
@@ -1395,7 +1395,7 @@ namespace Shoko.Server
             // check for any updated anime info every 12 hours
 
             ScheduledUpdate sched =
-                RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.AniDBFileUpdates);
+                RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.AniDBFileUpdates);
             if (sched != null)
             {
                 // if we have run this in the last 12 hours and are not forcing it, then exit
@@ -1471,7 +1471,7 @@ namespace Shoko.Server
 
             // check for any updated anime info every 100 hours
 
-            ScheduledUpdate sched = RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.AniDBTitles);
+            ScheduledUpdate sched = RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.AniDBTitles);
             if (sched != null)
             {
                 // if we have run this in the last 100 hours and are not forcing it, then exit

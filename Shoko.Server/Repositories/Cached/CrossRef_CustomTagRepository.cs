@@ -30,7 +30,7 @@ namespace Shoko.Server.Repositories
         {
             lock (Cache)
             {
-                return Refs.GetMultiple(id, (int) CustomTagCrossRefType.Anime);
+                return Refs.GetMultiple(id, (int)CustomTagCrossRefType.Anime);
             }
         }
 

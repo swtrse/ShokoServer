@@ -31,7 +31,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.SearchTrakt,
-            extraParams = new[] {AnimeID.ToString()}
+            extraParams = new[] { AnimeID.ToString() }
         };
 
         public CommandRequest_TraktSearchAnime()
@@ -42,7 +42,7 @@ namespace Shoko.Server.Commands
         {
             AnimeID = animeID;
             ForceRefresh = forced;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }
@@ -79,7 +79,7 @@ namespace Shoko.Server.Commands
                                     logger.Trace("Found trakt match on web cache for {0} - id = {1}", AnimeID,
                                         showInfo.title);
                                     TraktTVHelper.LinkAniDBTrakt(AnimeID,
-                                        (EpisodeType) xref.AniDBStartEpisodeType,
+                                        (EpisodeType)xref.AniDBStartEpisodeType,
                                         xref.AniDBStartEpisodeNumber,
                                         xref.TraktID, xref.TraktSeasonNumber, xref.TraktStartEpisodeNumber, true);
                                     doReturn = true;
@@ -135,7 +135,7 @@ namespace Shoko.Server.Commands
                             logger.Trace("Found trakt match using TvDBID locally {0} - id = {1}",
                                 AnimeID, showInfo.title);
                             TraktTVHelper.LinkAniDBTrakt(AnimeID,
-                                (EpisodeType) tvXRef.AniDBStartEpisodeType,
+                                (EpisodeType)tvXRef.AniDBStartEpisodeType,
                                 tvXRef.AniDBStartEpisodeNumber, showInfo.ids.slug,
                                 tvXRef.TvDBSeasonNumber, tvXRef.TvDBStartEpisodeNumber,
                                 true);

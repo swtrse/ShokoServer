@@ -29,7 +29,7 @@ namespace Shoko.Server.Commands
         public int EntityType { get; set; }
         public bool ForceDownload { get; set; }
 
-        public ImageEntityType EntityTypeEnum => (ImageEntityType) EntityType;
+        public ImageEntityType EntityTypeEnum => (ImageEntityType)EntityType;
 
         public override CommandRequestPriority DefaultPriority => CommandRequestPriority.Priority2;
 
@@ -86,9 +86,9 @@ namespace Shoko.Server.Commands
         public CommandRequest_DownloadImage(int entityID, ImageEntityType entityType, bool forced)
         {
             EntityID = entityID;
-            EntityType = (int) entityType;
+            EntityType = (int)entityType;
             ForceDownload = forced;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }
@@ -277,37 +277,37 @@ namespace Shoko.Server.Commands
         private void RemoveImageRecord()
         {
             switch (EntityTypeEnum)
-                {
-                    case ImageEntityType.TvDB_FanArt:
-                        TvDB_ImageFanart fanart = RepoFactory.TvDB_ImageFanart.GetByID(EntityID);
-                        if (fanart == null) return;
-                        RepoFactory.TvDB_ImageFanart.Delete(fanart);
-                        break;
+            {
+                case ImageEntityType.TvDB_FanArt:
+                    TvDB_ImageFanart fanart = RepoFactory.TvDB_ImageFanart.GetByID(EntityID);
+                    if (fanart == null) return;
+                    RepoFactory.TvDB_ImageFanart.Delete(fanart);
+                    break;
 
-                    case ImageEntityType.TvDB_Cover:
-                        TvDB_ImagePoster poster = RepoFactory.TvDB_ImagePoster.GetByID(EntityID);
-                        if (poster == null) return;
-                        RepoFactory.TvDB_ImagePoster.Delete(poster);
-                        break;
+                case ImageEntityType.TvDB_Cover:
+                    TvDB_ImagePoster poster = RepoFactory.TvDB_ImagePoster.GetByID(EntityID);
+                    if (poster == null) return;
+                    RepoFactory.TvDB_ImagePoster.Delete(poster);
+                    break;
 
-                    case ImageEntityType.TvDB_Banner:
-                        TvDB_ImageWideBanner wideBanner = RepoFactory.TvDB_ImageWideBanner.GetByID(EntityID);
-                        if (wideBanner == null) return;
-                        RepoFactory.TvDB_ImageWideBanner.Delete(wideBanner);
-                        break;
+                case ImageEntityType.TvDB_Banner:
+                    TvDB_ImageWideBanner wideBanner = RepoFactory.TvDB_ImageWideBanner.GetByID(EntityID);
+                    if (wideBanner == null) return;
+                    RepoFactory.TvDB_ImageWideBanner.Delete(wideBanner);
+                    break;
 
-                    case ImageEntityType.MovieDB_Poster:
-                        MovieDB_Poster moviePoster = RepoFactory.MovieDB_Poster.GetByID(EntityID);
-                        if (moviePoster == null) return;
-                        RepoFactory.MovieDB_Poster.Delete(moviePoster);
-                        break;
+                case ImageEntityType.MovieDB_Poster:
+                    MovieDB_Poster moviePoster = RepoFactory.MovieDB_Poster.GetByID(EntityID);
+                    if (moviePoster == null) return;
+                    RepoFactory.MovieDB_Poster.Delete(moviePoster);
+                    break;
 
-                    case ImageEntityType.MovieDB_FanArt:
-                        MovieDB_Fanart movieFanart = RepoFactory.MovieDB_Fanart.GetByID(EntityID);
-                        if (movieFanart == null) return;
-                        RepoFactory.MovieDB_Fanart.Delete(movieFanart);
-                        break;
-                }
+                case ImageEntityType.MovieDB_FanArt:
+                    MovieDB_Fanart movieFanart = RepoFactory.MovieDB_Fanart.GetByID(EntityID);
+                    if (movieFanart == null) return;
+                    RepoFactory.MovieDB_Fanart.Delete(movieFanart);
+                    break;
+            }
         }
 
         private void RecursivelyRetryDownload(string downloadURL, ref string tempFilePath, int count, int maxretry)
@@ -316,12 +316,12 @@ namespace Shoko.Server.Commands
             {
                 // download image
                 if (downloadURL.Length <= 0) return;
-                
+
                 // Ignore all certificate failures.
-                ServicePointManager.Expect100Continue = true;                
+                ServicePointManager.Expect100Continue = true;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-                
+
                 using (WebClient client = new WebClient())
                 {
                     client.Headers.Add("user-agent", "JMM");
@@ -357,7 +357,7 @@ namespace Shoko.Server.Commands
 
                     if (extension.Length <= 0) return;
                     string newFile = Path.ChangeExtension(tempFilePath, extension);
-                    if(newFile == null) return;
+                    if (newFile == null) return;
 
                     if (File.Exists(newFile)) File.Delete(newFile);
                     using (var fs = new FileStream(newFile, FileMode.Create, FileAccess.Write))

@@ -66,9 +66,9 @@ namespace LZ4ps
         private const int NOTCOMPRESSIBLE_DETECTIONLEVEL = 6;
 
 #if !UNSAFE
-/// <summary>Buffer length when Buffer.BlockCopy becomes faster than straight loop.
-/// Please note that safe implementation REQUIRES it to be greater (not even equal) than 8.</summary>
-		private const int BLOCK_COPY_LIMIT = 16;
+        /// <summary>Buffer length when Buffer.BlockCopy becomes faster than straight loop.
+        /// Please note that safe implementation REQUIRES it to be greater (not even equal) than 8.</summary>
+        private const int BLOCK_COPY_LIMIT = 16;
 
 #endif
 
@@ -117,8 +117,8 @@ namespace LZ4ps
         private const int HASHHC_ADJUST = MINMATCH * 8 - HASHHC_LOG;
         //private const int HASHHC_MASK = HASHHC_TABLESIZE - 1;
 
-        private static readonly int[] DECODER_TABLE_32 = {0, 3, 2, 3, 0, 0, 0, 0};
-        private static readonly int[] DECODER_TABLE_64 = {0, 0, 0, -1, 0, 1, 2, 3};
+        private static readonly int[] DECODER_TABLE_32 = { 0, 3, 2, 3, 0, 0, 0, 0 };
+        private static readonly int[] DECODER_TABLE_64 = { 0, 0, 0, -1, 0, 1, 2, 3 };
 
         private static readonly int[] DEBRUIJN_TABLE_32 =
         {

@@ -1510,9 +1510,11 @@ namespace Shoko.Server.Renamer
 
                 switch (episodes[0].GetEpisodeTypeEnum())
                 {
-                    case EpisodeType.Episode: epCount = anime.EpisodeCountNormal;
+                    case EpisodeType.Episode:
+                        epCount = anime.EpisodeCountNormal;
                         break;
-                    case EpisodeType.Special: epCount = anime.EpisodeCountSpecial;
+                    case EpisodeType.Special:
+                        epCount = anime.EpisodeCountSpecial;
                         break;
                     case EpisodeType.Credits:
                     case EpisodeType.Trailer:
@@ -1520,7 +1522,8 @@ namespace Shoko.Server.Renamer
                     case EpisodeType.Other:
                         epCount = 1;
                         break;
-                    default: epCount = 1;
+                    default:
+                        epCount = 1;
                         break;
                 }
 
@@ -1546,9 +1549,11 @@ namespace Shoko.Server.Renamer
 
                 switch (episodes[0].GetEpisodeTypeEnum())
                 {
-                    case EpisodeType.Episode: epCount = anime.EpisodeCountNormal;
+                    case EpisodeType.Episode:
+                        epCount = anime.EpisodeCountNormal;
                         break;
-                    case EpisodeType.Special: epCount = anime.EpisodeCountSpecial;
+                    case EpisodeType.Special:
+                        epCount = anime.EpisodeCountSpecial;
                         break;
                     case EpisodeType.Credits:
                     case EpisodeType.Trailer:
@@ -1556,7 +1561,8 @@ namespace Shoko.Server.Renamer
                     case EpisodeType.Other:
                         epCount = 1;
                         break;
-                    default: epCount = 1;
+                    default:
+                        epCount = 1;
                         break;
                 }
 

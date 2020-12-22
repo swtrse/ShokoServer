@@ -107,13 +107,13 @@ namespace Shoko.Server.API
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
-			builder =>
+            builder =>
                         {
-                		builder
-                		.AllowAnyOrigin()
-                		.AllowAnyMethod()
-                		.AllowAnyHeader();
-            		});
+                            builder
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                        });
 
             });
 
@@ -229,7 +229,8 @@ namespace Shoko.Server.API
             app.UseMvc();
         }
 
-        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target) {
+        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
+        {
             foreach (DirectoryInfo dir in source.GetDirectories())
                 CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
             foreach (FileInfo file in source.GetFiles())

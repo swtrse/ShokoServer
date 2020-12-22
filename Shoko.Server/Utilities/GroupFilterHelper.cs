@@ -231,12 +231,12 @@ namespace Shoko.Server
             GroupFilterSortDirection direc, bool isfirst)
         {
             if (isfirst)
-                return direc == GroupFilterSortDirection.Asc 
-                    ? groups.OrderBy(o) 
+                return direc == GroupFilterSortDirection.Asc
+                    ? groups.OrderBy(o)
                     : groups.OrderByDescending(o);
-            return direc == GroupFilterSortDirection.Asc 
-                ? ((IOrderedEnumerable<CL_AnimeGroup_User>) groups).ThenBy(o) 
-                : ((IOrderedEnumerable<CL_AnimeGroup_User>) groups).ThenByDescending(o);
+            return direc == GroupFilterSortDirection.Asc
+                ? ((IOrderedEnumerable<CL_AnimeGroup_User>)groups).ThenBy(o)
+                : ((IOrderedEnumerable<CL_AnimeGroup_User>)groups).ThenByDescending(o);
         }
 
         /*

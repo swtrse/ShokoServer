@@ -21,7 +21,7 @@ namespace Shoko.Server.Commands
 
         public CommandRequest_GetAniDBTitles()
         {
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

@@ -30,7 +30,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.SearchTvDB,
-            extraParams = new[] {AnimeID.ToString()}
+            extraParams = new[] { AnimeID.ToString() }
         };
 
         public CommandRequest_TvDBSearchAnime()
@@ -41,7 +41,7 @@ namespace Shoko.Server.Commands
         {
             AnimeID = animeID;
             ForceRefresh = forced;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }
@@ -212,7 +212,7 @@ namespace Shoko.Server.Commands
             };
             RepoFactory.CrossRef_AniDB_TvDB.Save(xref);
         }
-        
+
         private static readonly Regex RemoveYear = new Regex(@"(^.*)( \([0-9]+\)$)", RegexOptions.Compiled);
         private static readonly Regex RemoveAfterColon = new Regex(@"(^.*)(\:.*$)", RegexOptions.Compiled);
 

@@ -47,7 +47,7 @@ namespace Shoko.Server.API.v3.Controllers
             if (!User.AllowedSeries(ser)) return BadRequest("Series not allowed for current user");
             return new Series(HttpContext, ser);
         }
-        
+
         /// <summary>
         /// Get the series that reside in the path that ends with <param name="path"></param>
         /// </summary>
@@ -83,7 +83,7 @@ namespace Shoko.Server.API.v3.Controllers
             if (anime == null) return BadRequest("No AniDB_Anime for Series");
             return Series.GetAniDBInfo(HttpContext, anime);
         }
-        
+
         /// <summary>
         /// Get TvDB Info for series with ID
         /// </summary>
@@ -97,7 +97,7 @@ namespace Shoko.Server.API.v3.Controllers
             if (!User.AllowedSeries(ser)) return BadRequest("Series not allowed for current user");
             return Series.GetTvDBInfo(HttpContext, ser);
         }
-        
+
         /// <summary>
         /// Get all images for series with ID, optionally with Disabled images, as well.
         /// </summary>
@@ -112,7 +112,7 @@ namespace Shoko.Server.API.v3.Controllers
             if (!User.AllowedSeries(ser)) return BadRequest("Series not allowed for current user");
             return Series.GetArt(HttpContext, ser.AniDB_ID, includeDisabled);
         }
-        
+
         /// <summary>
         /// Get tags for Series with ID, applying the given TagFilter (0 is show all)
         /// </summary>
@@ -129,7 +129,7 @@ namespace Shoko.Server.API.v3.Controllers
             if (anime == null) return BadRequest("No AniDB_Anime for Series");
             return Series.GetTags(HttpContext, anime, filter);
         }
-        
+
         /// <summary>
         /// Get the cast listing for series with ID
         /// </summary>
@@ -218,7 +218,8 @@ namespace Shoko.Server.API.v3.Controllers
                 {
                     match = title;
                     dist = result;
-                } else if (Math.Abs(result - dist) < 0.00001)
+                }
+                else if (Math.Abs(result - dist) < 0.00001)
                 {
                     if (title.Length < match.Length) match = title;
                 }
@@ -265,7 +266,7 @@ namespace Shoko.Server.API.v3.Controllers
                                 .FindInEnumerable(User.GetHideCategories()))
                 .AsParallel();
 
-            HashSet<string> languages = new HashSet<string>{"en", "x-jat"};
+            HashSet<string> languages = new HashSet<string> { "en", "x-jat" };
             languages.UnionWith(ServerSettings.Instance.LanguagePreference);
             var distLevenshtein = new ConcurrentDictionary<SVR_AnimeSeries, Tuple<double, string>>();
             allSeries.ForAll(a => CheckTitlesFuzzy(search, languages, a, query, ref distLevenshtein, limit));

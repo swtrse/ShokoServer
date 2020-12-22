@@ -22,7 +22,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.GettingTvDBSeries,
-            extraParams = new[] {$"{SeriesTitle} ({TvDBSeriesID})"}
+            extraParams = new[] { $"{SeriesTitle} ({TvDBSeriesID})" }
         };
 
         public CommandRequest_TvDBUpdateSeries()
@@ -33,7 +33,7 @@ namespace Shoko.Server.Commands
         {
             TvDBSeriesID = tvDBSeriesID;
             ForceRefresh = forced;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
             SeriesTitle = RepoFactory.TvDB_Series.GetByTvDBID(tvDBSeriesID)?.SeriesName ?? string.Intern("Name not Available");
 
             GenerateCommandID();

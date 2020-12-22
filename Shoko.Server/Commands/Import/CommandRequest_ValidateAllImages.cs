@@ -23,12 +23,12 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.ValidateAllImages,
-            extraParams = new[] {string.Empty}
+            extraParams = new[] { string.Empty }
         };
 
         public CommandRequest_ValidateAllImages()
         {
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }
@@ -39,7 +39,7 @@ namespace Shoko.Server.Commands
             try
             {
                 QueueStateStruct queueState = PrettyDescription;
-                queueState.extraParams = new[] {Resources.Command_ValidateAllImages_TvDBEpisodes};
+                queueState.extraParams = new[] { Resources.Command_ValidateAllImages_TvDBEpisodes };
                 ShokoService.CmdProcessorImages.QueueState = queueState;
                 int count = 0;
                 logger.Info("Scanning TvDB Episode thumbs for corrupted images");
@@ -65,7 +65,7 @@ namespace Shoko.Server.Commands
                 if (ServerSettings.Instance.TvDB.AutoFanart)
                 {
                     count = 0;
-                    queueState.extraParams = new[] {Resources.Command_ValidateAllImages_TvDBFanarts};
+                    queueState.extraParams = new[] { Resources.Command_ValidateAllImages_TvDBFanarts };
                     ShokoService.CmdProcessorImages.QueueState = queueState;
                     logger.Info("Scanning TvDB Fanarts for corrupted images");
                     var fanarts = RepoFactory.TvDB_ImageFanart.GetAll().Where(fanart =>
@@ -91,7 +91,7 @@ namespace Shoko.Server.Commands
                 if (ServerSettings.Instance.TvDB.AutoPosters)
                 {
                     count = 0;
-                    queueState.extraParams = new[] {Resources.Command_ValidateAllImages_TvDBPosters};
+                    queueState.extraParams = new[] { Resources.Command_ValidateAllImages_TvDBPosters };
                     ShokoService.CmdProcessorImages.QueueState = queueState;
                     logger.Info("Scanning TvDB Posters for corrupted images");
                     var fanarts = RepoFactory.TvDB_ImagePoster.GetAll().Where(fanart =>
@@ -118,7 +118,7 @@ namespace Shoko.Server.Commands
                 {
                     count = 0;
                     logger.Info("Scanning TvDB Banners for corrupted images");
-                    queueState.extraParams = new[] {Resources.Command_ValidateAllImages_TvDBBanners};
+                    queueState.extraParams = new[] { Resources.Command_ValidateAllImages_TvDBBanners };
                     ShokoService.CmdProcessorImages.QueueState = queueState;
                     var fanarts = RepoFactory.TvDB_ImageWideBanner.GetAll().Where(fanart =>
                         !string.IsNullOrEmpty(fanart.GetFullImagePath()) &&
@@ -142,7 +142,7 @@ namespace Shoko.Server.Commands
 
                 if (ServerSettings.Instance.MovieDb.AutoPosters)
                 {
-                    queueState.extraParams = new[] {Resources.Command_ValidateAllImages_MovieDBPosters};
+                    queueState.extraParams = new[] { Resources.Command_ValidateAllImages_MovieDBPosters };
                     ShokoService.CmdProcessorImages.QueueState = queueState;
                     count = 0;
                     logger.Info("Scanning MovieDB Posters for corrupted images");
@@ -168,7 +168,7 @@ namespace Shoko.Server.Commands
 
                 if (ServerSettings.Instance.MovieDb.AutoFanart)
                 {
-                    queueState.extraParams = new[] {Resources.Command_ValidateAllImages_MovieDBFanarts};
+                    queueState.extraParams = new[] { Resources.Command_ValidateAllImages_MovieDBFanarts };
                     ShokoService.CmdProcessorImages.QueueState = queueState;
                     count = 0;
                     logger.Info("Scanning MovieDB Fanarts for corrupted images");
@@ -191,7 +191,7 @@ namespace Shoko.Server.Commands
                     }
                 }
 
-                queueState.extraParams = new[] {Resources.Command_ValidateAllImages_AniDBPosters};
+                queueState.extraParams = new[] { Resources.Command_ValidateAllImages_AniDBPosters };
                 ShokoService.CmdProcessorImages.QueueState = queueState;
                 count = 0;
                 logger.Info("Scanning AniDB Posters for corrupted images");
@@ -214,7 +214,7 @@ namespace Shoko.Server.Commands
 
                 if (ServerSettings.Instance.AniDb.DownloadCharacters)
                 {
-                    queueState.extraParams = new[] {Resources.Command_ValidateAllImages_AniDBCharacters};
+                    queueState.extraParams = new[] { Resources.Command_ValidateAllImages_AniDBCharacters };
                     ShokoService.CmdProcessorImages.QueueState = queueState;
                     count = 0;
                     logger.Info("Scanning AniDB Characters for corrupted images");
@@ -239,7 +239,7 @@ namespace Shoko.Server.Commands
 
                 if (ServerSettings.Instance.AniDb.DownloadCreators)
                 {
-                    queueState.extraParams = new[] {Resources.Command_ValidateAllImages_AniDBSeiyuus};
+                    queueState.extraParams = new[] { Resources.Command_ValidateAllImages_AniDBSeiyuus };
                     ShokoService.CmdProcessorImages.QueueState = queueState;
                     count = 0;
                     logger.Info("Scanning AniDB Seiyuus for corrupted images");

@@ -33,7 +33,7 @@ namespace Shoko.Server.Commands
         public CommandRequest_GetUpdated(bool forced)
         {
             ForceRefresh = forced;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }
@@ -48,7 +48,7 @@ namespace Shoko.Server.Commands
 
                 // check the automated update table to see when the last time we ran this command
                 ScheduledUpdate sched =
-                    RepoFactory.ScheduledUpdate.GetByUpdateType((int) ScheduledUpdateType.AniDBUpdates);
+                    RepoFactory.ScheduledUpdate.GetByUpdateType((int)ScheduledUpdateType.AniDBUpdates);
                 if (sched != null)
                 {
                     int freqHours = Utils.GetScheduledHours(ServerSettings.Instance.AniDb.Anime_UpdateFrequency);

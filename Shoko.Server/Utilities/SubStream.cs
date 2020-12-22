@@ -75,7 +75,7 @@ namespace Shoko.Server.Utilities
         {
             if (count > _bytesLeft)
             {
-                count = (int) _bytesLeft;
+                count = (int)_bytesLeft;
             }
 
             long oldpos = _stream.Position;

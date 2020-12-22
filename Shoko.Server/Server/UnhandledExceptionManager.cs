@@ -111,7 +111,7 @@ namespace Shoko.Server.Server
         //--
         private static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs args)
         {
-            Exception objException = (Exception) args.ExceptionObject;
+            Exception objException = (Exception)args.ExceptionObject;
             GenericExceptionHandler(objException);
         }
 
@@ -755,7 +755,7 @@ namespace Shoko.Server.Server
         {
             int j = 0;
             ImageCodecInfo[] objImageCodecInfo = ImageCodecInfo.GetImageEncoders();
-            
+
             while (j < objImageCodecInfo.Length)
             {
                 if (objImageCodecInfo[j].MimeType == strMimeType)

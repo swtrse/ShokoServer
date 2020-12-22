@@ -17,7 +17,7 @@ namespace Shoko.Server.Plugin
         public IDictionary<Type, IPlugin> Plugins { get; } = new Dictionary<Type, IPlugin>();
         private readonly IList<Type> _pluginTypes = new List<Type>();
         private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
-        
+
         internal void Load(IServiceCollection serviceCollection)
         {
             var assemblies = new List<Assembly>();
@@ -60,7 +60,8 @@ namespace Shoko.Server.Plugin
 
         private void LoadPlugins(IEnumerable<Assembly> assemblies, IServiceCollection serviceCollection)
         {
-            var implementations = assemblies.SelectMany(a => {
+            var implementations = assemblies.SelectMany(a =>
+            {
                 try
                 {
                     return a.GetTypes();
@@ -71,12 +72,12 @@ namespace Shoko.Server.Plugin
                     return new Type[0];
                 }
             }).Where(a => a.GetInterfaces().Contains(typeof(IPlugin)));
-            
+
             foreach (var implementation in implementations)
             {
-                var mtd = implementation.GetMethod("ConfigureServices",  BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+                var mtd = implementation.GetMethod("ConfigureServices", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
                 if (mtd != null)
-                    mtd.Invoke(null, new object[]{serviceCollection});
+                    mtd.Invoke(null, new object[] { serviceCollection });
 
                 _pluginTypes.Add(implementation);
             }
@@ -105,7 +106,7 @@ namespace Shoko.Server.Plugin
                 .DistinctBy(a => a.GetAssemblyName())
                 .Select(a => (a.GetAssemblyName() + ".json", a)).FirstOrDefault();
             if (string.IsNullOrEmpty(name) || name == ".json") return;
-            
+
             try
             {
                 if (ServerSettings.Instance.Plugins.EnabledPlugins.ContainsKey(name) && !ServerSettings.Instance.Plugins.EnabledPlugins[name])
@@ -115,7 +116,7 @@ namespace Shoko.Server.Plugin
                     ? Activator.CreateInstance(t)
                     : ServerSettings.Deserialize(t, File.ReadAllText(settingsPath));
                 // Plugins.Settings will be empty, since it's ignored by the serializer
-                var settings = (IPluginSettings) obj;
+                var settings = (IPluginSettings)obj;
                 ServerSettings.Instance.Plugins.Settings.Add(settings);
 
                 plugin.OnSettingsLoaded(settings);

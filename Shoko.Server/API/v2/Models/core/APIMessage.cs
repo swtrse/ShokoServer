@@ -10,14 +10,14 @@ namespace Shoko.Server.API.v2.Models.core
     {
         public int code { get; set; }
         public string message { get; set; }
-        public (string, string) [] details { get; set; }
+        public (string, string)[] details { get; set; }
 
         /// <summary>
         /// An HTTP message with details about the result
         /// </summary>
         /// <param name="_code">The HTTP status code</param>
         /// <param name="_message">A summary of the message</param>
-        public APIMessage(HttpStatusCode _code, string _message) : this((int) _code, _message)
+        public APIMessage(HttpStatusCode _code, string _message) : this((int)_code, _message)
         {
         }
 
@@ -27,7 +27,7 @@ namespace Shoko.Server.API.v2.Models.core
         /// <param name="_code">The HTTP status code</param>
         /// <param name="_message">A summary of the message</param>
         public APIMessage(int _code, string _message) : this(_code, _message,
-            new List<(string, string)> {(_message, string.Empty)})
+            new List<(string, string)> { (_message, string.Empty) })
         {
         }
 
@@ -37,7 +37,7 @@ namespace Shoko.Server.API.v2.Models.core
         /// <param name="_code">The HTTP status code</param>
         /// <param name="_message">A summary of the message</param>
         /// <param name="_details">A list of tuples, with the first item being the field the message relates to, and the second the message</param>
-        public APIMessage(HttpStatusCode _code, string _message, List<(string, string)> _details) : this((int) _code,
+        public APIMessage(HttpStatusCode _code, string _message, List<(string, string)> _details) : this((int)_code,
             _message, _details)
         {
         }
@@ -59,7 +59,7 @@ namespace Shoko.Server.API.v2.Models.core
         {
             context.HttpContext.Response.StatusCode = code;
             context.HttpContext.Response.ContentType = "application/json";
-            if (code == (int) HttpStatusCode.NoContent) return;
+            if (code == (int)HttpStatusCode.NoContent) return;
 
             var serializer = new JsonSerializer();
             using (StreamWriter writer = new StreamWriter(context.HttpContext.Response.Body))

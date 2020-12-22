@@ -31,20 +31,20 @@ namespace Shoko.Server.API.v1.Implementations
         [HttpGet("Filters/{userId}")]
         public MediaContainer GetFilters(string userId)
         {
-            return _impl.GetFilters(new KodiProvider {HttpContext = HttpContext}, userId);
+            return _impl.GetFilters(new KodiProvider { HttpContext = HttpContext }, userId);
         }
 
         [HttpGet("Metadata/{userId}/{type}/{id}/{filterid?}")]
         public MediaContainer GetMetadata(string userId, int type, string id, int? filterid)
         {
-            return _impl.GetMetadata(new KodiProvider {HttpContext = HttpContext}, userId, type, id, null, false,
+            return _impl.GetMetadata(new KodiProvider { HttpContext = HttpContext }, userId, type, id, null, false,
                 filterid);
         }
 
         [HttpGet("User")]
         public PlexContract_Users GetUsers()
         {
-            return _impl.GetUsers(new KodiProvider {HttpContext = HttpContext});
+            return _impl.GetUsers(new KodiProvider { HttpContext = HttpContext });
         }
 
         [HttpGet("Version")]
@@ -56,47 +56,47 @@ namespace Shoko.Server.API.v1.Implementations
         [HttpGet("Search/{userId}/{limit}/{query}")]
         public MediaContainer Search(string userId, int limit, string query)
         {
-            return _impl.Search(new KodiProvider {HttpContext = HttpContext}, userId, limit, query, false);
+            return _impl.Search(new KodiProvider { HttpContext = HttpContext }, userId, limit, query, false);
         }
 
         [HttpGet("SearchTag/{userId}/{limit}/{query}")]
         public MediaContainer SearchTag(string userId, int limit, string query)
         {
-            return _impl.Search(new KodiProvider {HttpContext = HttpContext}, userId, limit, query, true);
+            return _impl.Search(new KodiProvider { HttpContext = HttpContext }, userId, limit, query, true);
         }
 
         [HttpGet("Group/Watch/{userId}/{groupid}/{status}")]
         public Response ToggleWatchedStatusOnGroup(string userId, int groupid, bool status)
         {
-            return _impl.ToggleWatchedStatusOnGroup(new KodiProvider {HttpContext = HttpContext}, userId,
+            return _impl.ToggleWatchedStatusOnGroup(new KodiProvider { HttpContext = HttpContext }, userId,
                 groupid, status);
         }
 
         [HttpGet("Serie/Watch/{userId}/{serieid}/{status}")]
         public Response ToggleWatchedStatusOnSeries(string userId, int serieid, bool status)
         {
-            return _impl.ToggleWatchedStatusOnSeries(new KodiProvider {HttpContext = HttpContext}, userId,
+            return _impl.ToggleWatchedStatusOnSeries(new KodiProvider { HttpContext = HttpContext }, userId,
                 serieid, status);
         }
 
         [HttpGet("Serie/Watch/{userId}/{epid}/{status}")]
         public Response ToggleWatchedStatusOnEpisode(string userId, int epid, bool status)
         {
-            return _impl.ToggleWatchedStatusOnEpisode(new KodiProvider {HttpContext = HttpContext}, userId, epid,
+            return _impl.ToggleWatchedStatusOnEpisode(new KodiProvider { HttpContext = HttpContext }, userId, epid,
                 status);
         }
 
         [HttpGet("Vote/{userId}/{id}/{votevalue}/{votetype}")]
         public Response Vote(string userId, int id, float votevalue, int votetype)
         {
-            return _impl.VoteAnime(new KodiProvider {HttpContext = HttpContext}, userId, id, votevalue,
+            return _impl.VoteAnime(new KodiProvider { HttpContext = HttpContext }, userId, id, votevalue,
                 votetype);
         }
 
         [HttpGet("Trakt/Scrobble/{animeId}/{type}/{progress}/{status}")]
         public Response TraktScrobble(string animeId, int type, float progress, int status)
         {
-            return _impl.TraktScrobble(new KodiProvider {HttpContext = HttpContext}, animeId, type, progress,
+            return _impl.TraktScrobble(new KodiProvider { HttpContext = HttpContext }, animeId, type, progress,
                 status);
         }
 

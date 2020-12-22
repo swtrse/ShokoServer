@@ -1,9 +1,9 @@
-﻿ using System;
- using System.IO;
- using System.Linq;
- using Shoko.Server.Utilities;
+﻿using System;
+using System.IO;
+using System.Linq;
+using Shoko.Server.Utilities;
 
- namespace Shoko.Server.Server
+namespace Shoko.Server.Server
 {
     public class MigrationDirectory
     {
@@ -23,7 +23,7 @@
                 DriveInfo info = new DriveInfo(toDir.Root.Name);
                 if (info.AvailableFreeSpace < size)
                 {
-                    Utils.ShowErrorMessage("Not enough space",$"Unable to migrate directory {fromDir} into {toDir} not enough space");
+                    Utils.ShowErrorMessage("Not enough space", $"Unable to migrate directory {fromDir} into {toDir} not enough space");
                     return false;
                 }
             }
@@ -54,7 +54,7 @@
             }
             catch
             {
-                Utils.ShowErrorMessage("Migration ERROR",$"We are unable to move the directory '{From}' to '{To}', please move the directory with explorer");
+                Utils.ShowErrorMessage("Migration ERROR", $"We are unable to move the directory '{From}' to '{To}', please move the directory with explorer");
                 return false;
             }
         }

@@ -32,32 +32,32 @@ namespace Shoko.Server.API.v3.Models.Shoko
         /// Things like Seasons, Years, Tags, etc only count series individually, rather than by group
         /// </summary>
         public bool ApplyAtSeriesLevel { get; set; }
-        
+
         /// <summary>
         /// Directory Filters have subfilters
         /// </summary>
         public bool Directory { get; set; }
-        
+
         /// <summary>
         /// This determines whether to hide the filter in API queries. Things with this need to be explicitly asked for
         /// </summary>
         public bool HideInAPI { get; set; }
-        
-        public Filter() {}
+
+        public Filter() { }
 
         public Filter(HttpContext ctx, SVR_GroupFilter gf)
         {
-            IDs = new IDs {ID = gf.GroupFilterID};
+            IDs = new IDs { ID = gf.GroupFilterID };
             Name = gf.GroupFilterName;
             SVR_JMMUser user = ctx.GetUser();
-            Directory = ((GroupFilterType) gf.FilterType).HasFlag(GroupFilterType.Directory);
+            Directory = ((GroupFilterType)gf.FilterType).HasFlag(GroupFilterType.Directory);
             // This can be used to exclude from client visibility for user
             Size = gf.GroupsIds.ContainsKey(user.JMMUserID) ? gf.GroupsIds[user.JMMUserID].Count : 0;
             if (Directory)
                 Size += RepoFactory.GroupFilter.GetByParentID(gf.GroupFilterID).Count;
 
             ApplyAtSeriesLevel = gf.ApplyToSeries == 1;
-            
+
             // It's never null, just marked Nullable for some reason
             Locked = gf.Locked != null && gf.Locked.Value == 1;
 
@@ -73,7 +73,7 @@ namespace Shoko.Server.API.v3.Models.Shoko
         {
             return new FilterConditions(gf);
         }
-        
+
         /// <summary>
         /// Get the Sorting Criteria for the Group Filter. ORDER DOES MATTER
         /// </summary>
@@ -100,7 +100,7 @@ namespace Shoko.Server.API.v3.Models.Shoko
             public FilterConditions(SVR_GroupFilter gf)
             {
                 Conditions = gf.Conditions.Select(a => new Condition(a)).ToList();
-                InvertLogic = gf.BaseCondition == (int) GroupFilterBaseCondition.Exclude;
+                InvertLogic = gf.BaseCondition == (int)GroupFilterBaseCondition.Exclude;
             }
         }
 
@@ -120,7 +120,7 @@ namespace Shoko.Server.API.v3.Models.Shoko
             /// Condition Operator, how it applies
             /// </summary>
             public GroupFilterOperator Operator { get; set; }
-            
+
             /// <summary>
             /// The actual value to compare
             /// </summary>
@@ -128,8 +128,8 @@ namespace Shoko.Server.API.v3.Models.Shoko
             public Condition(GroupFilterCondition condition)
             {
                 ID = condition.GroupFilterConditionID;
-                Type = (GroupFilterConditionType) condition.ConditionType;
-                Operator = (GroupFilterOperator) condition.ConditionOperator;
+                Type = (GroupFilterConditionType)condition.ConditionType;
+                Operator = (GroupFilterOperator)condition.ConditionOperator;
                 Parameter = condition.ConditionParameter;
             }
         }
@@ -165,18 +165,18 @@ namespace Shoko.Server.API.v3.Models.Shoko
             /// The Parent Filter ID. You don't need to know this otherwise, but if you are saving a new filter, it is important.
             /// </summary>
             public int ParentID { get; set; }
-            
+
             /// <summary>
             /// The Filter conditions
             /// </summary>
             public FilterConditions Conditions { get; set; }
-            
+
             /// <summary>
             /// The sorting criteria
             /// </summary>
             public List<SortingCriteria> Sorting { get; set; }
-            
-            
+
+
             /// <summary>
             /// Creates a server model compatible with the database. This does not calculate any cached data, such as groups and series.
             /// </summary>
@@ -185,13 +185,13 @@ namespace Shoko.Server.API.v3.Models.Shoko
             {
                 SVR_GroupFilter gf = new SVR_GroupFilter
                 {
-                    FilterType = Directory ? (int) (GroupFilterType.UserDefined | GroupFilterType.Directory) : (int) GroupFilterType.UserDefined,
+                    FilterType = Directory ? (int)(GroupFilterType.UserDefined | GroupFilterType.Directory) : (int)GroupFilterType.UserDefined,
                     ApplyToSeries = ApplyAtSeriesLevel ? 1 : 0,
                     GroupFilterName = Name,
                     InvisibleInClients = HideInAPI ? 1 : 0,
-                    ParentGroupFilterID = ParentID == 0 ? (int?) null : ParentID,
+                    ParentGroupFilterID = ParentID == 0 ? (int?)null : ParentID,
                     // Conditions
-                    BaseCondition = (int) (Conditions.InvertLogic
+                    BaseCondition = (int)(Conditions.InvertLogic
                         ? GroupFilterBaseCondition.Exclude
                         : GroupFilterBaseCondition.Include),
                     Conditions = Conditions.Conditions.Select(c =>

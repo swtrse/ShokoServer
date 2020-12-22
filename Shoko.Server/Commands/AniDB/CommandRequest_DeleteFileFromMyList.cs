@@ -22,7 +22,7 @@ namespace Shoko.Server.Commands
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.AniDB_MyListDelete,
-            extraParams = new[] {Hash, MyListID.ToString()}
+            extraParams = new[] { Hash, MyListID.ToString() }
         };
 
         public CommandRequest_DeleteFileFromMyList()
@@ -34,7 +34,7 @@ namespace Shoko.Server.Commands
             Hash = string.Empty;
             FileSize = 0;
             MyListID = myListID;
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

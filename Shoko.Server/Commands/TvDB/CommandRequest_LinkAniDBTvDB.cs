@@ -22,7 +22,7 @@ namespace Shoko.Server.Commands.TvDB
         public override QueueStateStruct PrettyDescription => new QueueStateStruct
         {
             queueState = QueueStateEnum.LinkAniDBTvDB,
-            extraParams = new[] {animeID.ToString()}
+            extraParams = new[] { animeID.ToString() }
         };
 
         public CommandRequest_LinkAniDBTvDB()
@@ -35,7 +35,7 @@ namespace Shoko.Server.Commands.TvDB
             this.tvDBID = tvDBID;
             this.additiveLink = additiveLink;
 
-            Priority = (int) DefaultPriority;
+            Priority = (int)DefaultPriority;
 
             GenerateCommandID();
         }

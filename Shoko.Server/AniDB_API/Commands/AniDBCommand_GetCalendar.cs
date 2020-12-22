@@ -48,10 +48,10 @@ namespace AniDBAPI.Commands
             switch (sMsgType)
             {
                 case "297":
-                {
-                    calendars = new CalendarCollection(socketResponse);
-                    return AniDBUDPResponseCode.GotCalendar;
-                }
+                    {
+                        calendars = new CalendarCollection(socketResponse);
+                        return AniDBUDPResponseCode.GotCalendar;
+                    }
                 case "397": return AniDBUDPResponseCode.CalendarEmpty;
                 case "501": return AniDBUDPResponseCode.LoginRequired;
             }

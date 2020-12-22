@@ -60,7 +60,7 @@ namespace AniDBAPI.Commands
             commandID = "Deleting File: " + lid;
 
             commandText = "MYLISTADD lid=" + lid;
-            commandText += "&state=" + (int) AniDBFile_State.Deleted;
+            commandText += "&state=" + (int)AniDBFile_State.Deleted;
             commandText += "&edit=1";
         }
     }

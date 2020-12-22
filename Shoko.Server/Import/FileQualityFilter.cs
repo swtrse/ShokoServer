@@ -480,7 +480,7 @@ namespace Shoko.Server
                 if (newLocal?.Media?.VideoStream?.BitDepth == null ||
                     oldLocal?.Media?.VideoStream?.BitDepth == null) continue;
                 if (newLocal.Media.VideoStream.BitDepth == 8 && oldLocal.Media.VideoStream.BitDepth == 10)
-                        return Settings.Prefer8BitVideo ? -1 : 1;
+                    return Settings.Prefer8BitVideo ? -1 : 1;
                 if (newLocal.Media.VideoStream.BitDepth == 10 && oldLocal.Media.VideoStream.BitDepth == 8)
                     return Settings.Prefer8BitVideo ? 1 : -1;
             }

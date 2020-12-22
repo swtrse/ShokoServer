@@ -63,12 +63,12 @@ namespace Shoko.Server.API.v3.Helpers
             bool descending, bool isFirst)
         {
             if (isFirst)
-                return descending 
-                    ? groups.OrderByDescending(o) 
+                return descending
+                    ? groups.OrderByDescending(o)
                     : groups.OrderBy(o);
             return descending
-                ? ((IOrderedEnumerable<SVR_AnimeGroup>) groups).ThenByDescending(o)
-                : ((IOrderedEnumerable<SVR_AnimeGroup>) groups).ThenBy(o);
+                ? ((IOrderedEnumerable<SVR_AnimeGroup>)groups).ThenByDescending(o)
+                : ((IOrderedEnumerable<SVR_AnimeGroup>)groups).ThenBy(o);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Shoko.Server.PlexAndKodi
 
         public static void EpisodeTypeTranslated(PlexEpisodeType tp, EpisodeType epType, AnimeType an, int cnt)
         {
-            tp.Type = (int) epType;
+            tp.Type = (int)epType;
             tp.Count = cnt;
             tp.AnimeType = an;
             bool plural = cnt > 1;

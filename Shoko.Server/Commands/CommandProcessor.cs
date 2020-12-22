@@ -96,7 +96,7 @@ namespace Shoko.Server.Commands
         }
 
         private QueueStateStruct _queueState =
-            new QueueStateStruct {queueState = QueueStateEnum.Idle, extraParams = new string[0]};
+            new QueueStateStruct { queueState = QueueStateEnum.Idle, extraParams = new string[0] };
 
         public QueueStateStruct QueueState
         {
@@ -141,7 +141,7 @@ namespace Shoko.Server.Commands
 
             if (e.Cancelled) Logger.Warn($"The {QueueType} Queue was cancelled with {QueueCount} commands left");
 
-            QueueState = new QueueStateStruct {queueState = QueueStateEnum.Idle, extraParams = new string[0]};
+            QueueState = new QueueStateStruct { queueState = QueueStateEnum.Idle, extraParams = new string[0] };
 
             UpdateQueueCount();
         }

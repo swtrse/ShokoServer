@@ -135,7 +135,7 @@ namespace Shoko.Server.Models
                     ShokoServer.StartWatchingFiles(false);
                     return (false, renamed, "Error: Failed to rename file");
                 }
-                
+
                 // Rename external subs!
                 var oldBasename = Path.GetFileNameWithoutExtension(fullFileName);
                 var newBasename = Path.GetFileNameWithoutExtension(renamed);
@@ -429,7 +429,7 @@ namespace Shoko.Server.Models
                 return (false, ex.Message);
             }
         }
-        
+
         public void RemoveRecordAndDeletePhysicalFile(bool deleteFolder = true)
         {
             logger.Info("Deleting video local place record and file: {0}", (FullServerPath ?? VideoLocal_Place_ID.ToString()));
@@ -559,11 +559,11 @@ namespace Shoko.Server.Models
                 succeeded = invert ? RenameIfRequired() : MoveFileIfRequired();
                 if (!succeeded)
                 {
-                    Thread.Sleep((int) DELAY_IN_USE.SECOND);
+                    Thread.Sleep((int)DELAY_IN_USE.SECOND);
                     succeeded = invert ? RenameIfRequired() : MoveFileIfRequired();
                     if (!succeeded)
                     {
-                        Thread.Sleep((int) DELAY_IN_USE.THIRD);
+                        Thread.Sleep((int)DELAY_IN_USE.THIRD);
                         succeeded = invert ? RenameIfRequired() : MoveFileIfRequired();
                         if (!succeeded) return; // Don't bother renaming if we couldn't move. It'll need user interaction
                     }
@@ -576,11 +576,11 @@ namespace Shoko.Server.Models
                 succeeded = invert ? MoveFileIfRequired() : RenameIfRequired();
                 if (!succeeded)
                 {
-                    Thread.Sleep((int) DELAY_IN_USE.SECOND);
+                    Thread.Sleep((int)DELAY_IN_USE.SECOND);
                     succeeded = invert ? MoveFileIfRequired() : RenameIfRequired();
                     if (!succeeded)
                     {
-                        Thread.Sleep((int) DELAY_IN_USE.THIRD);
+                        Thread.Sleep((int)DELAY_IN_USE.THIRD);
                         succeeded = invert ? MoveFileIfRequired() : RenameIfRequired();
                         if (!succeeded) return;
                     }
@@ -778,7 +778,7 @@ namespace Shoko.Server.Models
                     if (string.IsNullOrEmpty(newParent) || string.IsNullOrEmpty(srcParent)) continue;
                     FileSystemResult<IObject> src = f.Resolve(Path.Combine(srcParent, subtitleFile.Filename));
                     if (src == null || !src.IsOk || !(src.Result is IFile)) continue;
-                    string newSubPath = Path.Combine(newParent, ((IFile) src.Result).Name);
+                    string newSubPath = Path.Combine(newParent, ((IFile)src.Result).Name);
                     dst = f.Resolve(newSubPath);
                     if (dst != null && dst.IsOk && dst.Result is IFile)
                     {
@@ -791,7 +791,7 @@ namespace Shoko.Server.Models
                     }
                     else
                     {
-                        FileSystemResult fr2 = ((IFile) src.Result).Move(destination);
+                        FileSystemResult fr2 = ((IFile)src.Result).Move(destination);
                         if (fr2 == null || !fr2.IsOk)
                         {
                             logger.Error("Unable to MOVE file: {0} to {1} error {2}", subtitleFile,
@@ -1058,7 +1058,7 @@ namespace Shoko.Server.Models
                                 if (string.IsNullOrEmpty(newParent) || string.IsNullOrEmpty(srcParent)) continue;
                                 FileSystemResult<IObject> src = f.Resolve(Path.Combine(srcParent, subtitleFile.Filename));
                                 if (src == null || !src.IsOk || !(src.Result is IFile)) continue;
-                                string newSubPath = Path.Combine(newParent, ((IFile) src.Result).Name);
+                                string newSubPath = Path.Combine(newParent, ((IFile)src.Result).Name);
                                 dst = f.Resolve(newSubPath);
                                 if (dst != null && dst.IsOk && dst.Result is IFile)
                                 {
@@ -1071,7 +1071,7 @@ namespace Shoko.Server.Models
                                 }
                                 else
                                 {
-                                    FileSystemResult fr2 = ((IFile) src.Result).Move(destination);
+                                    FileSystemResult fr2 = ((IFile)src.Result).Move(destination);
                                     if (fr2 == null || !fr2.IsOk)
                                     {
                                         logger.Error("Unable to MOVE file: {0} to {1} error {2}", subtitleFile,
@@ -1145,7 +1145,7 @@ namespace Shoko.Server.Models
                             FileSystemResult<IObject> src = f.Resolve(subtitleFile);
                             if (src == null || !src.IsOk || !(src.Result is IFile)) continue;
                             string newSubPath = Path.Combine(Path.GetDirectoryName(newFullServerPath),
-                                ((IFile) src.Result).Name);
+                                ((IFile)src.Result).Name);
                             dst = f.Resolve(newSubPath);
                             if (dst != null && dst.IsOk && dst.Result is IFile)
                             {
@@ -1158,7 +1158,7 @@ namespace Shoko.Server.Models
                             }
                             else
                             {
-                                FileSystemResult fr2 = ((IFile) src.Result).Move(destination);
+                                FileSystemResult fr2 = ((IFile)src.Result).Move(destination);
                                 if (fr2 == null || !fr2.IsOk)
                                 {
                                     logger.Error("Unable to MOVE file: {0} to {1} error {2}", subtitleFile,
@@ -1188,7 +1188,7 @@ namespace Shoko.Server.Models
             ShokoServer.StartWatchingFiles(false);
             return true;
         }
-        
+
         private void RecursiveDeleteEmptyDirectories(string dir, bool importfolder)
         {
             try
@@ -1224,7 +1224,7 @@ namespace Shoko.Server.Models
                 logger.Error($"There was an error removing the empty directory: {dir}\r\n{e}");
             }
         }
-        
+
         public bool IsDirectoryEmpty(string path)
         {
             try
@@ -1245,7 +1245,7 @@ namespace Shoko.Server.Models
         IHashes IVideoFile.Hashes => VideoLocal == null
             ? null
             : new VideoHashes
-                {CRC = VideoLocal.CRC32, MD5 = VideoLocal.MD5, ED2K = VideoLocal.Hash, SHA1 = VideoLocal.SHA1};
+            { CRC = VideoLocal.CRC32, MD5 = VideoLocal.MD5, ED2K = VideoLocal.Hash, SHA1 = VideoLocal.SHA1 };
 
         IMediaContainer IVideoFile.MediaInfo => VideoLocal?.Media;
 

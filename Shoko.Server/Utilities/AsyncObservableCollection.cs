@@ -30,7 +30,7 @@ namespace Shoko.Server
 
         private void RaiseCollectionChanged(object param)
         {
-            base.OnCollectionChanged((NotifyCollectionChangedEventArgs) param);
+            base.OnCollectionChanged((NotifyCollectionChangedEventArgs)param);
         }
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)
@@ -43,7 +43,7 @@ namespace Shoko.Server
 
         private void RaisePropertyChanged(object param)
         {
-            base.OnPropertyChanged((PropertyChangedEventArgs) param);
+            base.OnPropertyChanged((PropertyChangedEventArgs)param);
         }
     }
 }

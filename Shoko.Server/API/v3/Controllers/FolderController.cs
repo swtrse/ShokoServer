@@ -16,38 +16,38 @@ namespace Shoko.Server.API.v3.Controllers
         [HttpGet("drives")]
         public ActionResult<IEnumerable<Drive>> GetDrives()
         {
-            return  DriveInfo.GetDrives().Select(d =>
-            {
-                ChildItems childItems = null;
-                try
-                {
-                    
-                    childItems = d.IsReady ? new ChildItems()
-                    {
-                        Files = d.RootDirectory.GetFiles()?.Length ?? 0,
-                        Folders = d.RootDirectory.GetDirectories()?.Length ?? 0
-                    } : null;
-                }
-                catch (UnauthorizedAccessException)
-                {
-                }
+            return DriveInfo.GetDrives().Select(d =>
+           {
+               ChildItems childItems = null;
+               try
+               {
 
-                return new Drive()
-                {
-                    Path = d.RootDirectory.FullName,
-                    CanAccess = childItems != null,
-                    Sizes = childItems,
-                    DriveType = d.DriveType
-                };
-            }).ToList();
+                   childItems = d.IsReady ? new ChildItems()
+                   {
+                       Files = d.RootDirectory.GetFiles()?.Length ?? 0,
+                       Folders = d.RootDirectory.GetDirectories()?.Length ?? 0
+                   } : null;
+               }
+               catch (UnauthorizedAccessException)
+               {
+               }
+
+               return new Drive()
+               {
+                   Path = d.RootDirectory.FullName,
+                   CanAccess = childItems != null,
+                   Sizes = childItems,
+                   DriveType = d.DriveType
+               };
+           }).ToList();
         }
-        
+
         [HttpGet("")]
         public ActionResult<IEnumerable<Folder>> GetFolder([FromQuery] string path)
         {
             if (!Directory.Exists(path)) return NotFound("Directory not found");
-            
-            var root  = new DirectoryInfo(path);
+
+            var root = new DirectoryInfo(path);
             return root.GetDirectories().Select(dir =>
             {
                 ChildItems childItems = null;
